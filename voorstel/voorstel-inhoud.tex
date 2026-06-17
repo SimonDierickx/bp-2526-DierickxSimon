@@ -12,10 +12,30 @@
 % uitgewerkt (met medesturent VOORNAAM NAAM als mede-auteur).
 % 
 
-\section{Inleiding}%
-\label{sec:inleiding}
+\section{Introduction}%
+\label{sec:introduction}
 
-Waarover zal je bachelorproef gaan? Introduceer het thema en zorg dat volgende zaken zeker duidelijk aanwezig zijn:
+Morden society relies heavily (if not entirely) on available communication networks. This means emergency reponse relies on this as well.
+When a major storm destroys a cellular tower, or flooding cuts power, or large-scale incidents overloads the general public channels, they become unavailable. Or as we've seen recently during wars and communication line sget intentionally cut off.
+The moment they become unavailable, is th exact moment they are needed the most. In those scenarios first responders, civil protection services and communioties need a fallback that is independent of the existing fixed infrastructure.
+For those situations this should be easily and fast deployable solution, without needing any specialist and it should also be afordable at scale.
+
+A few off-the-grid communication technologies already exist, but they all have their own limitions in emergency contexts.
+\textbf{APRS} (Automatic Packet Reporting System) and \textbf{DMR} (Digital Mobile Radio) both require an amateur radio license and special equiment (specialized hardware configuration). This makes them hard to deploy in emergency situations.
+Commercial satellite messengers and phones (e.g. Garmin inReach or SPOT) are expensive and they require a subscription cost, plus per-message fees. These limitations make large-scale deployments nearly impossible for small volunteer or municipal emergency organizations.
+However, on the other side of the spectrum we also have mesh radio networks, which are built on \textbf{LoRa} (Long Range) radio technology. They represent a totally different approach, they are low-power, license-free operating devices in the \emph{sub-GHz ISM band}, using multi-hop routing which will then extend our coverage without needing any fixed infrastructure.
+
+To do this we can be looking at \textbf{Meshtastic}.
+First, what is Meshtastic?
+\begin{itemize}
+  \item Open-source firmware and protocol stack for LoRa-capable microcontrollers (mostly ESP32)
+  \item Encrypted and decentralized text messaging, locatrion sharing
+  \item Self-healing mesh network, multi-hop routing
+  \item No need of a SIM card or internet connection, no license
+\end{itemize}
+Why Meshtastic? On top of the previous mentioned advantages, anecdotes form community deployments and disaster response suggest promising results.
+However, no scientific, systematic, empirical research has been done on the reliability, deployability and evalution of it's performance in emergency situations has yet been published.
+This gap in research motivates the following research question: \textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily deployable emergency communication solution when primary network infrastructure fails?}
 
 \begin{itemize}
   \item kaderen thema
