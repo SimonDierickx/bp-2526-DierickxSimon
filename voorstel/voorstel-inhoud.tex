@@ -15,15 +15,27 @@
 \section{Introduction}%
 \label{sec:introduction}
 
-Morden society relies heavily (if not entirely) on available communication networks. This means emergency reponse relies on this as well.
-When a major storm destroys a cellular tower, or flooding cuts power, or large-scale incidents overloads the general public channels, they become unavailable. Or as we've seen recently during wars and communication line sget intentionally cut off.
-The moment they become unavailable, is th exact moment they are needed the most. In those scenarios first responders, civil protection services and communioties need a fallback that is independent of the existing fixed infrastructure.
-For those situations this should be easily and fast deployable solution, without needing any specialist and it should also be afordable at scale.
+Morden society relies heavily (if not entirely) on available communication networks.
+This means emergency reponse relies on this as well. When a major storm destroys a cellular
+tower, or flooding cuts power, or large-scale incidents overloads the general public channels,
+they become unavailable. Or as we've seen recently during wars and communication lines get
+intentionally cut off. The moment they become unavailable, is the exact moment they are needed
+the most. In those scenarios first responders, civil protection services and communities need a
+fallback that is independent of the existing fixed infrastructure. For those situations this
+should be easily and fast deployable solution, without needing any specialist and it
+should also be afordable at scale.
 
-A few off-the-grid communication technologies already exist, but they all have their own limitions in emergency contexts.
-\textbf{APRS} (Automatic Packet Reporting System) and \textbf{DMR} (Digital Mobile Radio) both require an amateur radio license and special equiment (specialized hardware configuration). This makes them hard to deploy in emergency situations.
-Commercial satellite messengers and phones (e.g. Garmin inReach or SPOT) are expensive and they require a subscription cost, plus per-message fees. These limitations make large-scale deployments nearly impossible for small volunteer or municipal emergency organizations.
-However, on the other side of the spectrum we also have mesh radio networks, which are built on \textbf{LoRa} (Long Range) radio technology. They represent a totally different approach, they are low-power, license-free operating devices in the \emph{sub-GHz ISM band}, using multi-hop routing which will then extend our coverage without needing any fixed infrastructure.
+A few off-the-grid communication technologies already exist, but they all have their own limitions
+in emergency contexts. \textbf{APRS} (Automatic Packet Reporting System) and \textbf{DMR}
+(Digital Mobile Radio) both require an amateur radio license and special equiment (specialized hardware
+configuration). This makes them hard to deploy in emergency situations. Commercial satellite messengers
+and phones (e.g. Garmin inReach or SPOT) are expensive and they require a subscription cost, plus per-message
+fees. These limitations make large-scale deployments nearly impossible for small volunteer or
+municipal emergency organizations. However, on the other side of the spectrum we also have mesh
+radio networks, which are built on \textbf{LoRa} (Long Range) radio technology.
+They represent a totally different approach, they are low-power, license-free operating
+devices in the \emph{sub-GHz ISM band}, using multi-hop routing which will then extend our coverage
+without needing any fixed infrastructure.
 
 To do this we can be looking at \textbf{Meshtastic}.
 First, what is Meshtastic?
@@ -33,24 +45,49 @@ First, what is Meshtastic?
   \item Self-healing mesh network, multi-hop routing
   \item No need of a SIM card or internet connection, no license
 \end{itemize}
-Why Meshtastic? On top of the previous mentioned advantages, anecdotes form community deployments and disaster response suggest promising results.
-However, no scientific, systematic, empirical research has been done on the reliability, deployability and evalution of it's performance in emergency situations has yet been published.
-This gap in research motivates the following research question: \textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily deployable emergency communication solution when primary network infrastructure fails?}
+Why Meshtastic? On top of the previous mentioned advantages, anecdotes form community deployments and disaster
+response suggest promising results. However, no scientific, systematic, empirical research has been done on the
+reliability, deployability and evalution of it's performance in emergency situations has yet been published.
+This gap in research motivates the following research question:
+\textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily deployable emergency communication solution when primary network infrastructure fails?}
 
+\subsection{Problem Domain}%
+\label{subsec:problem-domain}
+Let's examine and evaluate thje communication requirements that come up when the primary infrastructure fails, and if there are any adequate solutions to fix them.
+Three sub-questions guide us:
 \begin{itemize}
-  \item kaderen thema
-  \item de doelgroep
-  \item de probleemstelling en (centrale) onderzoeksvraag
-  \item de onderzoeksdoelstelling
+  \item What gaps exist in emergency contexts when the primary infra becomes unavailable?
+  \item How do exisitng alternatives compare to Meshtastioc in terms of accessibility, cost, required expertise, etc. ?
+  \item What environmental factors of the Belgian landscape and terrain affect LoRa performances once deployed.
+  \item How secure is the Meshtastic encrytion in case of traffic interception?
 \end{itemize}
 
-Denk er aan: een typische bachelorproef is \textit{toegepast onderzoek}, wat betekent dat je start vanuit een concrete probleemsituatie in bedrijfscontext, een \textbf{casus}. Het is belangrijk om je onderwerp goed af te bakenen: je gaat voor die \textit{ene specifieke probleemsituatie} op zoek naar een goede oplossing, op basis van de huidige kennis in het vakgebied.
+\subsection{Solution Domain}%
+\label{subsec:solution-domain}
+What are the actual performances of a Meshtastic setup, evaulated through a structured PoC and compare those results.
+Three sub-questions emerge here as well:
+\begin{itemize}
+  \item What range and reliability does a Meshtastic network have across different topologies (direct long-distance
+  vs multi-hop network) in a real deployment (East Flanders province)?
+  \item How does the Meshtastic security model hold up against potential attacks?
+  \item How does it compare with other alternatives in terms of requirements in emergency situations?
+\end{itemize}
 
-De doelgroep moet ook concreet en duidelijk zijn, dus geen algemene of vaag gedefinieerde groepen zoals \emph{bedrijven}, \emph{developers}, \emph{Vlamingen}, enz. Je richt je in elk geval op it-professionals, een bachelorproef is geen populariserende tekst. Eén specifiek bedrijf (die te maken hebben met een concrete probleemsituatie) is dus beter dan \emph{bedrijven} in het algemeen.
+\subsection{Target audience and scope}%
+\label{subsec:target-audience-and-scope}
+The main audience are IT professionals responsible for business continuity planning and civil protection communication
+in case of emergencies. A secondary audience we could describe are volunteer organizations, municipal safety services and 
+network enginess evaluating low-cost off the gris communication options, to be independent of the main societal infrastructure.
 
-Formuleer duidelijk de onderzoeksvraag! De begeleiders lezen nog steeds te veel voorstellen waarin we geen onderzoeksvraag terugvinden.
-
-Schrijf ook iets over de doelstelling. Wat zie je als het concrete eindresultaat van je onderzoek, naast de uitgeschreven scriptie? Is het een proof-of-concept, een rapport met aanbevelingen, \ldots Met welk eindresultaat kan je je bachelorproef als een succes beschouwen?
+The scope of our research is limited by following constraints.
+\begin{itemize}
+  \item The hardware testing stays limited to Meshtastic due to budget and time constraitns. Alternatives will be evaultaed using litterature only.
+  \item The PoC setup and measurtements will onlu be on the EU\_868MHz freqeuncy, this is dictated by \textbf{BIPT} (Belgisch Instituut voor Postdiensten en Telecommunicatie).
+\end{itemize}
+The geographical focus of the PoC will be the East-Flanders province. Measurements will be taken on the
+the direct long-distance link between Ronse and Lochristi (Ghent), this straight connection will cover ~65km.
+This is most-definitely unfeasible as a direct LoRa link. That's why we will evalute a multi-hop chain, with nodes in Oudenaarde and maybe Marelbeke (if necessary).
+These different setups and measuremnts will help us achieve meaningful results about the reliabiltiy, and limitions of Meshtastic on longer distances.
 
 %---------- Stand van zaken ---------------------------------------------------
 
