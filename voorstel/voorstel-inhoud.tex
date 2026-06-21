@@ -49,7 +49,8 @@ Why Meshtastic? On top of the previous mentioned advantages, anecdotes form comm
 response suggest promising results. However, no scientific, systematic, empirical research has been done on the
 reliability, deployability and evalution of it's performance in emergency situations has yet been published.
 This gap in research motivates the following research question:
-\textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily deployable emergency communication solution when primary network infrastructure fails?}
+\textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily
+deployable emergency communication solution when primary network infrastructure fails?}
 
 \subsection{Problem Domain}%
 \label{subsec:problem-domain}
@@ -116,18 +117,48 @@ Je mag deze sectie nog verder onderverdelen in subsecties als dit de structuur v
 %---------- Methodologie ------------------------------------------------------
 \section{Methodologie}%
 \label{sec:methodologie}
+This research will be conducted in five distinct, sequential phases.
 
-Hier beschrijf je hoe je van plan bent het onderzoek te voeren. Welke onderzoekstechniek ga je toepassen om elk van je onderzoeksvragen te beantwoorden? Gebruik je hiervoor literatuurstudie, interviews met belanghebbenden (bv.~voor requirements-analyse), experimenten, simulaties, vergelijkende studie, risico-analyse, PoC, \ldots?
+The first phase is the literature study. This is done to answer problem domain subquestions.
+Digital sources uwill be used and evualted using the CRAAP test (Currency, relevance, accuracy, authority, prupose).
+From this documenbtation we will be able to get a list of requirements for emergency communication, a comparison matrix between Meshtastic, APRS, DMR and satelitte options.
+This comparison will mostly focus on cost, licensing, range, reliability, easo of configuration and deployability.
 
-Valt je onderwerp onder één van de typische soorten bachelorproeven die besproken zijn in de lessen Research Methods (bv.\ vergelijkende studie of risico-analyse)? Zorg er dan ook voor dat we duidelijk de verschillende stappen terug vinden die we verwachten in dit soort onderzoek!
+In a second phase we will then design a Proof of Concept (PoC), as a first step we will have to select the used hardware that will be most suitable for our use case.
+The amount of nodes and devices will then also be determined, to make sure a complete reliable setup will be built.
+As metion ned previously, the configured frequency will be limited to the authorized 868-MHz band.
 
-Vermijd onderzoekstechnieken die geen objectieve, meetbare resultaten kunnen opleveren. Enquêtes, bijvoorbeeld, zijn voor een bachelorproef informatica meestal \textbf{niet geschikt}. De antwoorden zijn eerder meningen dan feiten en in de praktijk blijkt het ook bijzonder moeilijk om voldoende respondenten te vinden. Studenten die een enquête willen voeren, hebben meestal ook geen goede definitie van de populatie, waardoor ook niet kan aangetoond worden dat eventuele resultaten representatief zijn.
+The chain topology will be setup as a nort-south link accross the East-Flander province.
+Ronse (source node, elevated) -> Lochristi (destination node). All the nodes (source, destination or relay) will be placed as high as possibly to have a clean line of sight.
+A direct long-distance link between Ronse and Lochristi will be tested, but we excpect this to fail due to the distance constraints.
+This in itself will give us a finding of the research.
 
-Uit dit onderdeel moet duidelijk naar voor komen dat je bachelorproef ook technisch voldoen\-de diepgang zal bevatten. Het zou niet kloppen als een bachelorproef informatica ook door bv.\ een student marketing zou kunnen uitgevoerd worden.
+The third phase of our research will be the execution and measurements of our PoC.
+To do this, two topology variants will first be measured:
+\begin{enumerate}
+\item \textbf{Variant 1, direct link}: Direct link between Ronse and Lochristi, lon,g distance, to establish bnaseline single-hop performance.
+\item \textbf{Variant 2, relay link}: Full Ronse-Lochristi path with multipler hops. The relays will be placed at selected intermediate sites.
+\end{enumerate}
+For each of these topologies idfferent metrics will be measuered, specifically:
+\begin{itemize}
+  \item \textbf{Range}: distance between nodes  
+  \item \textbf{RSSI (Received Signal Strength Indicator)}: signal power at receiver
+  \item \textbf{SNR (Signal-to-Noise Ratio)}: signal quality at receiver
+  \item \textbf{Packet Loss Rate}: percentage of lost messages
+  \item \textbf{Latency}: time taken for a message to travel from source to destination
+\end{itemize}
 
-Je beschrijft ook al welke tools (hardware, software, diensten, \ldots) je denkt hiervoor te gebruiken of te ontwikkelen.
+These measurements will be taken on multiple occasions usign differents variables, spreading factor SF9/SF12, different times of the day, different weathers, etc.
+Each relay will be either battery powered or another alternative, this still has to be decided according to the setup. We will try and chose something that's the easiest and most reliable in emergency
+case (battery, solar, power outlet, \ldots).
 
-Probeer ook een tijdschatting te maken. Hoe lang zal je met elke fase van je onderzoek bezig zijn en wat zijn de concrete \emph{deliverables} in elke fase?
+In a fourth pahse we will answer the encryption related sub-question, This analysis will be primarly documentation based additional to the Meshtastic firmware analysis.
+A possiblity if time let's us do it is intercept one of the packages and try to decryupt it, and see to what extent the encryption is secure.
+
+For the fifth and final phase of the researhc we will then compare the PoC results and the literature findings.
+This comparuison will show us whether Meshtastic is worthy to consider as an alternative to APRS, DMR and other satelite messengers. The scoring matrix
+will be constructed using the evualtion cireteaira determined previously (reliability, deployabaility, cost, security, range, requirements, etc).
+Each one fo them will receive a score based on the evidence form the documentation and (for Meshtastic) from the Proof of Concept.
 
 %---------- Verwachte resultaten ----------------------------------------------
 \section{Verwacht resultaat, conclusie}%
