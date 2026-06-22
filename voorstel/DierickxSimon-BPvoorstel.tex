@@ -10,50 +10,53 @@
 
 % Invoegen bibliografiebestand
 \addbibresource{voorstel.bib}
-
-% Informatie over de opleiding, het vak en soort opdracht
-% \studyprogramme{Professionele bachelor toegepaste informatica}
-% \course{Bachelorproef}
-% \assignmenttype{Onderzoeksvoorstel}
-% Voor een voorstel in het Engels, haal de volgende 3 regels uit commentaar
 \studyprogramme{Bachelor of applied information technology}
 \course{Bachelor thesis}
 \assignmenttype{Research proposal}
-
 \academicyear{2025-2026}
-
 \title{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily deployable emergency communication solution when primary network infrastructure fails?}
-
 \author{Simon Dierickx}
 \email{simon.dierickx@student.hogent.be}
-
-
 \supervisor[Co-promotor]{M. Aubert (Accenture, \href{mailto:m.aubert@accenture.com}{m.aubert@accenture.com})}
-
-% Binnen welke specialisatierichting uit 3TI situeert dit onderzoek zich?
-% Kies uit deze lijst:
-%
-% - Mobile \& Enterprise development
-% - AI \& Data Engineering
-% - Functional \& Business Analysis
-% - System \& Network Administrator
-% - Mainframe Expert
-% - Als het onderzoek niet past binnen een van deze domeinen specifieer je deze
-%   zelf
-%
 \specialisation{System \& Network Administrator}
-\keywords{Meshtastic, LoRa, Emergency}
+\keywords{Meshtastic, LoRa, Mesh network, Emergency, Off-grid}
 
 \begin{document}
 
 \begin{abstract}
-  Hier schrijf je de samenvatting van je voorstel, als een doorlopende tekst van één paragraaf. Let op: dit is geen inleiding, maar een samenvattende tekst van heel je voorstel met inleiding (voorstelling, kaderen thema), probleemstelling en centrale onderzoeksvraag, onderzoeksdoelstelling (wat zie je als het concrete resultaat van je bachelorproef?), voorgestelde methodologie, verwachte resultaten en meerwaarde van dit onderzoek (wat heeft de doelgroep aan het resultaat?).
+  Modern society has developed an immense dependence on existing
+  telecommunications infrastructure, which renders emergency communication
+  inherently vulnerable. The same events that trigger crisis
+  situations---war, natural disasters, cyberattacks, power outages, and
+  censorship---disable these networks at the exact moment they are most
+  needed. Off-grid alternatives exist, but each presents significant
+  barriers in terms of cost, deployment, or usability in an emergency
+  context. APRS and DMR require operator licences and specialized hardware
+  configuration, while commercial satellite messengers impose per-device
+  costs and subscription fees, making large-scale deployment for volunteer
+  and municipal organizations nearly impossible. Meshtastic, an open-source
+  LoRa-based mesh networking platform, operates in a licence-free frequency
+  band, is low-cost compared to alternatives, and requires no SIM card,
+  internet connection, or operator licence. While some evidence of its use
+  exists from small-scale community deployments, no systematic evaluation of
+  Meshtastic's reliability or deployability in an emergency context has been
+  published. This thesis therefore investigates the following research
+  question: \textit{To what extent does Meshtastic, as a decentralized
+  LoRa-based mesh network, offer a reliable and readily deployable emergency
+  communication solution when primary network infrastructure fails?} The
+  research proceeds through five phases: a structured literature study; a
+  Proof of Concept (PoC) design phase; execution and measurement of the PoC,
+  collecting RSSI, SNR, packet delivery rate, and end-to-end latency data
+  across both direct-link and relay-chain topologies; a security analysis;
+  and a structured comparative analysis. The expected outcome is a set of
+  empirically grounded performance benchmarks under real-world Belgian
+  deployment conditions. The thesis is expected to conclude with a qualified
+  answer to the research question, identifying the conditions under which
+  Meshtastic could serve as a viable emergency communication solution.
 \end{abstract}
 
 \tableofcontents
 
-% De hoofdtekst van het voorstel zit in een apart bestand, zodat het makkelijk
-% kan opgenomen worden in de bijlagen van de bachelorproef zelf.
 \input{voorstel-inhoud}
 
 \printbibliography[heading=bibintoc]
