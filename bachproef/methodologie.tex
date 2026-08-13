@@ -5,26 +5,66 @@
 \chapter{\IfLanguageName{dutch}{Methodologie}{Methodology}}%
 \label{ch:methodologie}
 
-%% TODO: In dit hoofstuk geef je een korte toelichting over hoe je te werk bent
-%% gegaan. Verdeel je onderzoek in grote fasen, en licht in elke fase toe wat
-%% de doelstelling was, welke deliverables daar uit gekomen zijn, en welke
-%% onderzoeksmethoden je daarbij toegepast hebt. Verantwoord waarom je
-%% op deze manier te werk gegaan bent.
-%% 
-%% Voorbeelden van zulke fasen zijn: literatuurstudie, opstellen van een
-%% requirements-analyse, opstellen long-list (bij vergelijkende studie),
-%% selectie van geschikte tools (bij vergelijkende studie, "short-list"),
-%% opzetten testopstelling/PoC, uitvoeren testen en verzamelen
-%% van resultaten, analyse van resultaten, ...
-%%
-%% !!!!! LET OP !!!!!
-%%
-%% Het is uitdrukkelijk NIET de bedoeling dat je het grootste deel van de corpus
-%% van je bachelorproef in dit hoofstuk verwerkt! Dit hoofdstuk is eerder een
-%% kort overzicht van je plan van aanpak.
-%%
-%% Maak voor elke fase (behalve het literatuuronderzoek) een NIEUW HOOFDSTUK aan
-%% en geef het een gepaste titel.
+In this chapter the plan of execution will be explained.
+The exact execution was split up in five distinct phases.
+For each phase the objective, deliverables and research methods are described.
+The execution and results of the \gls{poc} are only described in Chapter~\ref{ch:poc}.
 
-\lipsum[21-25]
+\section{Phase 1: Literature study}%
+\label{sec:method-literature}
 
+The first of the five phases is a literature study. This means through research in available documentation answers are formulated on the problem-domain sub questions.
+Establishing requirements for emergency communication, reviewing existing alternatives (\gls{aprs}, \gls{dmr} and satellite messengers) as well as the known technical aspects of \gls{lora} and Meshtastic.
+Those digital sources are evaluated using the CRAAP test (Currency, Relevanc e, Accuracy, Authority and Purpose).
+The deliverables are a requirements list (Section~\ref{sec:sota-requirements}) and the comparison explained in Chapter~\ref{ch:stand-van-zaken}.
+Together they focus on the cost, licensing, range, reliability, easo of config and deployability.
+
+\section{Phase 2: Design of the proof of concept}%
+\label{sec:method-design}
+
+In this second phase the goal was designing a \gls{poc}. Starting by selecting the appropriate hardware, number of necessary nodes, and their roles. As required (by \gls{bipt}) the config was limited to the EU\,868\,MHz band.
+
+As clean \gls{los} was expected to be an important factor a three-nodes topology was designed, consisting of two elevated fixed nodes (base and relay).
+The third node was then a mobile node so testing could easily be done and compared to one antoher.
+The reasoning, difficulites and setup is documented in Chapter~\ref{ch:poc}.
+
+\section{Phase 3: Execution and measurement}%
+\label{sec:method-measurement}
+
+Third phase is the effective execution of the \gls{poc}: the field tests.
+Two different topologies were tested:
+\begin{enumerate}
+  \item \textbf{Topology 1 (direct link)}: during this test only two nodes were used, this was to test the direct connection between the base
+  node and the mobile node. This was sued to establish the maximal single-hop range of the network.
+  \item \textbf{Topology 2 (relay link)}: for this test the three-node topology was used. After finding the best spot for the relay
+  using the first topology, this one was to test the coverage of the entire network from base to relay to mobile node.
+  This way the extension of the range using a multi-hop path was determined.
+\end{enumerate}
+
+Two built-in instruments from the Meshtastic firmware helped during the drive.
+
+The \emph{Range Test} module was configured on the mobile node. This module communciates a test packet every 60 seconds from the moment the mobile node is booted.
+These packets are numbered and contain a series of metrics: timestamp, GPS coordinates (when a phone is connected), \gls{rssi} and \gls{snr} values. These packets
+are sent to the base node where a CSV file can be extracted. That way you can immediately tell the sequences missing, and by as a result the timestamps/locations of no connection.
+
+On top of the Range Test module the \emph{traceroute} function was also used, this wasn't to determine the dead zones while driving like the range test, this is used on the stop locatioons to test the full path to the base node.
+The metrics this gave were: the full path traveled (hops between mobile and base) and the quality of each single hop (\gls{rssi} and \gls{snr} values).
+
+Both these tests combined gave a clear view of coverage (working zones, dead zones) and the quality of the connections.
+All those measurements were taken across multiple testing days, different locations, tiomes of day and weather conditions where possible (even though thsi juli/august months in belgium were extremely dry so no real weather difference could be measured).
+This was done so that environmental, weather and topoligical factors where taken into account, and not just based on a single working snapshot.
+Each fixed node was powered by a battery and a solar panel, this way running it autonomously could also be investigated.
+
+\section{Phase 4: Security analysis}%
+\label{sec:method-security}
+
+For the fourth phase, the encryption sub-question, the main analsyiss is based on the official Meshtastic documentation.
+As described in Section~\ref{sec:sota-security}, the firmware's security model is analyzied as well.
+%TODO
+
+\section{Phase 5: Comparative analysis}%
+\label{sec:method-comparison}
+
+In the fifth and final phase all the collected results are compared with the initial literature findigs.
+Using the evaluation cirteria established during the first phase a scoring matrix will be built.
+Based on literature and on the \gls{poc} Meshtastic, \gls{aprs}, \gls{dmr} and satellite messengers are compared. This can be found in Chapter~\ref{ch:conclusies}.

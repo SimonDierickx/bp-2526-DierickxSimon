@@ -2,38 +2,38 @@
 \label{sec:introduction}
 
 Modern society relies heavily (if not entirely) on available communication networks.
-This means emergency response relies on this as well. When a major storm destroys a cellular
-tower, or flooding cuts power, or large-scale incidents overload the general public channels,
-they become unavailable. Or as we've seen recently during wars and communication lines get
-intentionally cut off. The moment they become unavailable, is the exact moment they are needed
-the most. In those scenarios first responders, civil protection services and communities need a
-fallback that is independent of the existing fixed infrastructure. For those situations this
-should be easily and fast deployable solution, without needing any specialist and it
-should also be affordable at scale.
+This means emergency response relies on them as well. When a major storm destroys a cellular
+tower, flooding cuts power, or large-scale incidents overload the general public channels,
+they become unavailable. Other examples are, as we've seen recently, wars where communication lines get
+intentionally cut off or censored. Even some government decisions on the possibility to access encrypted communication
+channels (Chat Control) show us the general network is heavily controlled and depended upon. The moment they become unavailable
+is the exact moment they are needed the most. In those scenarios first responders, civil protection services and communities need a
+fallback that is independent of the existing fixed infrastructure. For those situations the solutions should be something easily and
+quickly deployable, without needing any specialist and it should also be affordable at scale.
 
 A few off-the-grid communication technologies already exist, but they all have their own limitations
 in emergency contexts. \textbf{APRS} (Automatic Packet Reporting System) and \textbf{DMR}
-(Digital Mobile Radio) both require an amateur radio license and special equipment (specialized hardware
-configuration). This makes them hard to deploy in emergency situations. Commercial satellite messengers
-and phones (e.g. Garmin inReach or SPOT) are expensive and they require a subscription cost, plus per-message
-fees. These limitations make large-scale deployments nearly impossible for small volunteer or
-municipal emergency organizations. However, on the other side of the spectrum we also have mesh
+(Digital Mobile Radio) both require an amateur radio licence and special equipment (specialized hardware
+configuration). This makes them hard to deploy rapidly in emergency situations. Commercial satellite messengers
+and phones (e.g.\ Garmin inReach or SPOT) are expensive and they require a subscription, the cost of this subscription
+is not everything, they also charge per-message fees. These limitations make large-scale deployments nearly impossible
+for small volunteer or municipal emergency organizations. However, on the other side of the spectrum we also have mesh
 radio networks, which are built on \textbf{LoRa} (Long Range) radio technology.
-They represent a totally different approach, they are low-power, license-free operating
-devices in the \emph{sub-GHz ISM band}, using multi-hop routing which will then extend our coverage
+They represent a totally different approach, they are low-power, licence-free operating
+devices in the \emph{sub-GHz ISM band}, using multi-hop routing which will then extend the initial coverage
 without needing any fixed infrastructure.
 
-To do this we can be looking at \textbf{Meshtastic}.
+To do this we will be looking at \textbf{Meshtastic} specifically.
 First, what is Meshtastic?
 \begin{itemize}
   \item Open-source firmware and protocol stack for LoRa-capable microcontrollers (mostly ESP32)
-  \item Encrypted and decentralized text messaging, location sharing
+  \item Encrypted and decentralized text messaging and location sharing
   \item Self-healing mesh network, multi-hop routing
-  \item No need of a SIM card or internet connection, no license
+  \item No need of a SIM card, internet connection or licence
 \end{itemize}
-Why Meshtastic? On top of the previous mentioned advantages, anecdotes from the community deployments and disaster
-response suggest promising results. However, no scientific, systematic, empirical research has been done on the
-reliability, deployability and evalution of its performance in emergency situations has yet been published.
+Why Meshtastic? On top of the previously mentioned advantages, anecdotes from the community deployments and disaster
+response suggest promising results. However, no scientific, systematic, empirical research has been done or published on the
+reliability, deployability and evaluation of its performance in emergency situations.
 This gap in research motivates the following research question:
 \textbf{To what extent does Meshtastic, as a decentralized LoRa-based mesh network, offer a reliable and readily
 deployable emergency communication solution when primary network infrastructure fails?}
@@ -41,125 +41,131 @@ deployable emergency communication solution when primary network infrastructure 
 \subsection{Problem Domain}%
 \label{subsec:problem-domain}
 Let's examine and evaluate the communication requirements that come up when the primary infrastructure fails, and if there are any adequate solutions to fix them.
-Three sub-questions guide us:
+Four sub-questions guide us:
 \begin{itemize}
   \item What gaps exist in emergency contexts when the primary infra becomes unavailable?
-  \item How do existing alternatives compare to Meshtastic in terms of accessibility, cost, required expertise, etc. ?
-  \item What environmental factors of the Belgian landscape and terrain affect LoRa performances once deployed.
+  \item How do existing alternatives compare to Meshtastic in terms of accessibility, cost, required expertise, etc.?
+  \item What environmental factors of the Belgian (Flemish Ardennes and Wallonia) landscape and terrain affect LoRa performance once deployed?
   \item How secure is the Meshtastic encryption in case of traffic interception?
 \end{itemize}
 
 \subsection{Solution Domain}%
 \label{subsec:solution-domain}
-What are the actual performances of a Meshtastic setup, evaulated through a structured PoC and compare those results.
+What is the actual performance of a Meshtastic setup, evaluated through a structured PoC and compare those results to alternatives?
 Three sub-questions emerge here as well:
 \begin{itemize}
   \item What range and reliability does a Meshtastic network have across different topologies (direct long-distance
-  vs multi-hop network) in a real deployment (East Flanders province)?
+  vs.\ multi-hop) in a real deployment (East Flanders/Hainaut province: Flemish Ardennes/Pays des Collines regions (Ronse/Oudenaarde/Kluisbergen/Tournai))?
   \item How does the Meshtastic security model hold up against potential attacks?
   \item How does it compare with other alternatives in terms of requirements in emergency situations?
 \end{itemize}
 
 \subsection{Target audience and scope}%
 \label{subsec:target-audience-and-scope}
-The main audience are IT professionals responsible for business continuity planning and civil protection communication
+The main audience is IT professionals responsible for business continuity planning and civil protection communication
 in case of emergencies. A secondary audience we could describe are volunteer organizations, municipal safety services and 
 network engineers evaluating low-cost off the grid communication options, to be independent of the main societal infrastructure.
+An additional audience could also be the general public, interested in privacy and trying to actually keep their conversations private.
 
 The scope of our research is limited by following constraints.
 \begin{itemize}
   \item The hardware testing stays limited to Meshtastic due to budget and time constraints. Alternatives will be evaluated using literature only.
   \item The PoC setup and measurements will only be on the EU\_868MHz frequency, this is dictated by \textbf{BIPT} (Belgisch Instituut voor Postdiensten en Telecommunicatie).
 \end{itemize}
-The geographical focus of the PoC will be the East-Flanders province. Measurements will be taken on
-the direct long-distance link between Ronse and Lochristi (Ghent), this straight connection will cover ~65km.
-This is most-definitely unfeasible as a direct LoRa link. That's why we will evalute a multi-hop chain, with nodes in Oudenaarde and maybe Merelbeke (if necessary).
+The geographical focus of the PoC will be the region around Ronse (East Flanders), from there multiple range tests will be
+conducted in multiple directions. The first baseline that will be used is a performant single-hop connection, from where
+the relay-extended topology will be set up and evaluated to see how far we can extend the effective coverage.
 These different setups and measurements will help us achieve meaningful results about the reliability, and limitations of Meshtastic on longer distances.
 
 
 
 \section{Literature study}%
-\label{sec:literature study}
+\label{sec:literature-study}
 
 \subsubsection{APRS (Automatic Packet Reporting System)}%
 \label{subsec:aprs}
-APRS is a protocl using packet radio which enables real-time communication of positional and 
-telemetric info across a share radio frequency \autocite{UN2023APRS}. It was created by Bob Bruning in 1982.
-Why it would be suitable for an emergency context is because it operates independently of the itnernet.
-The setup is a smarthpone transmlits GPS coordinates to a station, and transmits it using VHF/UHF transceiuvers to a response station.
-\textcite{UN2023APRS} shows us this exact architecutre in a real-life disaster scenario in Cambodia. Both mobile and response station operators relied on licensed amateur radio to operate.
-This requirement in itself is the biggest vbarrier to deploy this technololgy rapidly in emergency cases.
-Both because a license would be seized by the government in case of war, or because the government wopn't spend time on giving a license in a natural diisaster.
-The needed hardware is quite specilized as well, which makes it hard to acquire in emergency situations.
+APRS is a protocol using packet radio which enables real-time communication of positional and 
+telemetric info across a shared radio frequency \autocite{UN2023APRS}.
+Why it would be suitable for an emergency context is because it operates independently of the internet.
+The setup is a smartphone which transmits GPS coordinates to a station, and transmits it using VHF/UHF transceivers to a response station.
+\textcite{UN2023APRS} shows us this exact architecture in a real-life disaster scenario in Cambodia. Both mobile and response station operators relied on licenced amateur radio to operate.
+This requirement in itself is the biggest barrier to deploy this technology rapidly in emergency cases.
+Both because a licence would be seized by the government in case of war, or because the government wouldn't spend time on giving a licence in a natural disaster case.
+The needed specialized hardware is an additional obstacle as well, which makes it hard to acquire in emergency situations.
 
 \subsubsection{DMR (Digital Mobile Radio)}
 \label{subsec:DMR}
 DMR (Digital Mobile Radio) is a digital mobile radio standard developed by and defined in \textcite{ETSI2023DMR} (European Telecommunications Standards Institute).
-There are 3 tiers in this standard, Tier-I (license-free, low-power, short-range devices), Tier-II (licensed, 
-two-slot TDME supporting voice and IP data). The third tier extends this to trunked networks.
-\textcite{Nyawose2025DMR} confrims the measurable improvements in efficiency, audi quality and security DMR offers compared to analogue mobile radio systems.
-However the tier-I DMR is not usable, and Tier-II and III require licenses, which leaves us in the same situation as with APRS...
-The hardware is, in this case again, a limiting factor as well, especially in a infra-failure scenario. This dependecy on existing infrastructure is a really what is limiting us.
+There are 3 tiers in this standard, Tier-I (licence-free, low-power, short-range devices), Tier-II (licenced, 
+two-slot TDMA supporting voice and IP data). The third tier extends this to trunked networks.
+\textcite{Nyawose2025DMR} confirms the measurable improvements in efficiency, audio quality and security DMR offers compared to analogue mobile radio systems.
+However, Tier-I DMR is not usable due to range limitations, and Tier-II and III require licences, which leaves us in the same situation as with APRS.
+The hardware is, in this case again, a limiting factor as well, especially in an infra-failure scenario.
+This dependency on existing infrastructure is really what is limiting us.
 
 
 
-\section{Methodologie}%
-\label{sec:methodologie}
+\section{Methodology}%
+\label{sec:methodology}
 This research will be conducted in five distinct, sequential phases.
 
 
-The first phase is the literature study. This is done to answer problem domain subquestions.
+The \textbf{first phase} is the literature study. This is done to answer problem domain sub-questions.
 Digital sources will be used and evaluated using the CRAAP test (Currency, relevance, accuracy, authority, purpose).
 From this documentation we will be able to get a list of requirements for emergency communication, a comparison matrix between Meshtastic, APRS, DMR and satellite options.
 This comparison will mostly focus on cost, licensing, range, reliability, ease of configuration and deployability.
 
 
-In a second phase we will then design a Proof of Concept (PoC), as a first step we will have to select the used hardware that will be most suitable for our use case.
+In a \textbf{second phase} we will then design a Proof of Concept (PoC), as a first step we will have to select the used hardware that will be most suitable for our use case.
 The amount of nodes and devices will then also be determined, to make sure a complete reliable setup will be built.
-As metion ned previously, the configured frequency will be limited to the authorized 868-MHz band.
+As previously mentioned, the configured frequency will be limited to the authorized 868\,MHz band.
 
-The chain topology will be setup as a north-south link across the East-Flander province.
-Ronse (source node, elevated) -> Lochristi (destination node). All the nodes (source, destination or relay) will be placed as high as possibly to have a clean line of sight.
-A direct long-distance link between Ronse and Lochristi will be tested, but we expect this to fail due to the distance constraints.
+The chain topology will be set up as a north-south link across the East-Flanders/Wallonia provinces.
+Ronse (source node, elevated) -> T.B.D. location (relay node) -> car (mobile, destination node).
+The fixed nodes (source and relay) will be placed as high as possible to have a clean line of sight.
+A direct long-distance link between Ronse and some locations will be tested using the mobile node.
+But we expect a lot of them to fail due to the distance and environmental constraints.
 This in itself will give us a finding of the research.
 
 
-The third phase of our research will be the execution and measurements of our PoC.
+The \textbf{third phase} of our research will be the execution and measurements of our PoC.
 To do this, two topology variants will first be measured:
 \begin{enumerate}
-\item \textbf{Variant 1, direct link}: Direct link between Ronse and Lochristi, long distance, to establish baseline single-hop performance.
-\item \textbf{Variant 2, relay link}: Full Ronse-Lochristi path with multipler hops. The relays will be placed at selected intermediate sites.
+\item \textbf{Variant 1, direct link}: A direct link to the mobile node to establish the most performant longest possible connection.
+\item \textbf{Variant 2, relay link}: An extended setup using one or more relay nodes to evaluate how much the coverage extends when using a multi-hop connection.
 \end{enumerate}
 For each of these topologies different metrics will be measured, specifically:
 \begin{itemize}
   \item \textbf{Range}: distance between nodes  
   \item \textbf{RSSI (Received Signal Strength Indicator)}: signal power at receiver
   \item \textbf{SNR (Signal-to-Noise Ratio)}: signal quality at receiver
-  \item \textbf{Packet Loss Rate}: percentage of lost messages
+  \item \textbf{PDR (Packet Delivery Rate)}: percentage of delivered messages
   \item \textbf{Latency}: time taken for a message to travel from source to destination
 \end{itemize}
 
-These measurements will be taken on multiple occasions using different variables, spreading factor SF9/SF12, different times of the day, different weathers, etc.
-Each relay will be either battery powered or another alternative, this still has to be decided according to the setup. We will try and chose something that's the easiest and most reliable in emergency
-case (battery, solar, power outlet, \ldots).
+These measurements will be taken on multiple occasions using different variables, different times of the day, different weathers, etc.
+Each relay will be either battery or solar powered or a combination of both, this still has to be decided according to the setup.
+We will try and choose something that's the easiest and most reliable in emergency
+cases (battery, solar, power outlet, \ldots).
 
 
-In a fourth phase we will answer the encryption related sub-question, This analysis will be primarily documentation based additional to the Meshtastic firmware analysis.
-A possiblity if time let's us do it is intercept one of the packages and try to decrypt it, and see to what extent the encryption is secure.
+In a \textbf{fourth phase} we will answer the encryption related sub-question. This analysis will be primarily documentation based additional to the Meshtastic firmware analysis.
+A possibility if time lets us do it is, intercept one of the packets and try to decrypt it, and see to what extent the encryption is secure.
 
 
-For the fifth and final phase of the research we will then compare the PoC results and the literature findings.
-This comparison will show us whether Meshtastic is worthy to consider as an alternative to APRS, DMR and other satellite messengers. The scoring matrix
-will be constructed using the evaluation criteria determined previously (reliability, deployability, cost, security, range, requirements, etc).
-Each one fo them will receive a score based on the evidence from the documentation and (for Meshtastic) from the Proof of Concept.
+For the \textbf{fifth and final phase} of the research we will then compare the PoC results and the literature findings.
+This comparison will show us whether Meshtastic is worthy to consider as a realistic alternative to APRS, DMR and other satellite messengers.
+The scoring matrix will be constructed using the evaluation criteria determined previously (reliability, deployability, cost, security, range, requirements, etc).
+Each one of them will receive a score based on the evidence from the documentation and (for Meshtastic) from the Proof of Concept.
 
 
 
 \section{Expected Results and Conclusion}%
 \label{sec:expected-results}
-The expectations of the PoC are that a full 65km link is not realistically achievable and that the same distance with multiple relay nodes (between 2 to 5 relay nodes) is feasible with acceptable packet delivery and latency.
-The comparative analysis should confirm Meshtastic's superiority to APRS or DMR, it will probably also show us limitations compared to other alternatives (authentication etc).
+The expectations of the PoC are that a direct medium to long distance link will be achievable up to a certain range.
+This distance will mostly be dictated by the hardware, line of sights, terrain obstruction, etc.
+Adding one or more relay nodes at elevated positions is expected to extend the usable range and prove a real-life deployment.
+The comparison with APRS and DMR should show to what extent Meshtastic is a realistic alternative (licensing, deployment speed, costs, authentication, etc.).
 
-
-The thesis should then conclude with a clear answer to the research question and what else should be implemented to make meshtastic a viable option.
+The thesis should then conclude with a clear answer to the research question and what else should be implemented to make Meshtastic a viable option.
 Recommendations for practitioners and directions for further research will be formulated based on the findings.
