@@ -101,7 +101,7 @@ Different roles can be attributed to the nodes, a \texttt{CLENT} node is an endp
 Message go from one node to another, with a maximum hop limit you can set up in the app.
 
 Meshtastic puts nodes into different channels, each channel is named, encrypted and defined by a \gls{psk} \autocite{MeshtasticChannels}.
-A device wanting to participate in said channel, must have the smae channel name and \gls{psk} configured. Eight different channels can be configured on a single node simultaneously, one primary and seven seocndary channels, each with its own key \autocite{MeshtasticChanels}.
+A device wanting to participate in said channel, must have the smae channel name and \gls{psk} configured. Eight different channels can be configured on a single node simultaneously, one primary and seven seocndary channels, each with its own key \autocite{MeshtasticChannels}.
 
 \begin{figure}
   \centering
@@ -109,7 +109,7 @@ A device wanting to participate in said channel, must have the smae channel name
   \caption[Meshtastic channels config.]{\label{fig:meshtastic-channel}Primary and seocndary channels with their respective options.}
 \end{figure}
 
-
+The above mentioned properties are the ones that make Meshtastic a potential candidate for our problem. It's inexpensibve, licence-free, quick to deploy, all of this falls into the deployability and affordabilityu requirements that were defined earlier. The questions left to answer to check if Meshtastic is in fact a suitabel candidate are: range, reliability and security in emergency cases.
 
 \section{Meshtastic security model}%
 \label{sec:sota-security}
