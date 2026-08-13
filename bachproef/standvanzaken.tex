@@ -114,9 +114,38 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 \section{Meshtastic security model}%
 \label{sec:sota-security}
 
-One of the subquestions was the secuirty of Meshtastic in case of traffic interception. 
+One of the subquestions was the secuirty of Meshtastic in case of traffic interception. Thats why Meshtastics encryption model deserves a dedicated analysis.
+
+Meshtastic encrypt the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a disticnt key per channel \autocite{MeshtasticEncryption}. One of the curcial decision of Meshtastic is to only encrypt the payload, which means the packet header (containing send node number, packet identifier and hop limit) is not encrypted and always transmitted in cleartext \autocite{MeshtasticEncryption}.
+This design is by intention, this makes routing possible, the route is chosen on the basis of the cleartext header, so that any node can forward it. That makes each node a relay, even when it can't decrypt the payload and read the message.
+This means confidentialityu of the message content and participation in routing are independent: a third-party node can carry traffic without reading it.
+
+The most important limitation concerns the default channel, which contains a default publicly known key, encoded as \texttt{AQ==} in Base64 \autocite{MeshtasticChannels}.
+This means any device worldwide could decrypt traffic on this defautl channel, so for that case no real secuirty or confidentiality is available until a private key is configured.
+This requires replacing the default key by a random generated 256-bit \gls{psk}, after which only the devices who posses the key can read the content \autocite{MeshtasticEncryption}.
+
+Even with a strong private key set up, limitations remain. \textcite{MeshtasticEncryptionLimitations} proves this, AES-CTR provides confidentialtiy for Meshtastic, but no authentication. This means anyone who can achieve the \gls{psk} can send messages impersonating another user.
+Second of all, the cleartext header which is handy for routing exposes data to third parties, anyone being able to observe the packages can see the node identifiers and timing, even tho the content stays unreadable.
+Some recent firmware updates to Meshtastioc (version 2.5 and later) add public-key cryptography but only to direct messages. These provide authentication for one-to-one communication. For group channels however, the shared-key model stays in place and riskful.
 
 \section{Comparative overview}%
 \label{sec:sota-comparison}
 
+Table~\ref{tab:sota-comparison} summarizes how the alternatives compare to each other on the five defined requirements in section~\ref{sec:sota-requirements}.
+The range and reliability of Meshtastic is left open on puprose, as this is what needs to be investigated using the \gls{poc} in chapter~\ref{ch:poc}.
 
+\begin{table}
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Requirement} & \textbf{APRS} & \textbf{DMR} & \textbf{Satellite} & \textbf{Meshtastic} \\
+    \midrule
+    Infrastructure-independent & Yes    & Partial & Yes    & Yes     \\
+    Low-barrier deployment     & No     & No      & Yes    & Yes     \\
+    Affordable at scale        & Partial& Partial & No     & Yes     \\
+    No licence required        & No     & No      & Yes    & Yes     \\
+    Range and reliability      & Good   & Good    & Global & To be measured \\
+    \bottomrule
+  \end{tabular}
+  \caption[Comparison of off-grid communication alternatives.]{\label{tab:sota-comparison}Comparison of the reviewed off-grid communication alternatives.}
+\end{table}
