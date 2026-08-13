@@ -1,56 +1,120 @@
 \chapter{\IfLanguageName{dutch}{Stand van zaken}{State of the art}}%
 \label{ch:stand-van-zaken}
 
-% Tip: Begin elk hoofdstuk met een paragraaf inleiding die beschrijft hoe
-% dit hoofdstuk past binnen het geheel van de bachelorproef. Geef in het
-% bijzonder aan wat de link is met het vorige en volgende hoofdstuk.
+This chapter is an introduction to the current state of the research domain, it examines it in depth.
+Establishing what emergency comunication acxtually requires when primary infrastructure fails in the first place (Section~\ref{sec:sota-requirements}). Then reviewing existing relevant off-grid alternatives, APRs in section~\ref{sec:sota-aprs}, DMR in section~\ref{sec:sota-dmr}, and other possible satellite messengers in section~\ref{sec:sota-satellite}.
+The rest of the chapter will provide technical background which is necessary to understand the PoC: \gls{lora} (Section~\ref{sec:sota-lora}), Meshtastic architecure (Section~\ref{sec:sota-meshtastic}) and the Meshtastic secuirty model (Section~\ref{sec:sota-security}).
+The chapter will close with a comparison evaluated before (Section~\ref{sec:sota-comparison}).
 
-% Pas na deze inleidende paragraaf komt de eerste sectiehoofding.
+\section{Requirements for emergency communication}%
+\label{sec:sota-requirements}
 
-Dit hoofdstuk bevat je literatuurstudie. De inhoud gaat verder op de inleiding, maar zal het onderwerp van de bachelorproef *diepgaand* uitspitten. De bedoeling is dat de lezer na lezing van dit hoofdstuk helemaal op de hoogte is van de huidige stand van zaken (state-of-the-art) in het onderzoeksdomein. Iemand die niet vertrouwd is met het onderwerp, weet nu voldoende om de rest van het verhaal te kunnen volgen, zonder dat die er nog andere informatie moet over opzoeken \autocite{Pollefliet2011}.
+Before anything can be evaluated, let's define emergency communication demands. When the primary infra fails (such as cellular or internet)), the replacement provided should satisfy a list of reqsuirements that is different form our everyday solutions.
+The needs identifieds are usually the same, \textcite{ManojBaker2007} state that one of the primary challenges is responding to disasters itself. The tools responders and public use should be affordable, available and usable in daily life.
+In a review of communication technologies for difficult terrain they test robustness, rapid deployability, cost and energy eggiciency as well as quality criteria \autocite{ElKhaledMcheick2019}.
+The five criteria listed below are the ones used throughout this thesis.
 
-Je verwijst bij elke bewering die je doet, vakterm die je introduceert, enz.\ naar je bronnen. In \LaTeX{} kan dat met het commando \texttt{$\backslash${textcite\{\}}} of \texttt{$\backslash${autocite\{\}}}. Als argument van het commando geef je de ``sleutel'' van een ``record'' in een bibliografische databank in het Bib\LaTeX{}-formaat (een tekstbestand). Als je expliciet naar de auteur verwijst in de zin (narratieve referentie), gebruik je \texttt{$\backslash${}textcite\{\}}. Soms is de auteursnaam niet expliciet een onderdeel van de zin, dan gebruik je \texttt{$\backslash${}autocite\{\}} (referentie tussen haakjes). Dit gebruik je bv.~bij een citaat, of om in het bijschrift van een overgenomen afbeelding, broncode, tabel, enz. te verwijzen naar de bron. In de volgende paragraaf een voorbeeld van elk.
+The first and maybe most important, requirement is \textbf{the independence from fixed infrastructure}. If a solution is found but it only works relying on the cnetral tower or on a data centre the same failure as the outage is selected. Which means the solution is unsable.
+This is exactly what motivates us to find an autonomous solution \autocite{ManojBaker2007}.
 
-\textcite{Knuth1998} schreef een van de standaardwerken over sorteer- en zoekalgoritmen. Experten zijn het erover eens dat cloud computing een interessante opportuniteit vormen, zowel voor gebruikers als voor dienstverleners op vlak van informatietechnologie~\autocite{Creeger2009}.
+Another requirement is \textbf{quick and easy deployability}. If there is a crisis, there is no time for licences, specialists or training.
+The emergency solution shoudl be setupped and ready by "general public" in minutes using the right documentation and instructions.
 
-Let er ook op: het \texttt{cite}-commando voor de punt, dus binnen de zin. Je verwijst meteen naar een bron in de eerste zin die erop gebaseerd is, dus niet pas op het einde van een paragraaf.
+The thrid requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most "normal" people, then the solution in itself in not usefula t all.
+This applies to subscription and per-message fees based solutions as well, especially for larger scale operations.
+
+Range and reliability, are off course one of the main requirements. The solution muist be able to cover a meaningful distance in order for it to be realistically deployable. 
+Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possiblity to extend it's range if necessary.
+Especially in situations where the duration and scope of the emergency is unknown or undetermined.
+
+The last main requirement found is the \textbf{security and privacy} of said solutions. Ins ome specific cases (wars, censorship, etc.) the communication could contain sensitive infromation which shuldn't be intercepted and might be targeted by attacks/snooping.
+As discussed in section~\ref{sec:sota-security}, this is desirable, but it isn't always as straightforward as it seems.
+
+These five requirements form the main evaluation cirteria for this thesis. They will be used to compare different alternatives as a solution for the main research question.
+
+\section{APRS (Automatic Packet Reporting System)}%
+\label{sec:sota-aprs}
+
+APRS is a known protocol, it's used with amateur radio frequencies, enabling real-time communication of position and telemetric info on said shared frequencies \autocite{UN2023APRS}.
+It is however relevant to emergency contexts as it operates independently from the internet. \textcite{UN2023APRS} demonstrates this in a real-world disaster (this happened in Cambodia). Both the response and mobile station operators relied on license amateur radios.
+
+The license is in fact the biggest barrier to rapid dpeloyment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time gonna be spent on giving out radio licneces.
+It also depends on specialized hardware, which makes it diffuicult to configure and place, especially in crisis conditions. If we compare this to the previously mentioned requirements, APRS is infrastructure independent, but it fails for the eays and quick deploy.
+
+\section{DMR (Digital Mobile Radio)}%
+\label{sec:sota-dmr}
+
+DMR, just like APRS, is a protocol base don radio, namely digital mobile radio standard as defines in \textcite{ETSI2023DMR} by the \gls{etsi}.
+It is defined in three tiers:
+\begin{itemize}
+    \item Tier-I: licence-free, low-power, short-range
+    \item Tier-II: licensed, \gls{tdma} equipment (voice and IP data), repeater-based communication 
+    \item Tier-III: licensed, trunked, \gls{tdma} equipment (voice and IP data), repeater-based communication
+\end{itemize}
+
+\textcite{Nyawose2025DMR} confirms the improvements in efficiency, quality and security DMR offers, this compared to analogue radio.
+
+It is however not a suitabel solution for emergency communication.
+Tier-I is definitely not suitable because of the severe range limiations. Tier-II and III require licenses, which is one of the main requirements and place it in the same position as APRS.
+The dependence on specialized hardware is once again limiting the deplolyment, especially because it's also dpeenden on repeaters, which may be failing due to the same outage as the primary infrastructure.
+DMR satisfy range and reliabiltity, but it fails for licensing and deployability.
+
+\section{Satellite messengers}%
+\label{sec:sota-satellite}
+
+Commercial satellite based messnegers (e.g. Garmin inReach, Zoleo, Bivy Stick, SPOT, etc.) provide a genuenly off-grid solution, relying on satellite infrastructure instead of terrestrial infrastructure. 
+The principal advantage they have over any other solution is the global coverage, which makes the range requirmeent completely irrelevant.
+
+This technology, with all the advatanges it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the inital purtchase amount a subscription fee adds up.
+Some of these also possess a per-message fee on top of the previously mentioned amounts. This means it's impossible to scale, especially fo rgeneral public associations like volunteer orghanizations or municipal safety services. Especially the recurring cost make it almost imlpossible to dpeloy at scale.
+The satellite messengers satifsfy the independency and range requirmeents, but horrendously fail on affordability at scale.
+
+\section{LoRa}%
+\label{sec:sota-lora}
+
+Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
+\gls{lora} is a physical-layer protocol that modulates radio signals in the \emph{"sub-GHz"} ISM band, these are free to use and unlicensed frequencies. To modulate they use gls\{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
+How it works is, instead of sending on a fixed narrowband,\gls{lora} spreads the input signal over a wider channel using chirps. This reuslts in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
+
+To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 and controls the balance between range and data rate.
+A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwith and coding rate determines the sensitivity and the througput \autocite{Raza2017LPWAN}.
+The hardware used in this thesis (Heltec V4 with Semtech SX1262 tranceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
+
+\gls{lora} comes with some limitations as well, in Europe it only allows operation on the 868 MHz band. it is also subject of duty-cycle and power limitations. These are defined by \gls{etsi}, and in Belgium by \gls{bipt}. 
+These limitations directed us in the right direction for the used config in the \gls{poc}, this can be found in chapter~\ref{ch:methodologie}.
+
+\gls{lora} in itself isn't how the nodes form a entwork, this is just a modulation protocol. The most known layer built on top of \gls{lora} is \gls{lpwan}, more specifically the LoRaWAN protocol.
+It organizes end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main indrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
+
+The usage of \gls{lora} for off-grid emergency communciation has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communciation for crisis situations. This showed a ranges of 4.6 to 6.5\,km, with a base node placed on a high building (dpeending on the used antenna and frequency).
+This provides a useful comparison to the measuremnts in chapter~\ref{ch:poc}.
+
+\section{Meshtastic}%
+\label{sec:sota-meshtastic}
+
+Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrolelrs (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
+It has attracted academic attentiuon oiver the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and it's modem presets in logn)range propagation scneraios, coriming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create forward and receive traffic.
+The network is also self-healing, this means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emrgency cases, where a node can suddenly be unavailable or be added.
+Each node is independent, it require no SIM card, no internet connection and no licence.
+
+Different roles can be attributed to the nodes, a \texttt{CLENT} node is an endpoint operated by a user; a \texttt{ROUTER} nodes is optimized to only relay traffic and a \texttt{CLIENT\_BASE} node combines both, it allows the node to forward traffic while also being able to connect to a user as an end-device.
+Message go from one node to another, with a maximum hop limit you can set up in the app.
+
+Meshtastic puts nodes into different channels, each channel is named, encrypted and defined by a \gls{psk} \autocite{MeshtasticChannels}.
+A device wanting to participate in said channel, must have the smae channel name and \gls{psk} configured. Eight different channels can be configured on a single node simultaneously, one primary and seven seocndary channels, each with its own key \autocite{MeshtasticChanels}.
 
 \begin{figure}
   \centering
-  \includegraphics[width=0.8\textwidth]{grail.jpg}
-  \caption[Voorbeeld figuur.]{\label{fig:grail}Voorbeeld van invoegen van een figuur. Zorg altijd voor een uitgebreid bijschrift dat de figuur volledig beschrijft zonder in de tekst te moeten gaan zoeken. Vergeet ook je bronvermelding niet!}
+  \includegraphics[width=0.8\textwidth]{meshtastic-channels.jpg}
+  \caption[Meshtastic channels config.]{\label{fig:meshtastic-channel}Primary and seocndary channels with their respective options.}
 \end{figure}
 
-\begin{listing}
-  \begin{minted}{python}
-    import pandas as pd
-    import seaborn as sns
 
-    penguins = sns.load_dataset('penguins')
-    sns.relplot(data=penguins, x="flipper_length_mm", y="bill_length_mm", hue="species")
-  \end{minted}
-  \caption[Voorbeeld codefragment]{Voorbeeld van het invoegen van een codefragment.}
-\end{listing}
 
-\lipsum[7-20]
-
-\begin{table}
-  \centering
-  \begin{tabular}{lcr}
-    \toprule
-    \textbf{Kolom 1} & \textbf{Kolom 2} & \textbf{Kolom 3} \\
-    $\alpha$         & $\beta$          & $\gamma$         \\
-    \midrule
-    A                & 10.230           & a                \\
-    B                & 45.678           & b                \\
-    C                & 99.987           & c                \\
-    \bottomrule
-  \end{tabular}
-  \caption[Voorbeeld tabel]{\label{tab:example}Voorbeeld van een tabel.}
-\end{table}
-
-\section{sota-security}%
+\section{Meshtastic security model}%
 \label{sec:sota-security}
 
-\section{sota-requirements}%
-\label{sec:sota-requirements}
+\section{Comparative overview}%
+\label{sec:sota-comparison}
+
+
