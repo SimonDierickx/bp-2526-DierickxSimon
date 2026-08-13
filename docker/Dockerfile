@@ -1,6 +1,7 @@
 FROM debian:bullseye
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get -o Acquire::Retries=5 update \
+    && apt-get -o Acquire::Retries=5 -o Acquire::http::Timeout=30 install -y \
     texlive-latex-base \
     texlive-latex-extra \
     texlive-lang-european \
