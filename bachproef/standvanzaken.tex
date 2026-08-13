@@ -73,7 +73,7 @@ The satellite messengers satifsfy the independency and range requirmeents, but h
 \label{sec:sota-lora}
 
 Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
-\gls{lora} is a physical-layer protocol that modulates radio signals in the \emph{"sub-GHz"} ISM band, these are free to use and unlicensed frequencies. To modulate they use gls\{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
+\gls{lora} is a physical-layer protocol that modulates radio signals in the \emph{"sub-GHz"} ISM band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
 How it works is, instead of sending on a fixed narrowband,\gls{lora} spreads the input signal over a wider channel using chirps. This reuslts in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
 
 To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 and controls the balance between range and data rate.
@@ -113,6 +113,8 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 
 \section{Meshtastic security model}%
 \label{sec:sota-security}
+
+One of the subquestions was the secuirty of Meshtastic in case of traffic interception. 
 
 \section{Comparative overview}%
 \label{sec:sota-comparison}
