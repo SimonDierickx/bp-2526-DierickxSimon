@@ -120,6 +120,36 @@ However the three nodes received three different roles: base node in Ronse as \t
 The Meshtastic Range Test module was enabled and configured so that the mobile node was sending a test packet every 60 seconds to the base node. The base node then kept this in a CSV log file for later analysis.
 These sequences contained a sequence number, time of reception, RSSI, SNR and the exact position of the node (this device doesn't have a GPS module, but it uses the phones shared GPS position).
 
+For all three nodes current configuration has been set up and saved to the devices:
+\begin{table}
+  \centering
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Setting} & \textbf{Base-Node (Ronse)} & \textbf{Relay-Node (Tournai)} & \textbf{Mobile Node} \\
+    \midrule
+    Name                  & Ronse-Base & Relay-Node & Mobile-Node \\
+    Role                  & \texttt{CLIENT\_BASE} & \texttt{ROUTER} & \texttt{CLIENT} \\
+    Device type           & Heltec WiFi LoRa 32 V4 & Heltec WiFi LoRa 32 V4 & Heltec WiFi LoRa 32 V4 \\
+    Firmware version      & 2.7.26.54e0d8d & 2.7.26.54e0d8d & 2.7.26.54e0d8d \\
+    Region                & EU\_868 & EU\_868 & EU\_868 \\
+    Modem preset          & LONG\_FAST & LONG\_FAST & LONG\_FAST \\
+    Bandwidth             & 250\,kHz & 250\,kHz & 250\,kHz \\
+    Spreading factor      & 11 & 11 & 11 \\
+    Coding rate           & 4/5 & 4/5 & 4/5 \\
+    Hop limit             & 3 & 3 & 3 \\
+    Transmit power        & 27\,dBm & 27\,dBm & 27\,dBm \\
+    Boosted RX gain       & Enabled & Enabled & Enabled \\
+    FEM/LNA mode          & Disabled & Disabled & Disabled \\
+    Rebroadcast mode      & ALL & ALL & ALL \\
+    Power saving          & Off & On & Off \\
+    Fixed position        & Yes & Yes & No (phone GPS) \\
+    Range Test            & Receiver (CSV) & Receiver & Sender (60\,s) \\
+    \bottomrule
+  \end{tabular}
+  \caption[Meshtastic node configuration.]{\label{tab:poc-config}The exact configuration applied to all three nodes.}
+\end{table}
+
 The nodes were properly configured, but this wasn't without any difficulties.
 These are also findings of this thesis to take into account (deployability requirement):
 \begin{itemize}
