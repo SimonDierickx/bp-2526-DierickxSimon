@@ -60,7 +60,8 @@ Each fixed node was powered by a battery and a solar panel, this way running it 
 
 For the fourth phase, the encryption sub-question, the main analysis is based on the official Meshtastic documentation.
 As described in Section~\ref{sec:sota-security}, the firmware's security model is analysed as well.
-%TODO
+No attempt has been made to try and break the encryption itself, both because as seen in the documentation, \gls{aes} is not the weak point and mostly because intercepting and/or decrypting third-party traffic is illegal.
+That said, some tests can be done on the field, having an additional node, not part of the network (encrypted with a different key) and see if it gets the traffic to forward it, and try to read the message (which shouldn't be possible because of the encryption).
 
 \section{Phase 5: Comparative analysis}%
 \label{sec:method-comparison}

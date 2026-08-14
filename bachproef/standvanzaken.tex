@@ -65,7 +65,7 @@ DMR satisfies range and reliability, but it fails for licensing and deployabilit
 Commercial satellite based messnegers (e.g. Garmin inReach, Zoleo, Bivy Stick, SPOT, etc.) provide a genuinely off-grid solution, relying on satellite infrastructure instead of terrestrial infrastructure. 
 The principal advantage they have over any other solution is the global coverage, which makes the range requirmeent completely irrelevant.
 
-This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the inital purchase amount a subscription fee adds up.
+This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the inital purchase amount a subscription fee adds up \autocite{GarminInReach2026, Zoleo2026}.
 Some of these also possess a per-message fee on top of the previously mentioned amounts. This means it's impossible to scale, especially for general public associations like volunteer organizations or municipal safety services. Especially the recurring cost make it almost impossible to deploy at scale.
 The satellite messengers satifsfy the independence and range requirements, but horrendously fail on affordability at scale.
 
@@ -79,6 +79,8 @@ How it works is, instead of sending on a fixed narrowband,\gls{lora} spreads the
 To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 and controls the balance between range and data rate.
 A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwith and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
 The hardware used in this thesis (Heltec V4 with Semtech SX1262 tranceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
+According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 to 15km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15km could be seen as a strong result.
+\textcite{Hochst2020LoRa} also shows us that vegetation and trees significantly reduce the radio signals. This can cause severe signal loss.
 
 \gls{lora} comes with some limitations as well, in Europe it only allows operation on the 868 MHz band. It is also subject to duty-cycle and power limitations. These are defined by \gls{etsi}, and in Belgium by \gls{bipt}. 
 These limitations directed us in the right direction for the used config in the \gls{poc}, this can be found in chapter~\ref{ch:methodologie}.
@@ -116,7 +118,10 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 
 One of the sub-questions was the secuirty of Meshtastic in case of traffic interception. Thats why Meshtastic's encryption model deserves a dedicated analysis.
 
-Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a distinct key per channel \autocite{MeshtasticEncryption}. One of the crucial decision of Meshtastic is to only encrypt the payload, which means the packet header (containing send node number, packet identifier and hop limit) is not encrypted and always transmitted in cleartext \autocite{MeshtasticEncryption}.
+Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a distinct key per channel \autocite{MeshtasticEncryption}. 
+The \gls{aes} encryption itself is considered secure, In \textcite{NIST2023AES} it is the approved standard for protecting sensitive information. It has been analyzed for more than twnety years and is still considered secure to use \autocite{Bogdanov2011AES}.
+Th known limitations come from the implementation, not the encryption itself, as specified down below.
+One of the crucial decision of Meshtastic is to only encrypt the payload, which means the packet header (containing send node number, packet identifier and hop limit) is not encrypted and always transmitted in cleartext \autocite{MeshtasticEncryption}.
 This design is by intention, this makes routing possible, the route is chosen on the basis of the cleartext header, so that any node can forward it. That makes each node a relay, even when it can't decrypt the payload and read the message.
 This means confidentiality of the message content and participation in routing are independent: a third-party node can carry traffic without reading it.
 
