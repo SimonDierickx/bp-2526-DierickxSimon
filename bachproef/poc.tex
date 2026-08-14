@@ -88,13 +88,13 @@ The junction box and antenna are oriented towards the base node.
   \caption[Assembled base node.]{\label{fig:poc-build-ronse}The base node inside the junction box and the roof installation. The V4 board, LiPo battery, antenna and solar panel can be identified.}
 \end{figure}
 
+The final installation of the relay node looked like this:
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{poc-build-relay.jpg}
   \caption[Relay installation.]{\label{fig:poc-build-relay}The relay node installation inside the viewing tower of Floreal Le Panoramique.}
 \end{figure}
 
-The final installation of the relay node looked like this:
 \begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{poc-panoramique.jpg}
@@ -411,6 +411,7 @@ This confirms our initial finding of session 1, LOS is more important than eleva
   \caption[Second session: relay research]{\label{tab:session2}Connection measurements at possible relay sites in the previously mentioned area (Session~2). Distance is measured from the base node. Sites with obstruction achieved 0\,\% packet delivery despite high altitude, while low open sites achieved 100\,\% \gls{pdr}.}
 \end{table}
 
+
 As seen some sites had good \gls{pdr} and \gls{rssi}, some had good altitude, but none of them combined both.
 The best possibilities from this session where the Malanderpark and Zandstraat tests. But these sites only had a straight line distance of 5.1--5.7\,km to the base node.
 On top of this, they didn't have a straightforward mounting point (houses, trees, poles, etc.) so an extra requirement would have been to ask permission to the relevant persons, which was complicated in this situation.
@@ -498,7 +499,7 @@ Theoretically, the battery of 2000\,mAh and 3.7\,V (storing 7.4\,Wh) should be a
 This time is the buffer time before the setup fails.
 
 In reality, what was observed is after a full day of sunlight, the battery took effectively over at night time, the battery level on the base node (with WiFi enabled, so more consumption) was at 75\% by the time it started charging again.
-This means that the batteyr could in reality sustain 4x +-8 hours, which means 24 hours of total operation. This is a good result, as the battery then charges when sunlight hits it. This means the battery could cover a night + a partially clear sky for example.
+This means that the battery could in reality sustain 4x ±8 hours, which means 24 hours of total operation. This is a good result, as the battery then charges when sunlight hits it. This means the battery could cover a night + a partially clear sky for example.
 
 In practice the solar panel charges the battery whenever it is hit with sunlight. Telemetry from the V4 reports a full battery and a 4.32\,V voltage, this confirms that during summer the solar panel produces enough energy for charging and operation.
 This proves the low-cost combination of a small LiPo battery and a solar panel is enough to keep a node of this size running without any external party being involved.
