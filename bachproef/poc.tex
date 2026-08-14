@@ -91,7 +91,14 @@ The junction box and antenna are oriented towards the base node.
 \begin{figure}
   \centering
   \includegraphics[width=0.8\textwidth]{poc-build-relay.jpg}
-  \caption[Relay installation.]{\label{fig:poc-build-relay}The relay node installation inside the viewing tower of Floreal Le Panoramique. The red marker indicates the position of the base node.}
+  \caption[Relay installation.]{\label{fig:poc-build-relay}The relay node installation inside the viewing tower of Floreal Le Panoramique.}
+\end{figure}
+
+The final installation of the relay node looked like this:
+\begin{figure}
+  \centering
+  \includegraphics[width=0.8\textwidth]{poc-panoramique.jpg}
+  \caption[Relay installation + viewing area.]{\label{fig:poc-panoramique}The red marker indicates the position of the base node.}
 \end{figure}
 
 No real setup was done for the mobile node. This was powered via the car's USB-C socket, connected to the antenna, magnetically attached to the car's roof.
@@ -121,6 +128,193 @@ These are also findings of this thesis to take into account (deployability requi
     \item When using the CLI the order and timing of the executed commands should be carefully considered. A reboot might be triggered and some commands get ignored.
     \item Polarity of the LiPo battery connector needs to be checked before installing, apparently this isn't standardized.
 \end{itemize}
+
+As mentioned above, the nodes were not always easy to set up using the Web Client, that's why some of the settings were done through the app to stay persistent.
+The app, however, is really user-friendly but not as complete as the Web Client could be. That's why the CLI was used to perform some of the more "advanced" settings.
+As shown below, each of the nodes had such a config file, which was a regular .bat file, pushing the configuration settings on a specified COM-port at the top of the file.
+
+\begin{lstlisting}[language=batch]
+@echo off
+REM ================================================================
+REM  MESHTASTIC - NODE: RONSE-BASE
+REM ================================================================
+
+SET COM_PORT=COM4
+SET MESH=python -m meshtastic --port %COM_PORT%
+
+REM -- Test connection first --
+echo [TEST] Checking connection...
+%MESH% --info > nul 2>&1
+IF ERRORLEVEL 1 (
+    echo ERROR: Cannot connect on %COM_PORT%
+    echo Check Device Manager for correct COM port number.
+    pause
+    exit /b 1
+)
+echo OK - Connected.
+echo.
+
+REM ================================================================
+REM  1. IDENTITY
+REM ================================================================
+echo [1/9] Setting identity...
+%MESH% --set-owner "Ronse-Base"
+timeout /t 3 /nobreak > nul
+%MESH% --set-owner-short "RONS"
+timeout /t 3 /nobreak > nul
+
+REM ================================================================
+REM  2. LORA RADIO
+REM ================================================================
+echo [2/9] Configuring LoRa radio...
+%MESH% --set lora.region EU_868
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.modem_preset LONG_FAST
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.hop_limit 3
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.tx_enabled true
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.tx_power 0
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.sx126x_rx_boosted_gain true
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.ignore_mqtt true
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.ok_to_mqtt false
+timeout /t 3 /nobreak > nul
+%MESH% --set lora.override_duty_cycle false
+timeout /t 5 /nobreak > nul
+
+REM ================================================================
+REM  3. FIXED POSITION (Ronse)
+REM     !! Update coordinates to exact installation spot !!
+REM     Right-click on Google Maps -> "What's here?" for exact coords
+REM ================================================================
+echo [3/9] Setting fixed position (Ronse)...
+%MESH% --setlat 50.72306 --setlon 3.63234 --setalt 88
+timeout /t 5 /nobreak > nul
+%MESH% --set position.gps_mode NOT_PRESENT
+timeout /t 3 /nobreak > nul
+%MESH% --set position.broadcast_secs 3600
+timeout /t 3 /nobreak > nul
+%MESH% --set position.smart_enabled false
+timeout /t 5 /nobreak > nul
+
+REM ================================================================
+REM  4. POWER (mains powered, no saving needed)
+REM ================================================================
+echo [4/9] Power settings...
+%MESH% --set power.is_power_saving false
+timeout /t 3 /nobreak > nul
+%MESH% --set power.wait_bluetooth_secs 0
+timeout /t 5 /nobreak > nul
+
+REM ================================================================
+REM  5. BLUETOOTH
+REM ================================================================
+echo [5/9] Bluetooth...
+%MESH% --set bluetooth.enabled true
+timeout /t 3 /nobreak > nul
+%MESH% --set bluetooth.mode NO_PIN
+timeout /t 5 /nobreak > nul
+
+REM ================================================================
+REM  6. DISPLAY
+REM ================================================================
+echo [6/9] Display...
+%MESH% --set display.screen_on_secs 60
+timeout /t 3 /nobreak > nul
+%MESH% --set display.units METRIC
+timeout /t 3 /nobreak > nul
+%MESH% --set display.twentyfourhr_clock true
+timeout /t 3 /nobreak > nul
+%MESH% --set display.heading_bold true
+timeout /t 3 /nobreak > nul
+%MESH% --set display.wake_on_tap_or_motion true
+timeout /t 3 /nobreak > nul
+%MESH% --set display.compass_north_top true
+timeout /t 3 /nobreak > nul
+%MESH% --set display.carousel_delay_sec 5
+timeout /t 5 /nobreak > nul
+
+REM ================================================================
+REM  7. MODULES
+REM ================================================================
+echo [7/9] Module config...
+
+REM Telemetry - logs battery voltage over time
+%MESH% --set telemetry.device_update_interval 1800
+timeout /t 3 /nobreak > nul
+
+REM Neighbor info - logs mesh topology
+%MESH% --set neighbor_info.enabled true
+timeout /t 3 /nobreak > nul
+%MESH% --set neighbor_info.update_interval 3600
+timeout /t 3 /nobreak > nul
+
+REM Serial debug output
+%MESH% --set serial.enabled true
+timeout /t 3 /nobreak > nul
+%MESH% --set serial.baud 115200
+timeout /t 3 /nobreak > nul
+
+REM Range test - RECEIVER MODE, saves CSV (thesis measurement data!)
+%MESH% --set range_test.enabled true
+timeout /t 3 /nobreak > nul
+%MESH% --set range_test.sender 0
+timeout /t 3 /nobreak > nul
+%MESH% --set range_test.save true
+timeout /t 5 /nobreak > nul
+
+%MESH% --set telemetry.device_telemetry_enabled true
+timeout /t 5 /nobreak > nul
+%MESH% --set telemetry.device_update_interval 900
+timeout /t 5 /nobreak > nul
+
+REM MQTT disabled
+%MESH% --set mqtt.enabled false
+timeout /t 3 /nobreak > nul
+
+REM ================================================================
+REM  8. DEVICE CONFIG (may cause reboot)
+REM ================================================================
+echo [8/9] Device config (node may reboot after this)...
+%MESH% --set device.rebroadcast_mode ALL
+timeout /t 3 /nobreak > nul
+%MESH% --set device.node_info_broadcast_secs 3600
+timeout /t 3 /nobreak > nul
+%MESH% --set device.tzdef "CET-1CEST,M3.5.0,M10.5.0/3"
+timeout /t 5 /nobreak > nul
+
+REM Role is set LAST because it always triggers a reboot
+%MESH% --set device.role CLIENT_BASE
+echo Waiting 35 seconds for node to reboot...
+timeout /t 35 /nobreak > nul
+
+REM ================================================================
+REM  9. VERIFY
+REM ================================================================
+echo [9/9] Verifying configuration...
+%MESH% --info
+
+echo.
+echo ================================================================
+echo  RONSE-BASE configuration complete.
+echo  Check output above - verify:
+echo    - Owner: Ronse-Base / RONS
+echo    - Role: ROUTER_CLIENT
+echo    - Region: EU_868
+echo    - Modem preset: LONG_FAST
+echo ================================================================
+echo.
+pause
+\end{lstlisting}
+
+The Python CLI saved lots of time configuring, but also verifying existing config using the following command:
+\begin{lstlisting}[language=batch]
+  python -m meshtastic --port {PORT} --info
+\end{lstlisting}
 
 \section{Session 1: Direct-link baseline}%
 \label{sec:poc-session1}
@@ -232,6 +426,10 @@ Other devices (Heltec, LilyGo, etc.) configured witht he Meshtastic firmware com
 This wasn't planned, but it shows exactly what Meshtastic is supposed to do: create a wide network using a Mesh topology to forward messages to areas that might not have the necessary connection.
 Some identified nodes reached as far as Amiens, Aalst and Dendermonde, among others.
 
+For example the Amiens node appeared as 2 hops away. The final node (in Amiens) is about 130\,km straight line distance from the base node in Ronse.
+This shows that the mesh setup is real, and that the total range of the network is also expandable with good placement of nodes.
+Off course, the Amiens node wasn't tested as this was a thrid-party node, and quite a drive for this \gls{poc}, but it shows the real potential of Meshtastic.
+
 This is the self-organizing nature of Meshtastic. Nodes discover one another and exchange necessary information for routing. This makes the range instantly larger than what you originally expected.
 This shows the mesh is a real, practical solution for establishing a connection between distant points. They however could forward the packages, but they couldn't read any content of these packages.
 That's the whole point of the secure encryption Meshtastic offers.
@@ -261,6 +459,9 @@ This setup was used for both the fixed nodes.
 The relay node was set up as "Power saving" mode, while the base node was completely set up without any limits, and even WiFi enabled (which consumes even more power).
 Theoretically, the battery of 2000\,mAh and 3.7\,V (storing 7.4\,Wh) should be able to run the setup during 20 to 30 hours. This is calculated using an estimation of 0.3\,W of usage on the setup.
 This time is the buffer time before the setup fails.
+
+In reality, what was observed is after a full day of sunlight, the battery took effectively over at night time, the battery level on the base node (with WiFi enabled, so more consumption) was at 75\% by the time it started charging again.
+This means that the batteyr could in reality sustain 4x +-8 hours, which means 24 hours of total operation. This is a good result, as the battery then charges when sunlight hits it. This means the battery could cover a night + a partially clear sky for example.
 
 In practice the solar panel charges the battery whenever it is hit with sunlight. Telemetry from the V4 reports a full battery and a 4.32\,V voltage, this confirms that during summer the solar panel produces enough energy for charging and operation.
 This proves the low-cost combination of a small LiPo battery and a solar panel is enough to keep a node of this size running without any external party being involved.
