@@ -6,32 +6,32 @@
 \label{ch:inleiding}
 
 
-Modern society relies heavily, we could even say entirely, on the permanent availabiltiy of our communication netwroks.
+Modern society relies heavily, we could even say entirely, on the permanent availability of our communication networks.
 Everything has switched to global networks, the Internet, cellular data, phone networks, etc. Everything became embedded in day-to-day life that people use it without even thinking about it, we take it for granted.
 Everything means even emergency response depends on said networks to communicate and to coordinate first responders, warn people and keep citizens connected.
-This means that this dependcy can becoime critical at the exact moment it is most needed, when networks become unavailable.
+This means that this dependency can become critical at the exact moment it is most needed, when networks become unavailable.
 
 When a big storm destroys a cellular tower, or when floods cut power of a specific region (where bases might be running) or other large-scale incidents happen that infrastructure just disappears, and suddenly what we took for granted is no longer available.
-This is not just hypotetical; natural disasters, power outages, conflict situations (disrupting traffic, censoring, etc.), these are moments when using the network is necessary, but impossible.
+This is not just hypothetical; natural disasters, power outages, conflict situations (disrupting traffic, censoring, etc.), these are moments when using the network is necessary, but impossible.
 
 For those exact situations a back-up system should be available. Not only for first responders or civil protection but also for the general public.
 A fallback available to the public should be quick and easy to deploy, not require a specialist and be affordable enough.
-Several technologies already exists, but they all have their limiations which make them difficult to effectively applu in an emergency.
+Several technologies already exists, but they all have their limiations which make them difficult to effectively apply in an emergency.
 These limitations can be cost, licences, needed hardware, extra fees, etc.
 
-Thios bachelor thesis will investigate \textbf{Meshtastic}. \textbf{Meshtastic} is an open-source project that allows to build a decentralized, encrypted mesh network. This can be done on low-cost \gls{lora} radio hardware.
-Meshtastic doesn't require any SIM card, internet connection or lcience. It provides self-healing multi-hop routing which allows us to extend the initial coverage without needing any fixed existing infrastructure.
-For these exact reasons, Meshtastic might be a promising candidate for the emergency contexts described above. However real-world tests have been conducted a real emergency reliability and emergency hasn't been evaluated yet. This thesis will address that gap in research by creating a PoC in the region around Ronse, Belgium.
+This bachelor thesis will investigate \textbf{Meshtastic}. \textbf{Meshtastic} is an open-source project that allows to build a decentralized, encrypted mesh network. This can be done on low-cost \gls{lora} radio hardware.
+Meshtastic doesn't require any SIM card, internet connection or licence. It provides self-healing multi-hop routing which allows us to extend the initial coverage without needing any fixed existing infrastructure.
+For these exact reasons, Meshtastic might be a promising candidate for the emergency contexts described above. However real-world tests have been conducted a real emergency reliability and emergency context hasn't been evaluated yet. This thesis will address that gap in research by creating a PoC in the region around Ronse, Belgium.
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 
 \label{sec:probleemstelling}
 
 Whenever the main infrastructure fails, the responsible people for coordinating instructions, help, etc. are left without any way to do this.
-The core problem of this thesis if the absence of an accessible, affordable, reliable and easy to deploy solution that functions independtly of the failed infraastrructure.
+The core problem of this thesis is the absence of an accessible, affordable, reliable and easy to deploy solution that functions independently of the failed infrastructure.
 Also no evidence is available about how well Meshtastic handles this role in practice.
 
-The primary audience are IT professionals that are responsible for continuity and civil protectiuon communication, such as security teams etc.
-As a secondary audience we could also identify volunteer oprganizations, municvipal safety services and network engiuveers who want to investigate low-sot, off the grid coimmunication options.
+The primary audience are IT professionals that are responsible for continuity and civil protection communication, such as security teams etc.
+As a secondary audience we could also identify volunteer organizations, municipal safety services and network engineers who want to investigate low-cost, off the grid communication options.
 A last additional audience could just be general public, for who privacy matters and don't want to roam on a controlled network.
 
 \section{\IfLanguageName{dutch}{Onderzoeksvraag}{Research question}}%
@@ -78,7 +78,7 @@ What the concrete deliverables are:
   \item A final matrix comparing Meshtastic to the alternatives
 \end{itemize}
 
-Success for this thesis can be defined as being able to give a clear, evidence-based answer to the research question, supported by th efield measuremnts the PoC provided.
+Success for this thesis can be defined as being able to give a clear, evidence-based answer to the research question, supported by the field measurements the PoC provided.
 
 \section{\IfLanguageName{dutch}{Opzet van deze bachelorproef}{Structure of this bachelor thesis}}%
 \label{sec:opzet-bachelorproef}
@@ -87,4 +87,10 @@ The structure of this thesis is as follows:
 
 Chapter~\ref{ch:inleiding} introduces the main problem, questions and ideas.
 
-%TODO
+Chapter~\ref{ch:stand-van-zaken} covers the state of the art. It defines problem and solution domains, reviews the existing alternatives (APRS, DMR and satellite messengers) and explains the technical background of \gls{lora} and Meshtastic.
+
+Chapter~\ref{ch:methodologie} describes how the project is set up, and how everythign will be executed, as well as the choices that have been made.
+
+Chapter~\ref{ch:poc} the actual \gls{poc}: from hardware selection, the build and configuration, the difficulties to the results of the test sessions.
+
+Chapter~\ref{ch:conclusie} concludes the thesis by answering the research question, reflecting on the obtained results, their limitations, directions to dig in for further research.
