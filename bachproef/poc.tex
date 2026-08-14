@@ -133,188 +133,194 @@ As mentioned above, the nodes were not always easy to set up using the Web Clien
 The app, however, is really user-friendly but not as complete as the Web Client could be. That's why the CLI was used to perform some of the more "advanced" settings.
 As shown below, each of the nodes had such a config file, which was a regular .bat file, pushing the configuration settings on a specified COM-port at the top of the file.
 
-\begin{lstlisting}[language=batch]
-@echo off
-REM ================================================================
-REM  MESHTASTIC - NODE: RONSE-BASE
-REM ================================================================
+\begin{listing}
+  \begin{minted}{batch}
+  @echo off
+  REM ================================================================
+  REM  MESHTASTIC - NODE: RONSE-BASE
+  REM ================================================================
 
-SET COM_PORT=COM4
-SET MESH=python -m meshtastic --port %COM_PORT%
+  SET COM_PORT=COM4
+  SET MESH=python -m meshtastic --port %COM_PORT%
 
-REM -- Test connection first --
-echo [TEST] Checking connection...
-%MESH% --info > nul 2>&1
-IF ERRORLEVEL 1 (
-    echo ERROR: Cannot connect on %COM_PORT%
-    echo Check Device Manager for correct COM port number.
-    pause
-    exit /b 1
-)
-echo OK - Connected.
-echo.
+  REM -- Test connection first --
+  echo [TEST] Checking connection...
+  %MESH% --info > nul 2>&1
+  IF ERRORLEVEL 1 (
+      echo ERROR: Cannot connect on %COM_PORT%
+      echo Check Device Manager for correct COM port number.
+      pause
+      exit /b 1
+  )
+  echo OK - Connected.
+  echo.
 
-REM ================================================================
-REM  1. IDENTITY
-REM ================================================================
-echo [1/9] Setting identity...
-%MESH% --set-owner "Ronse-Base"
-timeout /t 3 /nobreak > nul
-%MESH% --set-owner-short "RONS"
-timeout /t 3 /nobreak > nul
+  REM ================================================================
+  REM  1. IDENTITY
+  REM ================================================================
+  echo [1/9] Setting identity...
+  %MESH% --set-owner "Ronse-Base"
+  timeout /t 3 /nobreak > nul
+  %MESH% --set-owner-short "RONS"
+  timeout /t 3 /nobreak > nul
 
-REM ================================================================
-REM  2. LORA RADIO
-REM ================================================================
-echo [2/9] Configuring LoRa radio...
-%MESH% --set lora.region EU_868
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.modem_preset LONG_FAST
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.hop_limit 3
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.tx_enabled true
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.tx_power 0
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.sx126x_rx_boosted_gain true
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.ignore_mqtt true
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.ok_to_mqtt false
-timeout /t 3 /nobreak > nul
-%MESH% --set lora.override_duty_cycle false
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  2. LORA RADIO
+  REM ================================================================
+  echo [2/9] Configuring LoRa radio...
+  %MESH% --set lora.region EU_868
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.modem_preset LONG_FAST
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.hop_limit 3
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.tx_enabled true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.tx_power 0
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.sx126x_rx_boosted_gain true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.ignore_mqtt true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.ok_to_mqtt false
+  timeout /t 3 /nobreak > nul
+  %MESH% --set lora.override_duty_cycle false
+  timeout /t 5 /nobreak > nul
 
-REM ================================================================
-REM  3. FIXED POSITION (Ronse)
-REM     !! Update coordinates to exact installation spot !!
-REM     Right-click on Google Maps -> "What's here?" for exact coords
-REM ================================================================
-echo [3/9] Setting fixed position (Ronse)...
-%MESH% --setlat 50.72306 --setlon 3.63234 --setalt 88
-timeout /t 5 /nobreak > nul
-%MESH% --set position.gps_mode NOT_PRESENT
-timeout /t 3 /nobreak > nul
-%MESH% --set position.broadcast_secs 3600
-timeout /t 3 /nobreak > nul
-%MESH% --set position.smart_enabled false
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  3. FIXED POSITION (Ronse)
+  REM     !! Update coordinates to exact installation spot !!
+  REM     Right-click on Google Maps -> "What's here?" for exact coords
+  REM ================================================================
+  echo [3/9] Setting fixed position (Ronse)...
+  %MESH% --setlat 50.72306 --setlon 3.63234 --setalt 88
+  timeout /t 5 /nobreak > nul
+  %MESH% --set position.gps_mode NOT_PRESENT
+  timeout /t 3 /nobreak > nul
+  %MESH% --set position.broadcast_secs 3600
+  timeout /t 3 /nobreak > nul
+  %MESH% --set position.smart_enabled false
+  timeout /t 5 /nobreak > nul
 
-REM ================================================================
-REM  4. POWER (mains powered, no saving needed)
-REM ================================================================
-echo [4/9] Power settings...
-%MESH% --set power.is_power_saving false
-timeout /t 3 /nobreak > nul
-%MESH% --set power.wait_bluetooth_secs 0
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  4. POWER (mains powered, no saving needed)
+  REM ================================================================
+  echo [4/9] Power settings...
+  %MESH% --set power.is_power_saving false
+  timeout /t 3 /nobreak > nul
+  %MESH% --set power.wait_bluetooth_secs 0
+  timeout /t 5 /nobreak > nul
 
-REM ================================================================
-REM  5. BLUETOOTH
-REM ================================================================
-echo [5/9] Bluetooth...
-%MESH% --set bluetooth.enabled true
-timeout /t 3 /nobreak > nul
-%MESH% --set bluetooth.mode NO_PIN
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  5. BLUETOOTH
+  REM ================================================================
+  echo [5/9] Bluetooth...
+  %MESH% --set bluetooth.enabled true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set bluetooth.mode NO_PIN
+  timeout /t 5 /nobreak > nul
 
-REM ================================================================
-REM  6. DISPLAY
-REM ================================================================
-echo [6/9] Display...
-%MESH% --set display.screen_on_secs 60
-timeout /t 3 /nobreak > nul
-%MESH% --set display.units METRIC
-timeout /t 3 /nobreak > nul
-%MESH% --set display.twentyfourhr_clock true
-timeout /t 3 /nobreak > nul
-%MESH% --set display.heading_bold true
-timeout /t 3 /nobreak > nul
-%MESH% --set display.wake_on_tap_or_motion true
-timeout /t 3 /nobreak > nul
-%MESH% --set display.compass_north_top true
-timeout /t 3 /nobreak > nul
-%MESH% --set display.carousel_delay_sec 5
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  6. DISPLAY
+  REM ================================================================
+  echo [6/9] Display...
+  %MESH% --set display.screen_on_secs 60
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.units METRIC
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.twentyfourhr_clock true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.heading_bold true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.wake_on_tap_or_motion true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.compass_north_top true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set display.carousel_delay_sec 5
+  timeout /t 5 /nobreak > nul
 
-REM ================================================================
-REM  7. MODULES
-REM ================================================================
-echo [7/9] Module config...
+  REM ================================================================
+  REM  7. MODULES
+  REM ================================================================
+  echo [7/9] Module config...
 
-REM Telemetry - logs battery voltage over time
-%MESH% --set telemetry.device_update_interval 1800
-timeout /t 3 /nobreak > nul
+  REM Telemetry - logs battery voltage over time
+  %MESH% --set telemetry.device_update_interval 1800
+  timeout /t 3 /nobreak > nul
 
-REM Neighbor info - logs mesh topology
-%MESH% --set neighbor_info.enabled true
-timeout /t 3 /nobreak > nul
-%MESH% --set neighbor_info.update_interval 3600
-timeout /t 3 /nobreak > nul
+  REM Neighbor info - logs mesh topology
+  %MESH% --set neighbor_info.enabled true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set neighbor_info.update_interval 3600
+  timeout /t 3 /nobreak > nul
 
-REM Serial debug output
-%MESH% --set serial.enabled true
-timeout /t 3 /nobreak > nul
-%MESH% --set serial.baud 115200
-timeout /t 3 /nobreak > nul
+  REM Serial debug output
+  %MESH% --set serial.enabled true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set serial.baud 115200
+  timeout /t 3 /nobreak > nul
 
-REM Range test - RECEIVER MODE, saves CSV (thesis measurement data!)
-%MESH% --set range_test.enabled true
-timeout /t 3 /nobreak > nul
-%MESH% --set range_test.sender 0
-timeout /t 3 /nobreak > nul
-%MESH% --set range_test.save true
-timeout /t 5 /nobreak > nul
+  REM Range test - RECEIVER MODE, saves CSV (thesis measurement data!)
+  %MESH% --set range_test.enabled true
+  timeout /t 3 /nobreak > nul
+  %MESH% --set range_test.sender 0
+  timeout /t 3 /nobreak > nul
+  %MESH% --set range_test.save true
+  timeout /t 5 /nobreak > nul
 
-%MESH% --set telemetry.device_telemetry_enabled true
-timeout /t 5 /nobreak > nul
-%MESH% --set telemetry.device_update_interval 900
-timeout /t 5 /nobreak > nul
+  %MESH% --set telemetry.device_telemetry_enabled true
+  timeout /t 5 /nobreak > nul
+  %MESH% --set telemetry.device_update_interval 900
+  timeout /t 5 /nobreak > nul
 
-REM MQTT disabled
-%MESH% --set mqtt.enabled false
-timeout /t 3 /nobreak > nul
+  REM MQTT disabled
+  %MESH% --set mqtt.enabled false
+  timeout /t 3 /nobreak > nul
 
-REM ================================================================
-REM  8. DEVICE CONFIG (may cause reboot)
-REM ================================================================
-echo [8/9] Device config (node may reboot after this)...
-%MESH% --set device.rebroadcast_mode ALL
-timeout /t 3 /nobreak > nul
-%MESH% --set device.node_info_broadcast_secs 3600
-timeout /t 3 /nobreak > nul
-%MESH% --set device.tzdef "CET-1CEST,M3.5.0,M10.5.0/3"
-timeout /t 5 /nobreak > nul
+  REM ================================================================
+  REM  8. DEVICE CONFIG (may cause reboot)
+  REM ================================================================
+  echo [8/9] Device config (node may reboot after this)...
+  %MESH% --set device.rebroadcast_mode ALL
+  timeout /t 3 /nobreak > nul
+  %MESH% --set device.node_info_broadcast_secs 3600
+  timeout /t 3 /nobreak > nul
+  %MESH% --set device.tzdef "CET-1CEST,M3.5.0,M10.5.0/3"
+  timeout /t 5 /nobreak > nul
 
-REM Role is set LAST because it always triggers a reboot
-%MESH% --set device.role CLIENT_BASE
-echo Waiting 35 seconds for node to reboot...
-timeout /t 35 /nobreak > nul
+  REM Role is set LAST because it always triggers a reboot
+  %MESH% --set device.role CLIENT_BASE
+  echo Waiting 35 seconds for node to reboot...
+  timeout /t 35 /nobreak > nul
 
-REM ================================================================
-REM  9. VERIFY
-REM ================================================================
-echo [9/9] Verifying configuration...
-%MESH% --info
+  REM ================================================================
+  REM  9. VERIFY
+  REM ================================================================
+  echo [9/9] Verifying configuration...
+  %MESH% --info
 
-echo.
-echo ================================================================
-echo  RONSE-BASE configuration complete.
-echo  Check output above - verify:
-echo    - Owner: Ronse-Base / RONS
-echo    - Role: ROUTER_CLIENT
-echo    - Region: EU_868
-echo    - Modem preset: LONG_FAST
-echo ================================================================
-echo.
-pause
-\end{lstlisting}
+  echo.
+  echo ================================================================
+  echo  RONSE-BASE configuration complete.
+  echo  Check output above - verify:
+  echo    - Owner: Ronse-Base / RONS
+  echo    - Role: ROUTER_CLIENT
+  echo    - Region: EU_868
+  echo    - Modem preset: LONG_FAST
+  echo ================================================================
+  echo.
+  pause
+  \end{minted}
+  \caption[Config file]{Example of a config file from one of the nodes.}
+\end{listing}
 
 The Python CLI saved lots of time configuring, but also verifying existing config using the following command:
-\begin{lstlisting}[language=batch]
+\begin{listing}
+  \begin{minted}{batch}
   python -m meshtastic --port {PORT} --info
-\end{lstlisting}
+  \end{minted}
+  \caption[Config verification]{Command to verify the nodes configuration.}
+\end{listing}
 
 \section{Session 1: Direct-link baseline}%
 \label{sec:poc-session1}
