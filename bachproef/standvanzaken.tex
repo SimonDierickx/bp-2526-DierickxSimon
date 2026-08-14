@@ -119,7 +119,7 @@ Messages go from one node to another, with a maximum hop limit you can set up in
 Meshtastic puts nodes into different channels, each channel is named, encrypted and defined by a \gls{psk} \autocite{MeshtasticChannels}.
 A device wanting to participate in said channel, must have the same channel name and \gls{psk} configured. Eight different channels can be configured on a single node simultaneously, one primary and seven secondary channels, each with its own key \autocite{MeshtasticChannels}.
 
-\begin{figure}
+\begin{figure}[htbp]
   \centering
   \includegraphics[width=0.8\textwidth]{meshtastic-channels.jpg}
   \caption[Meshtastic channels config.]{\label{fig:meshtastic-channel}Primary and secondary channels with their respective options.}
@@ -156,7 +156,7 @@ The secuirty aspect of Meshtastic has also been getting some academic attention.
 Table~\ref{tab:sota-comparison} summarizes how the alternatives compare to each other on the five defined requirements in section~\ref{sec:sota-requirements}.
 The range and reliability of Meshtastic is left open on purpose, as this is what needs to be investigated using the \gls{poc} in chapter~\ref{ch:poc}.
 
-\begin{table}
+\begin{table}[htbp]
   \centering
   \begin{tabular}{lcccc}
     \toprule
