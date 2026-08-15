@@ -1,0 +1,59 @@
+\chapter{Field measurement logs}%
+\label{ch:bijlage-veldnotities}
+
+This appendix contains field notes recorded during Session~2 (relay-candidate
+survey) and Session~3 (deployed-relay coverage mapping), complementing the summarized
+results in Sections~\ref{sec:poc-session2} and~\ref{sec:poc-session3}. Coordinates,
+timestamps and signal readings were recorded on site and standardized below for
+readability; raw notes are available in the project repository.
+
+\section{Session 2 -- relay-candidate survey}%
+\label{sec:bijlage-session2}
+
+\begin{table}[h]
+  \centering
+  \tiny
+  \begin{tabular}{lccccll}
+    \toprule
+    \textbf{Location} & \textbf{Alt.\ (m)} & \textbf{Time} & \textbf{RSSI} & \textbf{SNR} & \textbf{LOS} & \textbf{Mountable} \\
+    \midrule
+    Kruisstraat (low)    & 56  & 11:23--11:29 & $-103$\,dBm & $+3.75$\,dB  & Direct/almost      & Possibly (housing) \\
+    Kruisstraat (high)   & 74  & 11:30--11:36 & $-110$\,dBm & $-0.75$\,dB  & Direct/almost      & Possibly (housing) \\
+    Kruisstraat (top)    & 117 & 11:37--11:43 & $-122$\,dBm & $-11.0$\,dB  & No, trees/houses   & Possibly (housing) \\
+    Zandstraat            & 116 & 11:43--11:48 & $-107$ to $-122$\,dBm & $-2.75$ to $-11.5$\,dB & Almost, few trees & Guardrail, clear view \\
+    Hotond (top)          & 138 & 11:49--11:55 & No response & No response  & No, trees          & Café Hotond (unconfirmed) \\
+    Kwaremont (top)       & 100 & ---           & No response & No response  & No, trees          & Trees/houses only \\
+    Knokte / Trieu (top)  & 116 & ---           & No response & No response  & No, trees          & Trees/houses only \\
+    Karnemelkbeekstraat   & 80  & 12:12--12:18 & $-106$\,dBm & $+2.75$\,dB  & Clear              & Unclear (house/trees) \\
+    Drie Lindenstraat     & 88  & 12:19--12:23 & $-109$\,dBm & $+0.75$\,dB  & Clear/almost       & Fields, bench, trees \\
+    Malanderpark (foot)   & 98  & 12:30--12:40 & $-106$ to $-110$\,dBm & $+0.5$ to $+3.75$\,dB & Almost clear & Park (trees) \\
+    Ten Bergestraat       & 86  & 12:52--12:55 & $-118$\,dBm & $-6.75$\,dB  & Clear/almost       & Houses \\
+    Muziekbos/Kanarieberg & 148 & ---           & No signal   & No signal    & ---                & Not usable, no data recorded \\
+    \bottomrule
+  \end{tabular}
+  \caption[Session 2]{\label{tab:bijlage-session2}Field log for session 2 (finding an appropriate spot for relay)}
+\end{table}
+
+\section{Session 3 -- deployed-relay coverage mapping}%
+\label{sec:bijlage-session3}
+
+\begin{table}[h]
+  \centering
+  \tiny
+  \begin{tabular}{cccccccl}
+    \toprule
+    \textbf{Stop} & \textbf{Alt.\ (m)} & \textbf{Arrival} & \textbf{RSSI (relay)} & \textbf{SNR (relay)} & \textbf{Hops} & \textbf{PDR} & \textbf{Notes} \\
+    \midrule
+    1 & 60 & 13:01 & $-128$\,dBm & $-18.5$\,dB  & 1 (relay) & Fair   & Slight LOS \\
+    2 & 40 & 13:11 & $-90$\,dBm  & $+5.75$\,dB  & 1 (relay) & Good   & No LOS \\
+    3 & 40 & 13:22 & Failed      & Failed       & ---       & ---    & City centre, dense buildings, no LOS \\
+    4 & 20 & 13:40 & $-90$\,dBm  & $+5.75$\,dB  & 1 (relay) & Good   & No LOS (almost) \\
+    5 & 20 & 13:45 & $-90$ to $-106$\,dBm & $+3.0$ to $+5.75$\,dB & 1 (relay) & Good & Day-1 dead zone, now working \\
+    6 & 10 & 14:00 & Failed      & Failed       & ---       & ---    & Very low altitude, buildings, trees \\
+    7 & 60 & 14:14 & $-109$ to $-110$\,dBm & $+0.25$\,dB & 1 (relay) & Good & Rain starting \\
+    8 & 70 & 14:29 & $-117$\,dBm & $-6.25$ to $-6.75$\,dB & 1 (relay) & Good & Marginal \\
+    9 & 50 & 15:42 & $-109$ to $-116$\,dBm & $-6.0$ to $+0.25$\,dB & 1 (relay) & Good & \\
+    \bottomrule
+  \end{tabular}
+  \caption[Session 3]{\label{tab:bijlage-session3}Field log for session 3 (discovering exact coverage)}
+\end{table}

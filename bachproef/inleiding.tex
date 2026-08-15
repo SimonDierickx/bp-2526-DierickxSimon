@@ -7,7 +7,7 @@
 
 
 Modern society relies heavily, we could even say entirely, on the permanent availability of our communication networks.
-Everything has switched to global networks, the Internet, cellular data, phone networks, etc. Everything became embedded in day-to-day life that people use it without even thinking about it, we take it for granted.
+Everything has switched to global networks, the Internet, cellular data, phone networks, etc. Everything became so embedded in day-to-day life that people use it without even thinking about it, we take it for granted.
 Everything means even emergency response depends on said networks to communicate and to coordinate first responders, warn people and keep citizens connected.
 This means that this dependency can become critical at the exact moment it is most needed, when networks become unavailable.
 
@@ -16,7 +16,7 @@ This is not just hypothetical; natural disasters, power outages, conflict situat
 
 For those exact situations a back-up system should be available. Not only for first responders or civil protection but also for the general public.
 A fallback available to the public should be quick and easy to deploy, not require a specialist and be affordable enough.
-Several technologies already exists, but they all have their limiations which make them difficult to effectively apply in an emergency.
+Several technologies already exist, but they all have their limitations which make them difficult to effectively apply in an emergency.
 These limitations can be cost, licences, needed hardware, extra fees, etc.
 
 This bachelor thesis will investigate \textbf{Meshtastic}. \textbf{Meshtastic} is an open-source project that allows to build a decentralized, encrypted mesh network. This can be done on low-cost \gls{lora} radio hardware.
@@ -30,7 +30,7 @@ Whenever the main infrastructure fails, the responsible people for coordinating 
 The core problem of this thesis is the absence of an accessible, affordable, reliable and easy to deploy solution that functions independently of the failed infrastructure.
 Also no evidence is available about how well Meshtastic handles this role in practice.
 
-The primary audience are IT professionals that are responsible for continuity and civil protection communication, such as security teams etc.
+The primary audience is IT professionals that are responsible for continuity and civil protection communication, such as security teams etc.
 As a secondary audience we could also identify volunteer organizations, municipal safety services and network engineers who want to investigate low-cost, off the grid communication options.
 A last additional audience could just be general public, for who privacy matters and don't want to roam on a controlled network.
 
@@ -50,12 +50,12 @@ To do this following sub-questions will be answered:
 \begin{itemize}
   \item What gaps exist in emergency contexts when the primary infra becomes unavailable?
   \item How do existing alternatives compare to Meshtastic in terms of accessibility, cost, required expertise, etc.?
-  \item What environmental factors of the Belgian (Flemish Ardennes and Wallonia) landscape and terrain affect LoRa performance once deployed?
+  \item What environmental factors of the Belgian (Flemish Ardennes and Wallonia) landscape and terrain affect \gls{lora} performance once deployed?
   \item How secure is the Meshtastic encryption in case of traffic interception?
 \end{itemize}
 
 The \textbf{solution domain} on the other hand is evaluating the measurements from the real-life deplooyement during the PoC.
-This provides us these sub-questions:
+This provides us with these sub-questions:
 \begin{itemize}
   \item What range and reliability does a Meshtastic network have across different topologies (direct long-distance
   vs.\ multi-hop) in a real deployment (East Flanders/Hainaut province, Flemish Ardennes/Pays des Collines regions, Ronse/Oudenaarde/Kluisbergen/Tournai)?
@@ -67,8 +67,8 @@ This provides us these sub-questions:
 \label{sec:onderzoeksdoelstelling}
 
 There are two goals for this thesis.
-First off, using literature, comparing Meshtastic to the most relevant alternatives (being APRS, DMR and other commercial satelitte messengers).
-The second one, making use of the \gls{poc}, measuring Meshtastic's effective range, reliability and deployabvility in a real-life mixed terrain.
+First off, using literature, comparing Meshtastic to the most relevant alternatives (being \gls{aprs}, \gls{dmr} and other commercial satellite messengers).
+The second one, making use of the \gls{poc}, measuring Meshtastic's effective range, reliability and deployability in a real-life mixed terrain.
 
 What the concrete deliverables are:
 \begin{itemize}
@@ -87,9 +87,9 @@ The structure of this thesis is as follows:
 
 Chapter~\ref{ch:inleiding} introduces the main problem, questions and ideas.
 
-Chapter~\ref{ch:stand-van-zaken} covers the state of the art. It defines problem and solution domains, reviews the existing alternatives (APRS, DMR and satellite messengers) and explains the technical background of \gls{lora} and Meshtastic.
+Chapter~\ref{ch:stand-van-zaken} covers the state of the art. It defines problem and solution domains, reviews the existing alternatives (\gls{aprs}, \gls{dmr} and satellite messengers) and explains the technical background of \gls{lora} and Meshtastic.
 
-Chapter~\ref{ch:methodologie} describes how the project is set up, and how everythign will be executed, as well as the choices that have been made.
+Chapter~\ref{ch:methodologie} describes how the project is set up, and how everything will be executed, as well as the choices that have been made.
 
 Chapter~\ref{ch:poc} the actual \gls{poc}: from hardware selection, the build and configuration, the difficulties to the results of the test sessions.
 

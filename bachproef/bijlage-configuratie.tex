@@ -1,0 +1,108 @@
+\chapter{Node configuration reference}%
+\label{ch:bijlage-config}
+
+This appendix lists the full configuration of the three deployed nodes as a technical
+reference, complementing the summary given in Table~\ref{tab:poc-config}. Values were
+read out using the Meshtastic command-line interface (\texttt{--info}) after the final
+configuration of each node.
+Quick note: WiFi doesn't need to be enabled, but with the node on the roof, this was easier to access the rangetest csv file.
+
+\section{Radio and device configuration}%
+\label{sec:bijlage-config-device}
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Parameter} & \textbf{Ronse-Base} & \textbf{Relay} & \textbf{Mobile} \\
+    \midrule
+    Role                    & CLIENT\_BASE & ROUTER      & CLIENT \\
+    Firmware                & 2.7.26.54e0d8d & 2.7.26.54e0d8d & 2.7.26.54e0d8d \\
+    Hardware model          & Heltec V4    & Heltec V4   & Heltec V4 \\
+    Region                  & EU\_868      & EU\_868     & EU\_868 \\
+    Modem preset            & LONG\_FAST   & LONG\_FAST  & LONG\_FAST \\
+    Bandwidth               & 250\,kHz     & 250\,kHz    & 250\,kHz \\
+    Spreading factor        & 11           & 11          & 11 \\
+    Coding rate             & 4/5          & 4/5         & 4/5 \\
+    Hop limit               & 3            & 3           & 3 \\
+    TX power                & 27\,dBm      & 27\,dBm     & 27\,dBm \\
+    Boosted RX gain         & Enabled      & Enabled     & Enabled \\
+    FEM/LNA mode            & Disabled     & Disabled    & Disabled \\
+    Rebroadcast mode        & ALL          & ALL         & ALL \\
+    \midrule
+    Fixed position          & Yes          & Yes         & No (GPS via phone) \\
+    Latitude                & 50.72316     & 50.65457    & --- \\
+    Longitude               & 3.63217      & 3.39975     & --- \\
+    Altitude                & 90\,m        & 140\,m      & --- \\
+    \midrule
+    Power saving            & Off          & On          & Off \\
+    Bluetooth                & Enabled, no PIN & Enabled, no PIN & Enabled, no PIN \\
+    WiFi                     & Enabled (bridge) & Disabled & Disabled \\
+    Display screen timeout   & 60\,s        & 30\,s       & 60\,s \\
+    \bottomrule
+  \end{tabular}
+  \caption[Radio and device configuration]{\label{tab:bijlage-config}Radio and device configuration of the three nodes.}
+\end{table}
+
+\section{Module configuration}%
+\label{sec:bijlage-config-modules}
+
+On top of the default settings, Meshtastic exposes a number of independent modules
+that were configured per node according to its role. Table~\ref{tab:bijlage-modules}
+lists the modules relevant to this deployment; modules not used in this thesis
+(such as Store\&Forward, Detection Sensor, Paxcounter, Audio and Canned Message)
+were left at their firmware defaults (disabled) on all nodes.
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{lccc}
+    \toprule
+    \textbf{Module} & \textbf{Ronse-Base} & \textbf{Relay} & \textbf{Mobile} \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Range Test}} \\
+    Enabled                 & Yes (receiver) & Yes (receiver) & Yes (sender) \\
+    Sender interval         & ---          & ---         & 60\,s \\
+    CSV logging             & Enabled      & Disabled    & --- \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Telemetry}} \\
+    Device telemetry        & Enabled      & Enabled     & Enabled \\
+    Update interval         & 1800\,s      & 1800\,s     & 1800\,s \\
+    Environment telemetry   & Disabled     & Disabled    & Disabled \\
+    \midrule
+    \multicolumn{4}{l}{\textit{Neighbor Info}} \\
+    Enabled                 & Yes          & Yes         & Yes \\
+    Update interval         & 21.600\,s      & 21.600\,s     & 21.600\,s \\
+    \midrule
+    \multicolumn{4}{l}{\textit{MQTT}} \\
+    Enabled                 & No           & No          & No \\
+    \bottomrule
+  \end{tabular}
+  \caption[Module configuration]{\label{tab:bijlage-modules}Module configuration of the three deployed nodes.}
+\end{table}
+
+\section{Channel and security configuration}%
+\label{sec:bijlage-config-security}
+
+All three nodes were migrated from the Meshtastic default public channel to a private
+channel secured with a randomly generated 256-bit \gls{psk}, as discussed in
+Section~\ref{sec:poc-security}. The channel name and PSK are identical across all three
+nodes so that they can communicate; the PSK itself is not reproduced here for obvious
+reasons.
+
+\begin{table}[h]
+  \centering
+  \small
+  \begin{tabular}{ll}
+    \toprule
+    \textbf{Parameter} & \textbf{Value} \\
+    \midrule
+    Channel index         & 0 (primary) \\
+    PSK type              & Random, 256-bit \\
+    PSK identical across nodes & Yes (verified via channel URL) \\
+    Uplink/downlink enabled & No \\
+    \bottomrule
+  \end{tabular}
+  \caption[Channel security configuration]{\label{tab:bijlage-security}Channel security configuration, identical on all three nodes.}
+\end{table}

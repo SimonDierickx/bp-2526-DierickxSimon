@@ -2,51 +2,28 @@
 %% Samenvatting
 %%=============================================================================
 
-% TODO: De "abstract" of samenvatting is een kernachtige (~ 1 blz. voor een
-% thesis) synthese van het document.
-%
-% Een goede abstract biedt een kernachtig antwoord op volgende vragen:
-%
-% 1. Waarover gaat de bachelorproef?
-% 2. Waarom heb je er over geschreven?
-% 3. Hoe heb je het onderzoek uitgevoerd?
-% 4. Wat waren de resultaten? Wat blijkt uit je onderzoek?
-% 5. Wat betekenen je resultaten? Wat is de relevantie voor het werkveld?
-%
-% Daarom bestaat een abstract uit volgende componenten:
-%
-% - inleiding + kaderen thema
-% - probleemstelling
-% - (centrale) onderzoeksvraag
-% - onderzoeksdoelstelling
-% - methodologie
-% - resultaten (beperk tot de belangrijkste, relevant voor de onderzoeksvraag)
-% - conclusies, aanbevelingen, beperkingen
-%
-% LET OP! Een samenvatting is GEEN voorwoord!
-
 %%---------- Nederlandse samenvatting -----------------------------------------
 
 \IfLanguageName{english}{%
 \selectlanguage{dutch}
 \chapter*{Samenvatting}
 
-Hedendaagse maatschappij is zeer sterk afhankelijk van bestaande netwerkinfrastructuur, ook voor noodcommunicatie.
-Wanneer deze infrastructuur uitvalt, hetzij door een storm, stroomonderbreking, grootschalig incident of een bewuste afsluiting (oorlog, etc.), is er nood aan een back-up plan dat onafhaneklijk van deze infrastructuur werkt.
+De hedendaagse maatschappij is zeer sterk afhankelijk van bestaande netwerkinfrastructuur, ook voor noodcommunicatie.
+Wanneer deze infrastructuur uitvalt, hetzij door een storm, stroomonderbreking, grootschalig incident of een bewuste afsluiting (oorlog, etc.), is er nood aan een back-up plan dat onafhankelijk van deze infrastructuur werkt.
 
 Dit back-up plan moet snel en makkelijk inzetbaar zijn, eveneens betaalbaar op grote schaal en moet zonder vergunning kunnen worden gebruikt.
-Er bestaan oplossingen zoals APRS, DMR en andere satelliet alternatieven, maar deze voeldoen niet aan minstens één van deze voorwaarden.
+Er bestaan oplossingen zoals \gls{aprs}, \gls{dmr} en andere satelliet alternatieven, maar deze voldoen niet aan minstens één van deze voorwaarden.
 
-Met deze bachelorproef wordt onderzocht hoe Meshtastic (een gedecentraliseerd mesh-netwerk op basis van LoRa-radiotechnologie) een eventueel alternatief zou kunnen zijn.
-Het onderzoek bestaat niet enkel uit een literatuurstudie maar ook uit een werkeleijke real-world opzet tijdens een proof of concept, tijdens deze PoC werden drie nodes opgezet: een vaste basisnode is Ronse, een relay-node in Doornik en een mobiele node.
-Gedurende drie testsessies werden zowel het bereik, de signaalsterkte (RSSI), signaalkwaliteit (SNR) en het aantal verloren pakketten (PDR) gemeten.
+Met deze bachelorproef wordt onderzocht hoe Meshtastic (een gedecentraliseerd mesh-netwerk op basis van \gls{lora}-radiotechnologie) een eventueel alternatief zou kunnen zijn.
+Het onderzoek bestaat niet enkel uit een literatuurstudie maar ook uit een werkelijke real-world opzet tijdens een proof of concept, tijdens deze \gls{poc} werden drie nodes opgezet: een vaste basisnode in Ronse, een relay-node in Doornik en een mobiele node.
+Gedurende drie testsessies werden zowel het bereik, de signaalsterkte (\gls{rssi}), signaalkwaliteit (\gls{snr}) als het aantal verloren pakketten (\gls{pdr}) gemeten.
 Dit voor directe verbindingen met de basis node als met de relay node.
 
-Uit deze metingen bleek dat een directe verbinden van 18.5\,km in deze situatie haalbaar is.
+Uit deze metingen bleek dat een directe verbinding van 18,5km\,km in deze situatie haalbaar is.
 Met de huidige setup en beperkingen kon een relay node dit uitbreiden tot ongeveer 30\,km.
 Na de relay node in te schakelen werden sommige "dead zones" ook omgeschakeld naar werkende zones.
-Een van de belangrijke vondsten, is dat de zichtbaarheid meer impact heeft op het signaal dan de effectieve afstand of de hoogte van de nodes.
-De ingebouwde AES-256 encryptie beschermt de inhoud van de berichten, maar het standaardkanaal is publiek en moet dus verwijderd worden.
+Een van de belangrijke bevindingen is dat de zichtbaarheid meer impact heeft op het signaal dan de effectieve afstand of de hoogte van de nodes.
+De ingebouwde \gls{aes}-256 encryptie beschermt de inhoud van de berichten, maar het standaardkanaal is publiek en moet dus verwijderd worden.
 
 Binnen een beperkte range, of een grotere ongehinderd oppervlak kan Meshtastic dus een geloofwaardig, goedkoop en onafhankelijk alternatief bieden voor noodcommunicatie.
 
@@ -58,21 +35,21 @@ Binnen een beperkte range, of een grotere ongehinderd oppervlak kan Meshtastic d
 
 \chapter*{\IfLanguageName{dutch}{Samenvatting}{Abstract}}
 
-Current society is heavily dpeendent on existing network infrastructure, also for emergency communication.
+Current society is heavily dependent on existing network infrastructure, also for emergency communication.
 When this infrastructure fails, due to a storm, power outage, large-scale incident or a deliberate shutdown (wars, etc.), there is a need for a back-up communication system, working independently from the main infra.
 
 This back-up needs to be quick and easy to deploy, as well as affordable on larger scales and should be usable without a license.
-Solutions like APRS, DMR and other stellite alternatives exist, but they fail to meet at least one of the mentioned requirements.
+Solutions like \gls{aprs}, \gls{dmr} and other satellite alternatives exist, but they fail to meet at least one of the mentioned requirements.
 
-With this thesis an investigation of how Meshtastic (a decentralized mesh network based on LoRa radio technology) could be a potential alternative was conducted.
-The research doens't only consist of a literature study, but also a real-world deployed proof-of-concept, during which three nodes were deployed: a fioxed base node in Ronse, a relay node in Tournai and a mobile node.
-During three distinct test sessions, the range, signal strength (RSSI), signal quality (SNR) and packet loss (PDR) were measured.
+With this thesis an investigation of how Meshtastic (a decentralized mesh network based on \gls{lora} radio technology) could be a potential alternative was conducted.
+The research doesn't only consist of a literature study, but also a real-world deployed proof-of-concept, during which three nodes were deployed: a fixed base node in Ronse, a relay node in Tournai and a mobile node.
+During three distinct test sessions, the range, signal strength (\gls{rssi}), signal quality (\gls{snr}) and packet loss (\gls{pdr}) were measured.
 These metrics were collected for both direct connections to the base node, as well as connections through the relay node.
 
-From these measurements a direct connection of 18.5\,km with the base node was found achievable in this situation.
-Witht he current setup and its limitations, the relay node could extend this range to about 30\,km.
+From these measurements a direct connection of 18,5km\,km with the base node was found achievable in this situation.
+With the current setup and its limitations, the relay node could extend this range to about 30\,km.
 After putting the relay node into the network, some "dead zones" were also found working now.
 One of the main findings of the PoC is that line-of-sight matters more than distance or height of the nodes.
-The built-in AES-256 encryption protects the content of the messages, even though the default channel stays public, and should be removed on first use during real deployment.
+The built-in \gls{aes}-256 encryption protects the content of the messages, even though the default channel stays public, and should be removed on first use during real deployment.
 
 In a limited range, or in larger unobstructed areas, Meshtastic can be a credible, low-cost, independent alternative for emergency communication.

@@ -17,15 +17,15 @@ At the end of this chapter we can also observe other nodes, not known to us part
 The main constraint while choosing hardware was cost (this is one of the requirements for emergencies).
 The hardware should be able to support EU\,868\,MHz band as this is legally obliged, it should also allow an external antenna for improved range and permit power via battery and solar for autonomous usage.
 
-The final hardware choice was to use the \textbf{Heltec WiFi LoRa 32 V4}. This is a board using an Espressif ESP32-S3 microcontroller and the Semtech SX1262 LoRa transceiver.
+The final hardware choice was to use the \textbf{Heltec WiFi LoRa 32 V4}. This is a board using an Espressif ESP32-S3 microcontroller and the Semtech SX1262 \gls{lora} transceiver.
 Four units were acquired, one base node, one mobile node, one relay and the last one was a spare/second relay node if necessary.
-The V4 was chosen over the V3 (cheaper model) because it provides solar-charging input, higher maximum transmit power and the possiblity to add a battery.
+The V4 was chosen over the V3 (cheaper model) because it provides solar-charging input, higher maximum transmit power and the possibility to add a battery.
 These features are important in this use case. 
 The SX1262 transceiver provides a better sensitivity compared to the SX1276 (used on older models), this is important for long-range usage.
 
 Another important piece of hardware are the antennas. The provided antenna with the board is a small PCB antenna which is unusable in long-range scenarios and if the board is placed in an enclosure.
 Having to place the nodes outside this would also mean the antenna is unusable. That's why for the two fixed nodes (base and relay) a 5\,dBi external antenna was chosen. This antenna is omnidirectional which allows us to have a good coverage, despite the orientation.
-The main V4 boards where then mounted inside the enclosure and the external antenna was connected using a u.FL-to-SMA cable.
+The main V4 boards were then mounted inside the enclosure and the external antenna was connected using a u.FL-to-SMA cable.
 The mobile node was equipped with a 868\,MHz antenna with a magnetic base so that it could be mounted on the car roof.
 
 For realistic emergency situations both the fixed nodes were not plugged in a regular electrical socket. That's why for both the fixed nodes a small 2000mAh/3.7V LiPo battery was used as a buffer.
@@ -38,7 +38,7 @@ This setup was then mounted in an IP66 junction box for the fixed nodes.
 The junction box protects the hardware against dust and heavy rain and the cable glands allows the antenna and cables to get in and out of the box while being sealed.
 
 Table~\ref{tab:poc-cost} summarizes the cost of the whole operation, as cost is one of the main criteria in these emergency scenarios.
-This is a relevant result in itself for the scope of this thesis. The complete setup (four nodes, including a spare node, cables, antennas, batteries, solar panels and enclosures) was acquired for \euro{}185 in total.
+This is a relevant result in itself for the scope of this thesis. The complete setup (four nodes, including a spare node, cables, antennas, batteries, solar panels and enclosures) was acquired for \euro{}180,95 in total.
 This was on the chosen sites and at the moment of building the setup in Belgium, prices may vary according to time and location. 
 
 The bought components were not necessarily the cheapest available at the moment on the market, but due to the time constraints this project fell in, some products had to be chosen from more expensive EU-based resellers instead of non-EU resellers, which may be a lot cheaper, in order to achieve it in time.
@@ -79,7 +79,7 @@ For the base node the solar panel was mounted on top of the junction box, for th
 The base node was then installed on a house on one of the outskirts of Ronse (50.72316, 3.63217), at an altitude of 90\,m.
 The complete setup can be seen in figure~\ref{fig:poc-build-ronse} down below.
 The relay node was installed inside the viewing tower of Floreal Le Panoramique on the Mont-Saint-Aubert (50.65457,
-3.39975) with an altitude of 140\,m. Permission was obtained by the owners. The installation as seen in figure~\ref{fig:poc-build-relay} shows the solar panel is set up to be facing southwards.
+3.39975) with an altitude of 140\,m. Permission was obtained from the owners. The installation as seen in figure~\ref{fig:poc-build-relay} shows the solar panel is set up to be facing southwards.
 The junction box and antenna are oriented towards the base node.
 
 \begin{figure}[htbp]
@@ -102,23 +102,23 @@ The final installation of the relay node looked like this:
 \end{figure}
 
 No real setup was done for the mobile node. This was powered via the car's USB-C socket, connected to the antenna, magnetically attached to the car's roof.
-A phone was connected through Bluetooth to the mobile node, allowing it to broadcast it's real-time GPS location.
+A phone was connected through Bluetooth to the mobile node, allowing it to broadcast its real-time GPS location.
 
 \section{Configuration and setup difficulties}%
 \label{sec:poc-config}
 
 Using the \href{https://flasher.meshtastic.org/}{Meshtastic firmware flasher} the last stable version of Meshtastic (2.7.26.54e0d8d) was flashed on all four nodes.
-The board needed the installation of the CH343 driver to be able to flash and configure the board. The heltec device should also be put into bootloader mode by holding the PRG button while plugging it in.
+The board needed the installation of the CH343 driver to be able to flash and configure the board. The Heltec device should also be put into bootloader mode by holding the PRG button while plugging it in.
 
 The nodes can then be configured on three different ways: the web-based configuration interface, the Python command-line interface or the mobile application.
 
 The applied configuration was quite similar and simple on all three nodes.
 
-On all three nodes the radio profile was set on the EU\_868 region, LONG\_FAST modem preset (which is 250\,kHz bandwidth, spreading factor 11, coding rate 4/5), a hop limit of 3, a transmit power of 27\, dBm (as allowed in the EU\_868 band),
+On all three nodes the radio profile was set on the EU\_868 region, LONG\_FAST modem preset (which is 250\,kHz bandwidth, \gls{sf} 11, coding rate 4/5), a hop limit of 3, a transmit power of 27\,dBm (as allowed in the EU\_868 band),
 boosted receiver gain enabled and the FEM/LNA mode disabled (the V4 has no external low-noise amplifier).
-However the three nodes received three different roles: base node in Ronse as \texttt{CLIENT\_BASE} (sending, receiving and forwarding messages), relay node as \texttt{ROUTER} (forwarding messages) and mobile node as \texttt{CLIENT} (receving and sending messages). 
+However the three nodes received three different roles: base node in Ronse as \texttt{CLIENT\_BASE} (sending, receiving and forwarding messages), relay node as \texttt{ROUTER} (forwarding messages) and mobile node as \texttt{CLIENT} (receiving and sending messages). 
 The Meshtastic Range Test module was enabled and configured so that the mobile node was sending a test packet every 60 seconds to the base node. The base node then kept this in a CSV log file for later analysis.
-These sequences contained a sequence number, time of reception, RSSI, SNR and the exact position of the node (this device doesn't have a GPS module, but it uses the phones shared GPS position).
+These sequences contained a sequence number, time of reception, \gls{rssi}, \gls{snr} and the exact position of the node (this device doesn't have a GPS module, but it uses the phones shared GPS position).
 
 For all three nodes current configuration has been set up and saved to the devices:
 \begin{table}[htbp]
@@ -153,7 +153,7 @@ For all three nodes current configuration has been set up and saved to the devic
 The nodes were properly configured, but this wasn't without any difficulties.
 These are also findings of this thesis to take into account (deployability requirement):
 \begin{itemize}
-    \item The web-based configurator was unreliable for bulk configuring the device. Settings appeared as saved but frequently weren't really saved after the reboot. The Python CLI and mobile application were both more reliable, so thats what was used.
+    \item The web-based configurator was unreliable for bulk configuring the device. Settings appeared as saved but frequently weren't really saved after the reboot. The Python CLI and mobile application were both more reliable, so that's what was used.
     \item Reflashing the firmware doesn't hard reset the device. A partial or corrupted config survives a reflash and must be manually cleared.
     \item When using the CLI the order and timing of the executed commands should be carefully considered. A reboot might be triggered and some commands get ignored.
     \item Polarity of the LiPo battery connector needs to be checked before installing, apparently this isn't standardized.
@@ -334,7 +334,7 @@ As shown below, each of the nodes had such a config file, which was a regular .b
   echo  RONSE-BASE configuration complete.
   echo  Check output above - verify:
   echo    - Owner: Ronse-Base / RONS
-  echo    - Role: ROUTER_CLIENT
+  echo    - Role: CLIENT_BASE
   echo    - Region: EU_868
   echo    - Modem preset: LONG_FAST
   echo ================================================================
@@ -355,20 +355,20 @@ The Python CLI saved lots of time configuring, but also verifying existing confi
 \section{Session 1: Direct-link baseline}%
 \label{sec:poc-session1}
 
-The first test session consisted of discovering the usage of Meshtastic and LoRa technology, as well as testing a direct link between the Ronse base node and the mobile node.
+The first test session consisted of discovering the usage of Meshtastic and \gls{lora} technology, as well as testing a direct link between the Ronse base node and the mobile node.
 The first goal was to establish a baseline for a long single-hop connection, without any relay nodes. The secondary goal of this test was also to discover dead zones in the area.
 The mobile node was driven from the base to the Mont-Saint-Aubert transmitting a test packet every 60 sec, the base node then logged the received packets so we can check when the node was in a so called "dead zone".
 
 Three different phases could be distinguished in the perceived data. The first phase were the first three kilometres from the base node, on similar altitude without any direct line-of-sight.
-The PDR (Packet Delivery Rate) was 78.6\,\% and the RSSI degraded from $-51$\,dBm to $-119$\,dBm as the distance increased.
-After these initial three kilometres a first complete dead zone was found, lower altitude, no line-of-sight with the home node, these factors made communication impossible, 0\,\% PDR.
+The \gls{pdr} was 78.6\,\% and the \gls{rssi} degraded from $-51$\,dBm to $-119$\,dBm as the distance increased.
+After these initial three kilometres a first complete dead zone was found, lower altitude, no line-of-sight with the home node, these factors made communication impossible, 0\,\% \gls{pdr}.
 Eventually the mobile node reached the Mont-Saint-Aubert. This is an elevated part of Tournai with some spots having a clear uninterrupted line-of-sight to the base node.
-While ascending the Mont-Saint-Aubert the total PDR of the climb was 68.8\,\% and the RSSI stabilized around $-107$\,dBm with an SNR of approximately $+1$\,dB.
+While ascending the Mont-Saint-Aubert the total \gls{pdr} of the climb was 68.8\,\% and the \gls{rssi} stabilized around $-107$\,dBm with an \gls{snr} of approximately $+1$\,dB.
 The maximum distance at which communication was established that day was 18.5\,km.
 
 The key takeaway from this first testing session was that what the distance isn't the real challenge in our scenario. The terrain obstruction and absence of line-of-sight is the main limiting factor for long-range communication with these types of devices.
 The dead zone was at 8--15\,km while we had a link at 18.5\,km.
-The measured RSSI $-107$\,dBm also sits within the SX1262 sensitivity of approximately $-132$\,dBm at the LONG\_FAST setting.
+The measured \gls{rssi} $-107$\,dBm also sits within the SX1262 sensitivity of approximately $-132$\,dBm at the LONG\_FAST setting.
 This means that there was a $25$\,dBm margin.
 
 \section{Session 2: Relay-candidate survey}%
@@ -378,15 +378,15 @@ The second test session focused on other directions from the base node, with the
 The first session focused mainly on a southern/south-western direction. This second session focused on a northern/north-western direction.
 East wasn't checked because the eastern area starting from the node is densely planted with trees and elevation goes even higher at some points.
 
-The locations checked where around the Hotond, Kwaremont, Trieu and Kanarieberg. These locations are all elevated and have a somewhat clear line-of-sight with the base node.
-At each location the RSSI, SNR and packet delivery rate on the direct link to the base node were recorded, together with the altitude and an assessment of the line of sight. Each chosen spot was marked using it's coordinates for precise reporting.
+The locations checked were around the Hotond, Kwaremont, Trieu and Kanarieberg. Most locations are all elevated and have a somewhat clear line-of-sight with the base node.
+At each location the \gls{rssi}, \gls{snr} and \gls{pdr} on the direct link to the base node were recorded, together with the altitude and an assessment of the line of sight. Each chosen spot was marked using its coordinates for precise reporting.
 
 The results from this session are summarized in Table~\ref{tab:session2}.
 This reveals a somewhat unforeseen pattern, elevation alone isn't enough to guarantee a connection. All three highest locations Hotond (138\,m), Kwaremont (100\,m) and Trieu/Knokte (116\,m) achieved 0\,\% packet delivery.
 The main reason is probably the tree covering line-of-sight between the mobile and the base node.
-Lower locations that possessed a clear LOS like Karnemelkbeekstraat (80\,m) and Drie Lindenstraat (87\,m) achieved 100\,\% packet delivery at a distance of 7.5--7.6\,km.
+Lower locations that possessed a clear \gls{los} like Karnemelkbeekstraat (81\,m) and Drie Lindenstraat (86\,m) achieved 100\,\% packet delivery at a distance of 7.5--7.6\,km.
 
-This confirms our initial finding of session 1, LOS is more important than elevation. Elevation is really beneficial, but only when combined with a clear LOS.
+This confirms our initial finding of session 1, \gls{los} is more important than elevation. Elevation is really beneficial, but only when combined with a clear \gls{los}.
 
 \begin{table}[htbp]
   \centering
@@ -413,11 +413,11 @@ This confirms our initial finding of session 1, LOS is more important than eleva
 
 
 As seen some sites had good \gls{pdr} and \gls{rssi}, some had good altitude, but none of them combined both.
-The best possibilities from this session where the Malanderpark and Zandstraat tests. But these sites only had a straight line distance of 5.1--5.7\,km to the base node.
+The best possibilities from this session were the Malanderpark and Zandstraat tests. But these sites only had a straight line distance of 5.1--5.7\,km to the base node.
 On top of this, they didn't have a straightforward mounting point (houses, trees, poles, etc.) so an extra requirement would have been to ask permission to the relevant persons, which was complicated in this situation.
-Most of the locations that didn't get any signal were obstructed by surroundings (trees, vegeteation, buildings, etc.), this is confirmed by our initial findings during the literature study in section~\ref{sec:sota-lora}.
+Most of the locations that didn't get any signal were obstructed by surroundings (trees, vegetation, buildings, etc.), this is confirmed by our initial findings during the literature study in section~\ref{sec:sota-lora}.
 
-The Mont-Saint-Aubert possiblity stands out as the best option, combining elevation, clear \gls{los} and a person working there who could help with an accessible mounting point.
+The Mont-Saint-Aubert possibility stands out as the best option, combining elevation, clear \gls{los} and a person working there who could help with an accessible mounting point.
 As seen in Session~1, this location could guarantee a straight-line connection with the base at 18.5\,km.
 Permission to mount the relay node was confirmed inside the viewing tower of Floreal Le Panoramique. It offers a clear 180-degree view of the surrounding area, direct access to sunlight, all at a high elevation.
 The confirmed location of the relay node were then 50.65457, 3.39975 at an altitude of 140\,m.
@@ -432,16 +432,16 @@ During this third and last test session the base and relay node were set and con
 The mobile node was driven through the south-west/south area of the relay node. This included some locations that were previously marked as "dead zones".
 
 Adding a relay node in this connection changed everything, multiple stops achieved a working connection, and the clearest result for this was a confirmed dead zone in Session~1 (50.6133, 3.4128) which was now able to communicate from the mobile node
-to the base node passing through the relay node. The connection between the mobile and relay node had a connection with an RSSI between $-90$ and $-106$\,dBm. The distance between this location and the relay node was only 4.7km but no clear \gls{los} was present, the relay node was 140\,m high and the mobile node was at 30\,m.
+to the base node passing through the relay node. The connection between the mobile and relay node had a connection with an \gls{rssi} between $-90$ and $-106$\,dBm. The distance between this location and the relay node was only 4.7km but no clear \gls{los} was present, the relay node was 140\,m high and the mobile node was at 30\,m.
 The distance between the relay and base node was 18.5\,km, which means the total distance travelled by the message was 23.2\,km, straight line distance between the base and mobile node was 19.71\,km.
 
 During this test session the maximum end-to-end distance reached was 30km, with a working connection at 11.5\,km from the relay node.
 This result was achieved at the "Rue du préau" in Taintignies (50.56074, 3.33541) at an altitude of 30\,m. The measurements revealed an \gls{rssi} of $-110$\,dBm and an \gls{snr} of $0.25$\,dB. This means the connection is marginal but still established.
 
-This relay also revealed the effective limitations of Meshtastic using this relay configuration. Locations at low altitude (under 30\,m) at more then 10\,km from the relay where failing to connect. Locations in the city center of Tournai, which is densely built up, also failed.
+This relay also revealed the effective limitations of Meshtastic using this relay configuration. Locations at low altitude (under 30\,m) at more than 10\,km from the relay were failing to connect. Locations in the city center of Tournai, which is densely built up, also failed.
 This means, in our current config the effective range of the relay node was between 10 and 13\,km. If the situation had given us more altitude for the mobile node, a further distance probably could have been achieved.
-These findings confirm what was found in the first two test sessions. The obtruction dominates over the altitude, too much obstacles and the connection is impossible or marginal.
-In this situation a perfectr setup would have been a hill on the opposite side of the city from where the relay is, which would have given more coverage in the city center, and a connection further away, in the flat plains of Wallonia. 
+These findings confirm what was found in the first two test sessions. The obstruction dominates over the altitude, too much obstacles and the connection is impossible or marginal.
+In this situation a perfect setup would have been a hill on the opposite side of the city from where the relay is, which would have given more coverage in the city center, and a connection further away, in the flat plains of Wallonia. 
 
 Important to take into account, the shown coverage in this thesis consists of a basic, simple setup with a single relay node without looking for the best optimization possible.
 The effective coverage could be improved and extended by placing nodes in higher and less obstructed locations. Replacing the used antennas with higher end (higher gain, directional) antennas such as Yagi or parabolic antennas on the fixed nodes. These antennas would concentrate on a specific axis, which would improve the link but limit the broadcast.
@@ -460,16 +460,16 @@ The results can be put on a map (figure~\ref{fig:poc-measurements-map}), color-c
 \label{sec:poc-mesh}
 
 One thing that wasn't expected beforehand is the discovery of other nodes during the setup/tests.
-Other devices (Heltec, LilyGo, etc.) configured witht he Meshtastic firmware communicated with the deployed nodes, and actively participated in some connections: forwarding messages from mobile to base when the relay was not deployed yet, etc.
+Other devices (Heltec, LilyGo, etc.) configured with the Meshtastic firmware communicated with the deployed nodes, and actively participated in some connections: forwarding messages from mobile to base when the relay was not deployed yet, etc.
 This wasn't planned, but it shows exactly what Meshtastic is supposed to do: create a wide network using a Mesh topology to forward messages to areas that might not have the necessary connection.
 Some identified nodes reached as far as Amiens, Aalst and Dendermonde, among others.
 
-For example the Amiens node appeared as 2 hops away. The final node (in Amiens) is about 130\,km straight line distance from the base node in Ronse.
+For example the Amiens node appeared as 2 hops away. The final node (in Amiens) is about 130\,km straight line distance from the base node in Ronse. The Aalst and Dendermonde nodes were closer, at about 40\,km and 50\,km respectively. Both were reached through hops, but these weren't saved to write to this thesis.
 This shows that the mesh setup is real, and that the total range of the network is also expandable with good placement of nodes.
-Off course, the Amiens node wasn't tested as this was a thrid-party node, and quite a drive for this \gls{poc}, but it shows the real potential of Meshtastic.
+Of course, the Amiens node wasn't tested as this was a third-party node, and quite a drive for this \gls{poc}, but it shows the real potential of Meshtastic.
 
 This is the self-organizing nature of Meshtastic. Nodes discover one another and exchange necessary information for routing. This makes the range instantly larger than what you originally expected.
-This shows the mesh is a real, practical solution for establishing a connection between distant points. They however could forward the packages, but they couldn't read any content of these packages.
+This shows the mesh is a real, practical solution for establishing a connection between distant points. They however could forward the packets, but they couldn't read any content of these packets.
 That's the whole point of the secure encryption Meshtastic offers.
 
 \section{Security demonstration}%
@@ -481,11 +481,11 @@ During the test sessions third-party nodes appeared (as discussed in section \re
 default \gls{psk} being \texttt{AQ==}. This means that each node intercepting and forwarding the traffic could decrypt the messages. This is of course not safe, so the \gls{psk} was changed to a random 256-bit key.
 This last key was then shared between all three nodes.
 The difference is that now the nodes can forward the messages but they can't read them.
-Some parts of the packages are not encrypted, and these parts guide the routing of that package (node identifiers, timing, hop count).
+Some parts of the packets are not encrypted, and these parts guide the routing of that package (node identifiers, timing, hop count).
 
 This showed one of the main security issues of Meshtastic, when using the default \gls{psk} traffic seems secure but in reality, nothing really is as this default is known by everyone.
 Another limitation found is that the \gls{psk} is the same on all three nodes, which means if one of the nodes get "hacked" none of the traffic still is secure, also the fact the \gls{psk} is the same
-on each node it means the key has to be shared to each participant node, which also involves a security issue.
+on each node it means the key has to be shared with each participant node, which also involves a security issue.
 
 \section{Autonomous solar operation}%
 \label{sec:poc-solar}
@@ -499,7 +499,7 @@ Theoretically, the battery of 2000\,mAh and 3.7\,V (storing 7.4\,Wh) should be a
 This time is the buffer time before the setup fails.
 
 In reality, what was observed is after a full day of sunlight, the battery took effectively over at night time, the battery level on the base node (with WiFi enabled, so more consumption) was at 75\% by the time it started charging again.
-This means that the battery could in reality sustain 4x ±8 hours, which means 24 hours of total operation. This is a good result, as the battery then charges when sunlight hits it. This means the battery could cover a night + a partially clear sky for example.
+This means that the battery could in reality sustain 4x ±8 hours, which means about 32 hours of total operation. This is a good result, as the battery then charges when sunlight hits it. This means the battery could cover a night + a partially clear sky for example.
 
 In practice the solar panel charges the battery whenever it is hit with sunlight. Telemetry from the V4 reports a full battery and a 4.32\,V voltage, this confirms that during summer the solar panel produces enough energy for charging and operation.
 This proves the low-cost combination of a small LiPo battery and a solar panel is enough to keep a node of this size running without any external party being involved.
