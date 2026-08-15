@@ -340,13 +340,16 @@ As shown below, each of the nodes had such a config file, which was a regular .b
   echo.
   pause
 \end{minted}
-\captionof{listing}[Config file]{\label{lst:poc-config-file}Example of a config file from one of the nodes.}\\
+\captionof{listing}[Config file]{\label{lst:poc-config-file}Example of a config file from one of the nodes.}
+
 
 The Python CLI saved lots of time configuring, but also verifying existing config using the following command:
+
 \begin{minted}{batch}
   python -m meshtastic --port {PORT} --info
 \end{minted}
-\captionof{listing}[Config verification]{Command to verify the nodes configuration.}\\
+\captionof{listing}[Config verification]{Command to verify the nodes configuration.}
+
 
 \section{Session 1: Direct-link baseline}%
 \label{sec:poc-session1}
