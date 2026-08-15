@@ -45,7 +45,7 @@ The bought components were not necessarily the cheapest available at the moment 
 But even given this, the total cost of the setup compared to the cost of a commercial solution (e.g. a single Garmin inreach device) costs more than the full setup before even paying any subscription or fee.
 The figures below represent a realistic upper bound on the cost, this should not be taken as a cost-optimized setup. According to estimations, a total of 100/150€ could be done, according to the amount of nodes needed, etc.
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \small
   \begin{tabular}{lrrr}
@@ -82,20 +82,20 @@ The relay node was installed inside the viewing tower of Floreal Le Panoramique 
 3.39975) with an altitude of 140\,m. Permission was obtained from the owners. The installation as seen in figure~\ref{fig:poc-build-relay} shows the solar panel is set up to be facing southwards.
 The junction box and antenna are oriented towards the base node.
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{poc-build-ronse.jpg}
   \caption[Assembled base node.]{\label{fig:poc-build-ronse}The base node inside the junction box and the roof installation. The V4 board, LiPo battery, antenna and solar panel can be identified.}
 \end{figure}
 
 The final installation of the relay node looked like this:
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{poc-build-relay.jpg}
   \caption[Relay installation.]{\label{fig:poc-build-relay}The relay node installation inside the viewing tower of Floreal Le Panoramique.}
 \end{figure}
 
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.8\textwidth]{poc-panoramique.jpg}
   \caption[Relay installation + viewing area.]{\label{fig:poc-panoramique}The red marker indicates the position of the base node.}
@@ -121,7 +121,7 @@ The Meshtastic Range Test module was enabled and configured so that the mobile n
 These sequences contained a sequence number, time of reception, \gls{rssi}, \gls{snr} and the exact position of the node (this device doesn't have a GPS module, but it uses the phones shared GPS position).
 
 For all three nodes current configuration has been set up and saved to the devices:
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \small
   \begin{tabular}{lccc}
@@ -163,8 +163,7 @@ As mentioned above, the nodes were not always easy to set up using the Web Clien
 The app, however, is really user-friendly but not as complete as the Web Client could be. That's why the CLI was used to perform some of the more "advanced" settings.
 As shown below, each of the nodes had such a config file, which was a regular .bat file, pushing the configuration settings on a specified COM-port at the top of the file.
 
-\begin{listing}[htbp]
-  \begin{minted}{batch}
+\begin{minted}{batch}
   @echo off
   REM ================================================================
   REM  MESHTASTIC - NODE: RONSE-BASE
@@ -340,12 +339,11 @@ As shown below, each of the nodes had such a config file, which was a regular .b
   echo ================================================================
   echo.
   pause
-  \end{minted}
-  \caption[Config file]{Example of a config file from one of the nodes.}
-\end{listing}
+\end{minted}
+\captionof{listing}[Config file]{\label{lst:poc-config-file}Example of a config file from one of the nodes.}
 
 The Python CLI saved lots of time configuring, but also verifying existing config using the following command:
-\begin{listing}[htbp]
+\begin{listing}[H]
   \begin{minted}{batch}
   python -m meshtastic --port {PORT} --info
   \end{minted}
@@ -388,7 +386,7 @@ Lower locations that possessed a clear \gls{los} like Karnemelkbeekstraat (81\,m
 
 This confirms our initial finding of session 1, \gls{los} is more important than elevation. Elevation is really beneficial, but only when combined with a clear \gls{los}.
 
-\begin{table}[htbp]
+\begin{table}[H]
   \centering
   \small
   \begin{tabular}{lccccl}
@@ -449,7 +447,7 @@ This wasn't the main goal in this thesis as the cost effectiveness was also inve
 They are, if relevant, a good direction to improve network quality and extend the actual coverage. These are revisited in Chapter~\ref{ch:conclusie}.
 
 The results can be put on a map (figure~\ref{fig:poc-measurements-map}), color-coded by the obtained results:
-\begin{figure}[htbp]
+\begin{figure}[H]
   \centering
   % green = working, orange = marginal, red = failed
   \includegraphics[width=\textwidth]{poc-measurements-map.jpg}
