@@ -33,6 +33,7 @@ for latex_file in ${source_files}; do
 if [ -f "${output_dir}/${jobname}.glo" ] || [ -f "${output_dir}/${jobname}.acn" ]; then
     makeglossaries -d "${output_dir}" "${jobname}"
     latexmk \
+      -g \
       -file-line-error \
       -interaction=nonstopmode \
       -output-directory="${output_dir}" \
