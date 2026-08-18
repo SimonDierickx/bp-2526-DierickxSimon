@@ -22,7 +22,7 @@ Another requirement is \textbf{quick and easy deployability}. If there is a cris
 The emergency solution should be set up and ready by "general public" in minutes using the right documentation and instructions.
 
 The third requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most "normal" people, then the solution in itself is not useful at all.
-This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing €200,00 is expensive, but it's somewhat ok, if you need to buy 10 of those devices, that changes it completely.
+This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing \euro{}200.00 is expensive, but it's somewhat ok, if you need to buy 10 of those devices, that changes it completely.
 If the entry price or recurring costs (subscriptions, extra fees, etc.) are too high, the network stays to small to be really useful. \textcite{ElKhaledMcheick2019} points this out as well when talking aboit cost and energy efficiency as an evaluation citreria for communication in difficult conditions.
 
 Range and reliability, are off course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
@@ -40,7 +40,7 @@ These five requirements form the main evaluation criteria for this thesis. They 
 \gls{aprs} is a known protocol, it's used with amateur radio frequencies, enabling real-time communication of position and telemetric info on said shared frequencies \autocite{ManojBaker2007}.
 It is however relevant to emergency contexts as it operates independently from the internet. \textcite{ManojBaker2007} demonstrates this in a real-world disaster (this happened in Cambodia). Both the response and mobile station operators relied on licensed amateur radios.
 
-The licenceis in fact the biggest barrier to rapid deployment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time gonna be spent on giving out radio licneces.
+The licenceis in fact the biggest barrier to rapid deployment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time gonna be spent on giving out radio licences.
 It also depends on specialized hardware, which makes it difficult to configure and place, especially in crisis conditions. If we compare this to the previously mentioned requirements, \gls{aprs} is infrastructure independent, but it fails for the easy and quick deploy.
 
 \section{DMR (Digital Mobile Radio)}%
@@ -58,28 +58,28 @@ It is defined in three tiers:
 
 It is however not a suitable solution for emergency communication.
 Tier-I is definitely not suitable because of the severe range limitations. Tier-II and III require licences, which is one of the main requirements and place it in the same position as \gls{aprs}.
-The dependence on specialized hardware is once again limiting the deplolyment, especially because it's also dependent on repeaters, which may be failing due to the same outage as the primary infrastructure.
+The dependence on specialized hardware is once again limiting the deployment, especially because it's also dependent on repeaters, which may be failing due to the same outage as the primary infrastructure.
 \gls{dmr} satisfies range and reliability, but it fails for licensing and deployability.
 
 \section{Satellite messengers}%
 \label{sec:sota-satellite}
 
-Commercial satellite based messnegers (e.g. Garmin inReach, Zoleo, Bivy Stick, SPOT, etc.) provide a genuinely off-grid solution, relying on satellite infrastructure instead of terrestrial infrastructure. 
+Commercial satellite based messengers (e.g. Garmin inReach, Zoleo, Bivy Stick, SPOT, etc.) provide a genuinely off-grid solution, relying on satellite infrastructure instead of terrestrial infrastructure. 
 The principal advantage they have over any other solution is the global coverage, which makes the range requirmeent completely irrelevant.
 
 This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the inital purchase amount a subscription fee adds up \autocite{GarminInReach2026, Zoleo2026}.
-As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349,99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9,99 up to \euro{}59,99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well, they can be found on \textcite{GarminInReach2026}.
-This is the case for Zoleo as well, the device start at \euro{}249,00 \autocite{ZoleoProducts2026}, with an additional subscription fee of \euro{}17,99 to \euro{}34,99 \autocite{Zoleo2026}. For Zoleo as well, depending on the exact subscription per-message fees can be added. 
+As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349.99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9.99 up to \euro{}59.99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well, they can be found on \textcite{GarminInReach2026}.
+This is the case for Zoleo as well, the device start at \euro{}249.00 \autocite{ZoleoProducts2026}, with an additional subscription fee of \euro{}17.99 to \euro{}34.99 \autocite{Zoleo2026}. For Zoleo as well, depending on the exact subscription per-message fees can be added. 
 
 This means it's impossible to scale, especially for general public associations like volunteer organizations or municipal safety services. Especially the recurring cost make it almost impossible to deploy at scale.
-The satellite messengers satifsfy the independence and range requirements, but horrendously fail on affordability at scale.
+The satellite messengers satisfy the independence and range requirements, but horrendously fail on affordability at scale.
 
 \section{LoRa}%
 \label{sec:sota-lora}
 
 Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
 \gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{"sub-GHz"} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
-How it works is, instead of sending on a fixed narrowband, \gls{lora} spreads the input signal over a wider channel using chirps. A chirp is a signal of which the freqsuency sweeps up (or down) across the whole bandwidth.
+How it works is, instead of sending on a fixed narrowband, \gls{lora} spreads the input signal over a wider channel using chirps. A chirp is a signal of which the frequency sweeps up (or down) across the whole bandwidth.
 This results in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
 This is exactly why \gls{lora} is good at long distances at low transmit power \autocite{Raza2017LPWAN}.
 
@@ -87,24 +87,24 @@ To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 an
 A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwith and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
 This is important to understand, because depending on the use case it might be better to sacrifice the range for the speed at which the message is sent, and vice versa. In our use case, range matters more, this is the reason why we set \texttt{LONG\_FAST} as a setting preset (see chapter~\ref{ch:poc}).
 The hardware used in this thesis (Heltec V4 with Semtech SX1262 tranceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
-According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 and 15km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15km could be seen as a strong result.
+According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 and 15\,km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15\,km could be seen as a strong result.
 \textcite{Ma2024ForestAttenuation} also shows us that vegetation and trees significantly reduce the radio signals. This can cause severe signal loss.
 The range is also determined by the antenna. A higher antenna position (less obstructions = less path loss) and a more sensitive receiver (better antenna) means a higher range. This also explains why a similar location with a few trees in between can have a connection or not as clearly seen in chapter~\ref{ch:poc}.
 
-\gls{lora} comes with some limitations as well, in Europe it only allows operation on the 868 MHz band. It is also subject to duty-cycle and power limitations. These are defined by \gls{etsi}, and in Belgium by \gls{bipt}. 
+\gls{lora} comes with some limitations as well, in Europe it only allows operation on the 868\,MHz band. It is also subject to duty-cycle and power limitations. These are defined by \gls{etsi}, and in Belgium by \gls{bipt}. 
 These limitations directed us in the right direction for the used config in the \gls{poc}, this can be found in chapter~\ref{ch:methodologie}.
 
 \gls{lora} in itself isn't how the nodes form a network, this is just a modulation protocol. The most known layer built on top of \gls{lora} is LoRaWAN.
-It organizes end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main indrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
+It organizes end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
 
-The usage of \gls{lora} for off-grid emergency communication has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communication for crisis situations. This showed a range of 4.6 to 6.5\,km, with a base node placed on a high building (dpeending on the used antenna and frequency).
-This provides a useful comparison to the measuremnts in chapter~\ref{ch:poc}.
+The usage of \gls{lora} for off-grid emergency communication has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communication for crisis situations. This showed a range of 4.6 to 6.5\,km, with a base node placed on a high building (depending on the used antenna and frequency).
+This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
 
 \section{Meshtastic}%
 \label{sec:sota-meshtastic}
 
-Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrolelrs (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
-It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and it's modem presets in long-range propagation scneraios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
+Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrollers (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
+It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and it's modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
 The network is also self-healing, this means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emergency cases, where a node can suddenly be unavailable or be added.
 
 How do messages actually travel through the mesh: Meshtastic uses \gls{csma}/CA to avoid any collisions on the shared frequency. Each node forwards messages that are not meant only for itself using managed flooding (rebroadcasting). This way it reaches nodes further away.

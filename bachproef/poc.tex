@@ -28,22 +28,22 @@ Having to place the nodes outside this would also mean the antenna is unusable. 
 The main V4 boards were then mounted inside the enclosure and the external antenna was connected using a u.FL-to-SMA cable.
 The mobile node was equipped with a 868\,MHz antenna with a magnetic base so that it could be mounted on the car roof.
 
-For realistic emergency situations both the fixed nodes were not plugged in a regular electrical socket. That's why for both the fixed nodes a small 2000mAh/3.7V LiPo battery was used as a buffer.
-The main power source was a 6W 5V/1A solar panel, the size of this panel (27,1 x 17,5 x 0,26 cm) allows it to be easily mounted and directed to the sun.
+For realistic emergency situations both the fixed nodes were not plugged in a regular electrical socket. That's why for both the fixed nodes a small 2,000\,mAh/3.7\,V LiPo battery was used as a buffer.
+The main power source was a 6\,W 5\,V/1\,A solar panel, the size of this panel (27.1 x 17.5 x 0.26\,cm) allows it to be easily mounted and directed to the sun.
 This way the nodes uses the solar panel to be powered on and charge the battery during the day, at night or at cloudy weather the battery takes over.
-On the base node the solar panel was soldered to a JST\,1.25mm connector so the USB-C plug could be used for data transfer.
+On the base node the solar panel was soldered to a JST\,1.25\,mm connector so the USB-C plug could be used for data transfer.
 The mobile node was powered using USB-C from the car.
 
 This setup was then mounted in an IP66 junction box for the fixed nodes.
 The junction box protects the hardware against dust and heavy rain and the cable glands allows the antenna and cables to get in and out of the box while being sealed.
 
 Table~\ref{tab:poc-cost} summarizes the cost of the whole operation, as cost is one of the main criteria in these emergency scenarios.
-This is a relevant result in itself for the scope of this thesis. The complete setup (four nodes, including a spare node, cables, antennas, batteries, solar panels and enclosures) was acquired for \euro{}180,95 in total.
+This is a relevant result in itself for the scope of this thesis. The complete setup (four nodes, including a spare node, cables, antennas, batteries, solar panels and enclosures) was acquired for \euro{}180.95 in total.
 This was on the chosen sites and at the moment of building the setup in Belgium, prices may vary according to time and location. 
 
 The bought components were not necessarily the cheapest available at the moment on the market, but due to the time constraints this project fell in, some products had to be chosen from more expensive EU-based resellers instead of non-EU resellers, which may be a lot cheaper, in order to achieve it in time.
 But even given this, the total cost of the setup compared to the cost of a commercial solution (e.g. a single Garmin inreach device) costs more than the full setup before even paying any subscription or fee.
-The figures below represent a realistic upper bound on the cost, this should not be taken as a cost-optimized setup. According to estimations, a total of 100/150€ could be done, according to the amount of nodes needed, etc.
+The figures below represent a realistic upper bound on the cost, this should not be taken as a cost-optimized setup. According to estimations, a total of \euro{}100/150 could be done, according to the amount of nodes needed, etc.
 
 \begin{table}[H]
   \centering
@@ -54,7 +54,7 @@ The figures below represent a realistic upper bound on the cost, this should not
     \midrule
     Heltec WiFi LoRa 32 V4 (868\,MHz)          & \euro{}22.00 & 4 & \euro{}88.00 \\
     6\,W USB solar panel (5\,V/1\,A)            & \euro{}19.99 & 2 & \euro{}39.98 \\
-    LiPo battery 2000\,mAh (JST 1.25\,mm)       & \euro{}9.64  & 2 & \euro{}19.28 \\
+    LiPo battery 2,000\,mAh (JST 1.25\,mm)       & \euro{}9.64  & 2 & \euro{}19.28 \\
     Vecys 3\,dBi magnetic-base car antenna      & \euro{}7.87  & 1 & \euro{}7.87  \\
     5\,dBi omnidirectional antenna (2-pack)     & \euro{}6.76  & 1 & \euro{}6.76  \\
     Kopp IP66 enclosure                         & \euro{}5.36  & 2 & \euro{}10.72 \\
@@ -124,6 +124,7 @@ For all three nodes current configuration has been set up and saved to the devic
 \begin{table}[H]
   \centering
   \small
+  \resizebox{\textwidth}{!}{
   \begin{tabular}{lccc}
     \toprule
     \textbf{Setting} & \textbf{Base-Node (Ronse)} & \textbf{Relay-Node (Tournai)} & \textbf{Mobile Node} \\
@@ -147,6 +148,7 @@ For all three nodes current configuration has been set up and saved to the devic
     Range Test            & Receiver (CSV) & Receiver & Sender (60\,s) \\
     \bottomrule
   \end{tabular}
+  }
   \caption[Meshtastic node configuration.]{\label{tab:poc-config}The exact configuration applied to all three nodes.}
 \end{table}
 
@@ -431,10 +433,10 @@ During this third and last test session the base and relay node were set and con
 The mobile node was driven through the south-west/south area of the relay node. This included some locations that were previously marked as "dead zones".
 
 Adding a relay node in this connection changed everything, multiple stops achieved a working connection, and the clearest result for this was a confirmed dead zone in Session~1 (50.6133, 3.4128) which was now able to communicate from the mobile node
-to the base node passing through the relay node. The connection between the mobile and relay node had a connection with an \gls{rssi} between $-90$ and $-106$\,dBm. The distance between this location and the relay node was only 4.7km but no clear \gls{los} was present, the relay node was 140\,m high and the mobile node was at 30\,m.
+to the base node passing through the relay node. The connection between the mobile and relay node had a connection with an \gls{rssi} between $-90$ and $-106$\,dBm. The distance between this location and the relay node was only 4.7\,km but no clear \gls{los} was present, the relay node was 140\,m high and the mobile node was at 30\,m.
 The distance between the relay and base node was 18.5\,km, which means the total distance travelled by the message was 23.2\,km, straight line distance between the base and mobile node was 19.71\,km.
 
-During this test session the maximum end-to-end distance reached was 30km, with a working connection at 11.5\,km from the relay node.
+During this test session the maximum end-to-end distance reached was 30\,km, with a working connection at 11.5\,km from the relay node.
 This result was achieved at the "Rue du préau" in Taintignies (50.56074, 3.33541) at an altitude of 30\,m. The measurements revealed an \gls{rssi} of $-110$\,dBm and an \gls{snr} of $0.25$\,dB. This means the connection is marginal but still established.
 
 This relay also revealed the effective limitations of Meshtastic using this relay configuration. Locations at low altitude (under 30\,m) at more than 10\,km from the relay were failing to connect. Locations in the city center of Tournai, which is densely built up, also failed.
@@ -490,11 +492,11 @@ on each node it means the key has to be shared with each participant node, which
 \label{sec:poc-solar}
 
 In the end, the autonomous operation of said nodes was also evaluated. These nodes having to be deployed during an emergency, we can't ensure the main electrical supply survived.
-To avoid any of these issues the test was conducted using a LiPo battery (3.7\,V, 2000\,mAh) and a 6W solar panel (for charging the battery and operation during day time).
+To avoid any of these issues the test was conducted using a LiPo battery (3.7\,V, 2,000\,mAh) and a 6\,W solar panel (for charging the battery and operation during day time).
 This setup was used for both the fixed nodes.
 
 The relay node was set up as "Power saving" mode, while the base node was completely set up without any limits, and even WiFi enabled (which consumes even more power).
-Theoretically, the battery of 2000\,mAh and 3.7\,V (storing 7.4\,Wh) should be able to run the setup during 20 to 30 hours. This is calculated using an estimation of 0.3\,W of usage on the setup.
+Theoretically, the battery of 2,000\,mAh and 3.7\,V (storing 7.4\,Wh) should be able to run the setup during 20 to 30 hours. This is calculated using an estimation of 0.3\,W of usage on the setup.
 This time is the buffer time before the setup fails.
 
 In reality, what was observed is after a full day of sunlight, the battery took effectively over at night time, the battery level on the base node (with WiFi enabled, so more consumption) was at 75\% by the time it started charging again.
