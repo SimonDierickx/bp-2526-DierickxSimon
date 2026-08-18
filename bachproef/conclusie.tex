@@ -8,18 +8,18 @@
 \section{Answer to the research question}%
 \label{sec:conclusion-answer}
 
-This thesis started by investigating to what extent does Meshtastic, as a decentralized \gls{lora}-based mesh network, offers a reliable and readily deployable emergency communication solution when primary network infrastructure fails.
+This thesis started by investigating to what extent Meshtastic, as a decentralized \gls{lora}-based mesh network, offers a reliable and readily deployable emergency communication solution when primary network infrastructure fails.
 Based on the initial literature study and the \gls{poc}, the answer to this question would be yes, on certain conditions.
 
 The \gls{poc} showed that a low-cost Meshtastic setup can provide a real, working link over real distances without relying on any existing infrastructure. A direct connection between two nodes reached a maximum of 18.5\,km, and adding a single relay in this setup improved the end-to-end distance (from Base-Node to mobile node) to an impressive 30\,km, this is larger than the literature study suggested.
-The \gls{poc} also proved a relay could convert a dead zone connection into a working connection (session 1 compared to session 3). When comparing against the five inital requirements the literature study gave us in chapter~\ref{ch:stand-van-zaken}, Meshtastic can be seen as a realistic alternative.
+The \gls{poc} also proved a relay could convert a dead zone connection into a working connection (session 1 compared to session 3). When comparing against the five initial requirements the literature study gave us in chapter~\ref{ch:stand-van-zaken}, Meshtastic can be seen as a realistic alternative.
 It performs well on infrastructure independence, deployability and affordability, and for security, the last one is not perfect, but it offers a good level if correctly configured.
 
 For the problem domain, the identified gaps were solutions that don't depend on main infrastructure, which are quick to deploy and are affordable at scale. Both \gls{aprs} and \gls{dmr} fail because of the licensing requirements. Satellite messengers like Garmin inReach and Zoleo mainly fail because of the recurring costs.
 Meshtastic is the only alternative that ticks every box. Regarding the environmental factors, the \gls{poc} showed us that the trees, buildings and other obstructions impede the signal way more than just the distance or the altitude.
 This was clearly illustrated in section~\ref{sec:poc-session2} where the highest test locations (Hotond, Kwaremont) had 0\,\% \gls{pdr} because of the trees, while lower altitude locations but with a clear \gls{los} achieved 100\,\%.
 The security question is a bit tricky on Meshtastic. The messages are effectively encrypted using \gls{aes}-256 once a private key is configured, but the default channel is public, so on a wrong config every message isn't really encrypted. Also once set up, the channels don't use authentication to make sure the message is from the right device.
-If someone gets the key, they can impersonate a node and send messages on the channel. The header of the message is also in cleartext, so the metadata is not protected. The private communication from end-to-end is protected with authentication as well.
+If someone gets the key, they can impersonate a node and send messages on the channel. The header of the message is also in cleartext, so the metadata is not protected. The private communication in between devices (end-to-end, no channel usage) is not only protected with the encryption but this also has authentication compared to the channels.
 
 The range and reliability question from the solution domain has also been answered in the \gls{poc}.
 The maximum direct connection distance achieved between two nodes was 18.5\,km, and with a single relay, the end-to-end distance was 30\,km. The effective range of the relay was estimated at 10 to 13\,km depending on terrain.
@@ -31,7 +31,7 @@ Compared to the other alternatives, Meshtastic is the only one that combines inf
 \label{sec:conclusion-reflection}
 
 The effective total range of a clear \gls{los} connection was surprising going into the \gls{poc}. The assumption was that the higher the node, the better the connection. But the results showed that a lower location with a better \gls{los} outperforms most high altitude nodes surrounded by trees.
-This is important for a real-world deployment: picking a relay location isn't just "find the highest point", but it's "finding the point with the best \gls{los} in the direction you need coverage".
+This is important for a real-world deployment: picking a relay location isn't just ``find the highest point``, but it's ``finding the point with the best \gls{los} in the direction you need coverage``.
 
 Something that makes sense, but wasn't expected either was the discovery of third-party nodes during testing, some as far as Amiens, roughly 130\,km away.
 This was as said unexpected, but it was convincing that the mesh topology is actually working as intended: nodes that weren't configured together still find a way to route traffic between them.

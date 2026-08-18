@@ -19,14 +19,14 @@ This is exactly what motivates us to find an autonomous solution \autocite{Manoj
 Therefore, a solution that still relies on that same infrastructure is not a solution, it just has the same exact weakness. Real independence means the solution has to be able to generate its own connectivity when being deployed.
 
 Another requirement is \textbf{quick and easy deployability}. If there is a crisis, there is no time for licences, specialists or training.
-The emergency solution should be set up and ready by "general public" in minutes using the right documentation and instructions.
+The emergency solution should be set up and ready by ``general public`` in minutes using the right documentation and instructions.
 
-The third requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most "normal" people, then the solution in itself is not useful at all.
-This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing \euro{}200.00 is expensive, but it's somewhat ok, if you need to buy 10 of those devices, that changes it completely.
-If the entry price or recurring costs (subscriptions, extra fees, etc.) are too high, the network stays to small to be really useful. \textcite{ElKhaledMcheick2019} points this out as well when talking aboit cost and energy efficiency as an evaluation citreria for communication in difficult conditions.
+The third requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most ``normal`` people, then the solution in itself is not useful at all.
+This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing \euro{}200.00 is expensive, but it is somewhat ok, if you need to buy 10 of those devices, that changes it completely.
+If the entry price or recurring costs (subscriptions, extra fees, etc.) are too high, the network stays too small to be really useful. \textcite{ElKhaledMcheick2019} point this out as well when talking about cost and energy efficiency as an evaluation criteria for communication in difficult conditions.
 
-Range and reliability, are off course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
-Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possiblity to extend it's range if necessary.
+Range and reliability are off course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
+Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possiblity to extend its range if necessary.
 Especially in situations where the duration and scope of the emergency is unknown or undetermined.
 
 The last main requirement found is the \textbf{security and privacy} of said solutions. In some specific cases (wars, censorship, etc.) the communication could contain sensitive information which shouldn't be intercepted and might be targeted by attacks/snooping.
@@ -38,9 +38,9 @@ These five requirements form the main evaluation criteria for this thesis. They 
 \label{sec:sota-aprs}
 
 \gls{aprs} is a known protocol, it's used with amateur radio frequencies, enabling real-time communication of position and telemetric info on said shared frequencies \autocite{ManojBaker2007}.
-It is however relevant to emergency contexts as it operates independently from the internet. \textcite{ManojBaker2007} demonstrates this in a real-world disaster (this happened in Cambodia). Both the response and mobile station operators relied on licensed amateur radios.
+It is however relevant to emergency contexts as it operates independently from the internet. \textcite{ManojBaker2007} demonstrate this in a real-world disaster (this happened in Cambodia). Both the response and mobile station operators relied on licensed amateur radios.
 
-The licenceis in fact the biggest barrier to rapid deployment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time gonna be spent on giving out radio licences.
+The licence is in fact the biggest barrier to rapid deployment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time will be spent on giving out radio licences.
 It also depends on specialized hardware, which makes it difficult to configure and place, especially in crisis conditions. If we compare this to the previously mentioned requirements, \gls{aprs} is infrastructure independent, but it fails for the easy and quick deploy.
 
 \section{DMR (Digital Mobile Radio)}%
@@ -54,7 +54,7 @@ It is defined in three tiers:
     \item Tier-III: licensed, trunked, \gls{tdma} equipment (voice and IP data), repeater-based communication
 \end{itemize}
 
-\textcite{Nyawose2025DMR} confirms the improvements in efficiency, quality and security \gls{dmr} offers, this compared to analogue radio.
+\textcite{Nyawose2025DMR} confirm the improvements in efficiency, quality and security \gls{dmr} offers, this compared to analogue radio.
 
 It is however not a suitable solution for emergency communication.
 Tier-I is definitely not suitable because of the severe range limitations. Tier-II and III require licences, which is one of the main requirements and place it in the same position as \gls{aprs}.
@@ -65,9 +65,9 @@ The dependence on specialized hardware is once again limiting the deployment, es
 \label{sec:sota-satellite}
 
 Commercial satellite based messengers (e.g. Garmin inReach, Zoleo, Bivy Stick, SPOT, etc.) provide a genuinely off-grid solution, relying on satellite infrastructure instead of terrestrial infrastructure. 
-The principal advantage they have over any other solution is the global coverage, which makes the range requirmeent completely irrelevant.
+The principal advantage they have over any other solution is the global coverage, which makes the range requirement completely irrelevant.
 
-This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the inital purchase amount a subscription fee adds up \autocite{GarminInReach2026, Zoleo2026}.
+This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the initial purchase amount a subscription fee adds up \autocite{GarminInReach2026, Zoleo2026}.
 As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349.99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9.99 up to \euro{}59.99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well, they can be found on \textcite{GarminInReach2026}.
 This is the case for Zoleo as well, the device start at \euro{}249.00 \autocite{ZoleoProducts2026}, with an additional subscription fee of \euro{}17.99 to \euro{}34.99 \autocite{Zoleo2026}. For Zoleo as well, depending on the exact subscription per-message fees can be added. 
 
@@ -78,15 +78,15 @@ The satellite messengers satisfy the independence and range requirements, but ho
 \label{sec:sota-lora}
 
 Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
-\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{"sub-GHz"} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
+\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{``sub-GHz``} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
 How it works is, instead of sending on a fixed narrowband, \gls{lora} spreads the input signal over a wider channel using chirps. A chirp is a signal of which the frequency sweeps up (or down) across the whole bandwidth.
 This results in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
 This is exactly why \gls{lora} is good at long distances at low transmit power \autocite{Raza2017LPWAN}.
 
 To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 and controls the balance between range and data rate.
-A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwith and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
+A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwidth and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
 This is important to understand, because depending on the use case it might be better to sacrifice the range for the speed at which the message is sent, and vice versa. In our use case, range matters more, this is the reason why we set \texttt{LONG\_FAST} as a setting preset (see chapter~\ref{ch:poc}).
-The hardware used in this thesis (Heltec V4 with Semtech SX1262 tranceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
+The hardware used in this thesis (Heltec V4 with Semtech SX1262 transceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
 According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 and 15\,km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15\,km could be seen as a strong result.
 \textcite{Ma2024ForestAttenuation} also shows us that vegetation and trees significantly reduce the radio signals. This can cause severe signal loss.
 The range is also determined by the antenna. A higher antenna position (less obstructions = less path loss) and a more sensitive receiver (better antenna) means a higher range. This also explains why a similar location with a few trees in between can have a connection or not as clearly seen in chapter~\ref{ch:poc}.
@@ -104,14 +104,14 @@ This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
 \label{sec:sota-meshtastic}
 
 Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrollers (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
-It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and it's modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
+It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and its modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
 The network is also self-healing, this means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emergency cases, where a node can suddenly be unavailable or be added.
 
 How do messages actually travel through the mesh: Meshtastic uses \gls{csma}/CA to avoid any collisions on the shared frequency. Each node forwards messages that are not meant only for itself using managed flooding (rebroadcasting). This way it reaches nodes further away.
 This is done until the message reaches the destination or the hop limit is reached \autocite{Durand2025MeshLoRa}.
-\textcite{Durand2025MeshLoRa} evaluates a \gls{lora}-based mesh network and shows that multi-hop forwarding improves the \gls{pdr} for nodes far away from the destination. This is exactly the supposed effect of a relay node.
+\textcite{Durand2025MeshLoRa} evaluate a \gls{lora}-based mesh network and shows that multi-hop forwarding improves the \gls{pdr} for nodes far away from the destination. This is exactly the supposed effect of a relay node.
 
-Each node is independent, it require no SIM card, no internet connection and no licence.
+Each node is independent, it requires no SIM card, no internet connection and no licence.
 
 Different roles can be attributed to the nodes, a \texttt{CLIENT} node is an endpoint operated by a user; a \texttt{ROUTER} node is optimized to only relay traffic and a \texttt{CLIENT\_BASE} node combines both, it allows the node to forward traffic while also being able to connect to a user as an end-device.
 Messages go from one node to another, with a maximum hop limit you can set up in the app.
@@ -130,7 +130,7 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 \section{Meshtastic security model}%
 \label{sec:sota-security}
 
-One of the sub-questions was the security of Meshtastic in case of traffic interception. Thats why Meshtastic's encryption model deserves a dedicated analysis.
+One of the sub-questions was the security of Meshtastic in case of traffic interception. That's why Meshtastic's encryption model deserves a dedicated analysis.
 
 Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a distinct key per channel \autocite{MeshtasticEncryption}. 
 The \gls{aes} encryption itself is considered secure, In \textcite{NIST2023AES} it is the approved standard for protecting sensitive information. It has been analyzed for more than twenty years and is still considered secure to use \autocite{Bogdanov2011AES}.
@@ -142,13 +142,13 @@ This means confidentiality of the message content and participation in routing a
 
 The most important limitation concerns the default channel, which contains a default publicly known key, encoded as \texttt{AQ==} in Base64 \autocite{MeshtasticChannels}.
 This means any device worldwide could decrypt traffic on this default channel, so for that case no real security or confidentiality is available until a private key is configured.
-This requires replacing the default key with a random generated 256-bit \gls{psk}, after which only the devices who posses the key can read the content \autocite{MeshtasticEncryption}.
+This requires replacing the default key with a random generated 256-bit \gls{psk}, after which only the devices who possess the key can read the content \autocite{MeshtasticEncryption}.
 
-Even with a strong private key set up, limitations remain. \textcite{MeshtasticEncryptionLimitations} proves this, \gls{aes}-\gls{ctr} provides confidentialtiy for Meshtastic, but no authentication. This means anyone who can achieve the \gls{psk} can send messages impersonating another user.
+Even with a strong private key set up, limitations remain. \textcite{MeshtasticEncryptionLimitations} proves this, \gls{aes}-\gls{ctr} provides confidentiality for Meshtastic, but no authentication. This means anyone who can obtain/know the \gls{psk} can send messages impersonating another user.
 Second of all, the cleartext header which is handy for routing exposes data to third parties, anyone being able to observe the packets can see the node identifiers and timing, even though the content stays unreadable.
 Some recent firmware updates to Meshtastic (version 2.5 and later) add public-key cryptography but only to direct messages. These provide authentication for one-to-one communication. For group channels however, the shared-key model stays in place and stays risky.
 
-The security aspect of Meshtastic has also been getting some academic attention. \textcite{Messina2024Meshtastic} study the Meshtastic protocol, more specifically in an \gls{iot} security context. It confirms both findings. The strengths: dynamic and adaptable mesh with per-channel encryption but also the weakness being: the dependence on how the channel keys are managed.
+The security aspect of Meshtastic has also been getting some academic attention. \textcite{Messina2024Meshtastic} study the Meshtastic protocol, more specifically in an \gls{iot} security context. They confirm both findings. The strengths: dynamic and adaptable mesh with per-channel encryption but also the weakness being: the dependence on how the channel keys are managed.
 
 \section{Comparative overview}%
 \label{sec:sota-comparison}

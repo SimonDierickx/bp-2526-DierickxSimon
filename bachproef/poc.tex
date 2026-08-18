@@ -30,7 +30,7 @@ The mobile node was equipped with a 868\,MHz antenna with a magnetic base so tha
 
 For realistic emergency situations both the fixed nodes were not plugged in a regular electrical socket. That's why for both the fixed nodes a small 2,000\,mAh/3.7\,V LiPo battery was used as a buffer.
 The main power source was a 6\,W 5\,V/1\,A solar panel, the size of this panel (27.1 x 17.5 x 0.26\,cm) allows it to be easily mounted and directed to the sun.
-This way the nodes uses the solar panel to be powered on and charge the battery during the day, at night or at cloudy weather the battery takes over.
+This way the nodes use the solar panel to be powered on and charge the battery during the day, at night or at cloudy weather the battery takes over.
 On the base node the solar panel was soldered to a JST\,1.25\,mm connector so the USB-C plug could be used for data transfer.
 The mobile node was powered using USB-C from the car.
 
@@ -118,7 +118,7 @@ On all three nodes the radio profile was set on the EU\_868 region, LONG\_FAST m
 boosted receiver gain enabled and the FEM/LNA mode disabled (the V4 has no external low-noise amplifier).
 However the three nodes received three different roles: base node in Ronse as \texttt{CLIENT\_BASE} (sending, receiving and forwarding messages), relay node as \texttt{ROUTER} (forwarding messages) and mobile node as \texttt{CLIENT} (receiving and sending messages). 
 The Meshtastic Range Test module was enabled and configured so that the mobile node was sending a test packet every 60 seconds to the base node. The base node then kept this in a CSV log file for later analysis.
-These sequences contained a sequence number, time of reception, \gls{rssi}, \gls{snr} and the exact position of the node (this device doesn't have a GPS module, but it uses the phones shared GPS position).
+These sequences contained a sequence number, time of reception, \gls{rssi}, \gls{snr} and the exact position of the node (this device doesn't have a GPS module, but it uses the phone's shared GPS position).
 
 For all three nodes current configuration has been set up and saved to the devices:
 \begin{table}[H]
@@ -160,7 +160,7 @@ These are also findings of this thesis to take into account (deployability requi
 \end{itemize}
 
 As mentioned above, the nodes were not always easy to set up using the Web Client, that's why some of the settings were done through the app to stay persistent.
-The app, however, is really user-friendly but not as complete as the Web Client could be. That's why the CLI was used to perform some of the more "advanced" settings.
+The app, however, is really user-friendly but not as complete as the Web Client could be. That's why the CLI was used to perform some of the more ``advanced`` settings.
 As shown below, each of the nodes had such a config file, which was a regular .bat file, pushing the configuration settings on a specified COM-port at the top of the file.
 
 \begin{minted}{batch}
@@ -356,7 +356,7 @@ The Python CLI saved lots of time configuring, but also verifying existing confi
 
 The first test session consisted of discovering the usage of Meshtastic and \gls{lora} technology, as well as testing a direct link between the Ronse base node and the mobile node.
 The first goal was to establish a baseline for a long single-hop connection, without any relay nodes. The secondary goal of this test was also to discover dead zones in the area.
-The mobile node was driven from the base to the Mont-Saint-Aubert transmitting a test packet every 60 sec, the base node then logged the received packets so we can check when the node was in a so called "dead zone".
+The mobile node was driven from the base to the Mont-Saint-Aubert transmitting a test packet every 60 sec, the base node then logged the received packets so we can check when the node was in a so called ``dead zone``.
 
 Three different phases could be distinguished in the perceived data. The first phase were the first three kilometres from the base node, on similar altitude without any direct line-of-sight.
 The \gls{pdr} was 78.6\,\% and the \gls{rssi} degraded from $-51$\,dBm to $-119$\,dBm as the distance increased.
@@ -428,14 +428,14 @@ A next test session was planned to test the effective coverage and limitations o
 \label{sec:poc-session3}
 
 During this third and last test session the base and relay node were set and configured. This session was purely determining the exact coverage and limitations of our current setup.
-The mobile node was driven through the south-west/south area of the relay node. This included some locations that were previously marked as "dead zones".
+The mobile node was driven through the south-west/south area of the relay node. This included some locations that were previously marked as ``dead zones``.
 
 Adding a relay node in this connection changed everything, multiple stops achieved a working connection, and the clearest result for this was a confirmed dead zone in Session~1 (50.6133, 3.4128) which was now able to communicate from the mobile node
 to the base node passing through the relay node. The connection between the mobile and relay node had a connection with an \gls{rssi} between $-90$ and $-106$\,dBm. The distance between this location and the relay node was only 4.7\,km but no clear \gls{los} was present, the relay node was 140\,m high and the mobile node was at 30\,m.
 The distance between the relay and base node was 18.5\,km, which means the total distance travelled by the message was 23.2\,km, straight line distance between the base and mobile node was 19.71\,km.
 
 During this test session the maximum end-to-end distance reached was 30\,km, with a working connection at 11.5\,km from the relay node.
-This result was achieved at the "Rue du préau" in Taintignies (50.56074, 3.33541) at an altitude of 30\,m. The measurements revealed an \gls{rssi} of $-110$\,dBm and an \gls{snr} of $0.25$\,dB. This means the connection is marginal but still established.
+This result was achieved at the ``Rue du préau`` in Taintignies (50.56074, 3.33541) at an altitude of 30\,m. The measurements revealed an \gls{rssi} of $-110$\,dBm and an \gls{snr} of $0.25$\,dB. This means the connection is marginal but still established.
 
 This relay also revealed the effective limitations of Meshtastic using this relay configuration. Locations at low altitude (under 30\,m) at more than 10\,km from the relay were failing to connect. Locations in the city center of Tournai, which is densely built up, also failed.
 This means, in our current config the effective range of the relay node was between 10 and 13\,km. If the situation had given us more altitude for the mobile node, a further distance probably could have been achieved.
@@ -483,7 +483,7 @@ The difference is that now the nodes can forward the messages but they can't rea
 Some parts of the packets are not encrypted, and these parts guide the routing of that package (node identifiers, timing, hop count).
 
 This showed one of the main security issues of Meshtastic, when using the default \gls{psk} traffic seems secure but in reality, nothing really is as this default is known by everyone.
-Another limitation found is that the \gls{psk} is the same on all three nodes, which means if one of the nodes get "hacked" none of the traffic still is secure, also the fact the \gls{psk} is the same
+Another limitation found is that the \gls{psk} is the same on all three nodes, which means if one of the nodes ``is compromised`` none of the traffic still is secure, also the fact the \gls{psk} is the same
 on each node it means the key has to be shared with each participant node, which also involves a security issue.
 
 \section{Autonomous solar operation}%
@@ -493,7 +493,7 @@ In the end, the autonomous operation of said nodes was also evaluated. These nod
 To avoid any of these issues the test was conducted using a LiPo battery (3.7\,V, 2,000\,mAh) and a 6\,W solar panel (for charging the battery and operation during day time).
 This setup was used for both the fixed nodes.
 
-The relay node was set up as "Power saving" mode, while the base node was completely set up without any limits, and even WiFi enabled (which consumes even more power).
+The relay node was set up as ``Power saving`` mode, while the base node was completely set up without any limits, and even WiFi enabled (which consumes even more power).
 Theoretically, the battery of 2,000\,mAh and 3.7\,V (storing 7.4\,Wh) should be able to run the setup during 20 to 30 hours. This is calculated using an estimation of 0.3\,W of usage on the setup.
 This time is the buffer time before the setup fails.
 
