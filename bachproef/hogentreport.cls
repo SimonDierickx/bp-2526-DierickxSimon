@@ -168,7 +168,7 @@
 \fi
 \RequirePackage{csquotes}
 
-\RequirePackage[small,bf,nooneline,footnotesize]{caption}
+\RequirePackage[small,bf,nooneline,footnotesize,justification=centering]{caption}
 \RequirePackage[flushmargin,hang]{footmisc}
 \RequirePackage{ifpdf}
 \RequirePackage{ifxetex}
