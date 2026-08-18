@@ -107,7 +107,7 @@ A phone was connected through Bluetooth to the mobile node, allowing it to broad
 \section{Configuration and setup difficulties}%
 \label{sec:poc-config}
 
-Using the \href{https://flasher.meshtastic.org/}{Meshtastic firmware flasher} the last stable version of Meshtastic (2.7.26.54e0d8d) was flashed on all four nodes.
+Using the \href{https://flasher.meshtastic.org/}{Meshtastic firmware flasher} the last stable version of Meshtastic\\(2.7.26.54e0d8d) was flashed on all four nodes.
 The board needed the installation of the CH343 driver to be able to flash and configure the board. The Heltec device should also be put into bootloader mode by holding the PRG button while plugging it in.
 
 The nodes can then be configured on three different ways: the web-based configuration interface, the Python command-line interface or the mobile application.
@@ -124,7 +124,6 @@ For all three nodes current configuration has been set up and saved to the devic
 \begin{table}[H]
   \centering
   \small
-  \resizebox{\textwidth}{!}{
   \begin{tabular}{lccc}
     \toprule
     \textbf{Setting} & \textbf{Base-Node (Ronse)} & \textbf{Relay-Node (Tournai)} & \textbf{Mobile Node} \\
@@ -148,7 +147,6 @@ For all three nodes current configuration has been set up and saved to the devic
     Range Test            & Receiver (CSV) & Receiver & Sender (60\,s) \\
     \bottomrule
   \end{tabular}
-  }
   \caption[Meshtastic node configuration.]{\label{tab:poc-config}The exact configuration applied to all three nodes.}
 \end{table}
 
