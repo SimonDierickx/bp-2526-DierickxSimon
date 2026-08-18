@@ -19,6 +19,7 @@ set +x
 # Loop over all found .tex source files and compile
 for latex_file in ${source_files}; do
   echo "========== Compiling ${latex_file} =========="
+  jobname=$(basename "${latex_file}" .tex)
   set -x
   latexmk \
     -file-line-error \
@@ -28,5 +29,17 @@ for latex_file in ${source_files}; do
     -synctex=1 \
     -xelatex \
     "${latex_file}"
+
+if [ -f "${output_dir}/${jobname}.glo" ] || [ -f "${output_dir}/${jobname}.acn" ]; then
+    makeglossaries -d "${output_dir}" "${jobname}"
+    latexmk \
+      -file-line-error \
+      -interaction=nonstopmode \
+      -output-directory="${output_dir}" \
+      -shell-escape \
+      -synctex=1 \
+      -xelatex \
+      "${latex_file}"
+  fi
   set +x
 done
