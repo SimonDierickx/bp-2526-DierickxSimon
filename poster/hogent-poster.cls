@@ -101,7 +101,7 @@
 \DeclareOption{english}{\@dutchfalse\@englishtrue}
 
 \DeclareOption*{\PackageWarning{hogent-poster}{Unknown Option \CurrentOption}}
-\ExecuteOptions{dutch,landscape,a0b,final}
+\ExecuteOptions{english,landscape,a0b,final}
 \ProcessOptions\relax
 
 \if@english
