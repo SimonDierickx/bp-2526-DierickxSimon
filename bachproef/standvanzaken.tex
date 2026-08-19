@@ -71,7 +71,7 @@ This technology, with all the advantages it has, isn't something that is easily 
 As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349.99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9.99 up to \euro{}59.99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well, they can be found on \textcite{GarminInReach2026}.
 This is the case for Zoleo as well, the device start at \euro{}249.00 \autocite{ZoleoProducts2026}, with an additional subscription fee of \euro{}17.99 to \euro{}34.99 \autocite{Zoleo2026}. For Zoleo as well, depending on the exact subscription per-message fees can be added. 
 
-This means it's impossible to scale, especially for general public associations like volunteer organizations or municipal safety services. Especially the recurring cost make it almost impossible to deploy at scale.
+This means it's impossible to scale, especially for general public associations like volunteer organisations or municipal safety services. Especially the recurring cost make it almost impossible to deploy at scale.
 The satellite messengers satisfy the independence and range requirements, but horrendously fail on affordability at scale.
 
 \section{LoRa}%
@@ -95,7 +95,7 @@ The range is also determined by the antenna. A higher antenna position (less obs
 These limitations directed us in the right direction for the used config in the \gls{poc}, this can be found in chapter~\ref{ch:methodologie}.
 
 \gls{lora} in itself isn't how the nodes form a network, this is just a modulation protocol. The most known layer built on top of \gls{lora} is LoRaWAN.
-It organizes end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
+It organises end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
 
 The usage of \gls{lora} for off-grid emergency communication has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communication for crisis situations. This showed a range of 4.6 to 6.5\,km, with a base node placed on a high building (depending on the used antenna and frequency).
 This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
@@ -104,7 +104,7 @@ This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
 \label{sec:sota-meshtastic}
 
 Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrollers (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
-It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyzes the resilience of Meshtastic networks and its modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
+It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyses the resilience of Meshtastic networks and its modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
 The network is also self-healing, this means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emergency cases, where a node can suddenly be unavailable or be added.
 
 How do messages actually travel through the mesh: Meshtastic uses \gls{csma}/CA to avoid any collisions on the shared frequency. Each node forwards messages that are not meant only for itself using managed flooding (rebroadcasting). This way it reaches nodes further away.
@@ -133,7 +133,7 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 One of the sub-questions was the security of Meshtastic in case of traffic interception. That's why Meshtastic's encryption model deserves a dedicated analysis.
 
 Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a distinct key per channel \autocite{MeshtasticEncryption}. 
-The \gls{aes} encryption itself is considered secure, In \textcite{NIST2023AES} it is the approved standard for protecting sensitive information. It has been analyzed for more than twenty years and is still considered secure to use \autocite{Bogdanov2011AES}.
+The \gls{aes} encryption itself is considered secure, In \textcite{NIST2023AES} it is the approved standard for protecting sensitive information. It has been analysed for more than twenty years and is still considered secure to use \autocite{Bogdanov2011AES}.
 The known limitations come from the implementation, not the encryption itself, as specified down below.
 
 One of the crucial decisions of Meshtastic is to only encrypt the payload, which means the packet header (containing send node number, packet identifier and hop limit) is not encrypted and always transmitted in cleartext \autocite{MeshtasticEncryption}.

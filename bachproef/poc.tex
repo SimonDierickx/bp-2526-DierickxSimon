@@ -5,10 +5,10 @@
 \chapter{\IfLanguageName{dutch}{Proof of concept}{Proof of concept}}%
 \label{ch:poc}
 
-This chapter presents and analyzes the proof of concept.
+This chapter presents and analyses the proof of concept.
 First is deciding which hardware is selected and the reasoning behind these choices (Section~\ref{sec:poc-hardware}), followed by the
 hardware assembly and construction together with the configuration of the nodes and the difficulties encountered during setup (Section~\ref{sec:poc-config}).
-The next part is presenting and analyzing the results of three different field-test sessions: direct-link baseline (Section~\ref{sec:poc-session1}), relay survey (Section~\ref{sec:poc-session2}) and full deployment (Section~\ref{sec:poc-session3}).
+The next part is presenting and analysing the results of three different field-test sessions: direct-link baseline (Section~\ref{sec:poc-session1}), relay survey (Section~\ref{sec:poc-session2}) and full deployment (Section~\ref{sec:poc-session3}).
 At the end of this chapter we can also observe other nodes, not known to us participating in the mesh network (Section~\ref{sec:poc-mesh}), the security demonstration (Section~\ref{sec:poc-security}) and the evaluations of autonomous solar operation (Section~\ref{sec:poc-solar}).
 
 \section{Hardware selection}%
@@ -222,7 +222,7 @@ As shown below, each of the nodes had such a config file, which was a regular .b
   REM     Right-click on Google Maps -> "What's here?" for exact coords
   REM ================================================================
   echo [3/9] Setting fixed position (Ronse)...
-  %MESH% --setlat 50.72306 --setlon 3.63234 --setalt 88
+  %MESH% --setlat 50.72316 --setlon 3.63217 --setalt 90
   timeout /t 5 /nobreak > nul
   %MESH% --set position.gps_mode NOT_PRESENT
   timeout /t 3 /nobreak > nul
@@ -392,7 +392,7 @@ The first session focused mainly on a southern/south-western direction. This sec
 East wasn't checked because the eastern area starting from the node is densely planted with trees and elevation goes even higher at some points.
 
 The locations checked were around the Hotond, Kwaremont, Trieu and Kanarieberg. Most locations are all elevated and have a somewhat clear line-of-sight with the base node.
-At each location the \gls{rssi}, \gls{snr} and \gls{pdr} on the direct link to the base node were recorded, together with the altitude and an assessment of the line of sight. Each chosen spot was marked using its coordinates for precise reporting.
+At each location the \gls{rssi}, \gls{snr} and \gls{pdr} on the direct link to the base node were recorded, together with the altitude and an assessment of the \gls{los}. Each chosen spot was marked using its coordinates for precise reporting.
 
 The results from this session are summarized in Table~\ref{tab:session2}.
 This reveals a somewhat unforeseen pattern, elevation alone isn't enough to guarantee a connection. All three highest locations Hotond (138\,m), Kwaremont (100\,m) and Trieu/Knokte (116\,m) achieved 0\,\% packet delivery.
@@ -406,7 +406,7 @@ This confirms our initial finding of session 1, \gls{los} is more important than
   \small
   \begin{tabular}{lccccl}
     \toprule
-    \textbf{Location} & \textbf{Dist.\ (km)} & \textbf{Alt.\ (m)} & \textbf{RSSI (dBm)} & \textbf{PDR} & \textbf{Line of sight} \\
+    \textbf{Location} & \textbf{Dist.\ (km)} & \textbf{Alt.\ (m)} & \textbf{RSSI (dBm)} & \textbf{PDR} & \textbf{Line-of-sight} \\
     \midrule
     Karnemelkbeekstraat (50.75726, 3.53882) & 7.6 & 81  & $-109$ & 100\,\% & Clear   \\
     Drie Lindenstraat (50.75807, 3.54101)   & 7.5 & 86  & $-110$ & 100\,\% & Clear   \\
@@ -487,7 +487,7 @@ For example the Amiens node appeared as 2 hops away. The final node (in Amiens) 
 This shows that the mesh setup is real, and that the total range of the network is also expandable with good placement of nodes.
 Of course, the Amiens node wasn't tested as this was a third-party node, and quite a drive for this \gls{poc}, but it shows the real potential of Meshtastic.
 
-This is the self-organizing nature of Meshtastic. Nodes discover one another and exchange necessary information for routing. This makes the range instantly larger than what you originally expected.
+This is the self-organising nature of Meshtastic. Nodes discover one another and exchange necessary information for routing. This makes the range instantly larger than what you originally expected.
 This shows the mesh is a real, practical solution for establishing a connection between distant points. They however could forward the packets, but they couldn't read any content of these packets.
 That's the whole point of the secure encryption Meshtastic offers.
 
