@@ -54,12 +54,20 @@ As planned, the security analysis stayed documentation-based combined with some 
 The most obvious next step for continuing this research is to expand the \gls{poc} with more nodes, and more relays. This would allow to test even more hops and see how far the range could be extended using more nodes.
 Each node probably adds some packet loss, it would be useful to know exactly how much and how far (in terms of hops and distance) this type of network can be pushed before it stops being useful.
 
-Another next step could be testing in different environmental conditions. This was supposed to be done during the \gls{poc}, but except different days and time of the day the weather has been dry and calm from start to finish of the \gls{poc} (20th of July 2026 - 20th of August 2026).
+A rough estimation can be made on creating a longer multi-hop path. The first hop of the current setup (base to relay) reached 18.5\,km with a clear \gls{los}. The second hop (relay to mobile) reached an effective 10--13\,km, which gave us a 30\,km end-to-end distance.
+If a second relay would be added at another elevated, clear-\gls{los} site, a comparable third hop of roughly 10--15\,km could be estimated. This would extend the theoretical reach of the chain to approximately 45--50\,km over three hops.
+This remains an estimation; every additional hop adds latency and more chance of packet loss. If a second relay would be introduced, the hop limit setting should also be moved from 3 to a higher count.
+An effective test with a second relay should be done to confirm the effective range. That's a clear direction for further research.
+
+Another next step could be testing in different environmental conditions. This was supposed to be done during the \gls{poc}, but the weather stayed largely dry and calm throughout the \gls{poc} (20 July 2026 – 20 August 2026),
+so no systematic weather comparison was possible during the sessions. Only one day allowed testing in the rain (section~\ref{sec:poc-rain}).
+This does not mean the setup is viable in all weather conditions, but it shows that rain does not necessarily break the connection, and this should be confirmed in future research.
 The same measurements could be repeated but at different times of the day, and most importantly, in different weather conditions (rain, wind, temperature swings) to see whether the change in conditions has a real-world effect on the stability of the connection.
 
 Going more into the security side of Meshtastic could be another direction to dig into, especially authentication and metadata protection (section~\ref{sec:sota-security}).
 Lastly, as mentioned in section~\ref{sec:poc-session3}, using higher-gain or directional antennas (such as Yagi, parabolic, etc.) instead of a small omnidirectional one could largely improve the quality and the range of the network. The broadcast aspect would likely be lost, but in return the range and quality could be extended.
 This wasn't tested during this thesis due to cost and time constraints, but it is a realistic next step for anyone trying to push the research even further.
+
 
 \section{Comparison matrix}%
 \label{sec:conclusion-comparison}

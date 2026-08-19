@@ -522,3 +522,12 @@ This means that the battery could in reality sustain 4x ±8 hours, which means a
 
 In practice the solar panel charges the battery whenever it is hit with sunlight. Telemetry from the V4 reports a full battery and a 4.32\,V voltage, this confirms that during summer the solar panel produces enough energy for charging and operation.
 This proves the low-cost combination of a small LiPo battery and a solar panel is enough to keep a node of this size running without any external party being involved.
+
+\subsection{Opportunistic wet-weather check}
+\label{sec:poc-rain}
+
+Throughout the whole testing period the weather in Belgium (Flemish Ardennes and Pays des Collines) was very dry. This made testing weather variations impossible to measure during the sessions.
+However at the end of the period, on 17 August 2026 at 06:02, a single traceroute could be performed during heavy rain. This traceroute was done between the Ronse base node and the relay node at Mont-Saint-Aubert.
+The traceroute returned a successful result. The Ronse\,$\rightarrow$\,relay link had an \gls{rssi} of $-114$\,dBm and an \gls{snr} of $-10.75$\,dB. The relay\,$\rightarrow$\,Ronse link had an \gls{rssi} of $-114$\,dBm and an \gls{snr} of $-4.75$\,dB.
+This single observation cannot claim the connection is weather variation proof, but it does show that in this occasion the link was still operational.
+What can be seen is that, altough the link was successful, the quality of the connection was degraded, so this should be further investigated.
