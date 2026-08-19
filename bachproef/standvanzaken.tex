@@ -68,7 +68,7 @@ Commercial satellite based messengers (e.g. Garmin inReach, Zoleo, Bivy Stick, S
 The principal advantage they have over any other solution is the global coverage, which makes the range requirement completely irrelevant.
 
 This technology, with all the advantages it has, isn't something that is easily accessible to everyone. The devices are really expensive and on top of the initial purchase amount a subscription fee adds up \autocite{GarminInReach2026, Zoleo2026}.
-As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349.99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9.99 up to \euro{}59.99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well, they can be found on \textcite{GarminInReach2026}.
+As seen on both the constructors' websites, a Garmin inReach Mini 2 costs \euro{}349.99 \autocite{GarminInReachMini22026} to buy, on top of this price the mandatory subscription of \euro{}9.99 up to \euro{}59.99 per month \autocite{GarminInReach2026} needs to be paid. Depending on the exact subscription chosen, per message fees can be added as well; they can be found on \textcite{GarminInReach2026}.
 This is the case for Zoleo as well, the device start at \euro{}249.00 \autocite{ZoleoProducts2026}, with an additional subscription fee of \euro{}17.99 to \euro{}34.99 \autocite{Zoleo2026}. For Zoleo as well, depending on the exact subscription per-message fees can be added. 
 
 This means it's impossible to scale, especially for general public associations like volunteer organisations or municipal safety services. Especially the recurring cost make it almost impossible to deploy at scale.
@@ -78,23 +78,23 @@ The satellite messengers satisfy the independence and range requirements, but ho
 \label{sec:sota-lora}
 
 Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
-\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{``sub-GHz''} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
+\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{``sub-GHz''} \gls{ism} band; these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
 How it works is, instead of sending on a fixed narrowband, \gls{lora} spreads the input signal over a wider channel using chirps. A chirp is a signal of which the frequency sweeps up (or down) across the whole bandwidth.
 This results in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
 This is exactly why \gls{lora} is good at long distances at low transmit power \autocite{Raza2017LPWAN}.
 
 To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 and controls the balance between range and data rate.
 A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwidth and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
-This is important to understand, because depending on the use case it might be better to sacrifice the range for the speed at which the message is sent, and vice versa. In our use case, range matters more, this is the reason why we set \texttt{LONG\_FAST} as a setting preset (see chapter~\ref{ch:poc}).
+This is important to understand, because depending on the use case it might be better to sacrifice the range for the speed at which the message is sent, and vice versa. In our use case, range matters more. This is the reason why we set \texttt{LONG\_FAST} as a setting preset (see chapter~\ref{ch:poc}).
 The hardware used in this thesis (Heltec V4 with Semtech SX1262 transceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
 According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 and 15\,km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15\,km could be seen as a strong result.
 \textcite{Ma2024ForestAttenuation} also shows us that vegetation and trees significantly reduce the radio signals. This can cause severe signal loss.
 The range is also determined by the antenna. A higher antenna position (less obstructions = less path loss) and a more sensitive receiver (better antenna) means a higher range. This also explains why a similar location with a few trees in between can have a connection or not as clearly seen in chapter~\ref{ch:poc}.
 
 \gls{lora} comes with some limitations as well, in Europe it only allows operation on the 868\,MHz band. It is also subject to duty-cycle and power limitations. These are defined by \gls{etsi}, and in Belgium by \gls{bipt}. 
-These limitations directed us in the right direction for the used config in the \gls{poc}, this can be found in chapter~\ref{ch:methodologie}.
+These limitations directed us in the right direction for the used config in the \gls{poc}; this can be found in chapter~\ref{ch:methodologie}.
 
-\gls{lora} in itself isn't how the nodes form a network, this is just a modulation protocol. The most known layer built on top of \gls{lora} is LoRaWAN.
+\gls{lora} in itself isn't how the nodes form a network; it is just a modulation protocol. The most known layer built on top of \gls{lora} is LoRaWAN.
 It organises end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
 
 The usage of \gls{lora} for off-grid emergency communication has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communication for crisis situations. This showed a range of 4.6 to 6.5\,km, with a base node placed on a high building (depending on the used antenna and frequency).

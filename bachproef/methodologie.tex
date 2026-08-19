@@ -34,7 +34,7 @@ The reasoning, difficulties and setup are documented in Chapter~\ref{ch:poc}.
 Third phase is the effective execution of the \gls{poc}: the field tests.
 Two different topologies were tested:
 \begin{enumerate}
-  \item \textbf{Topology 1 (direct link)}: during this test only two nodes were used, this was to test the direct connection between the base
+  \item \textbf{Topology 1 (direct link)}: during this test only two nodes were used, to test the direct connection between the base
   node and the mobile node. This was used to establish the maximal single-hop range of the network.
   \item \textbf{Topology 2 (relay link)}: for this test the three-node topology was used. After finding the best spot for the relay
   using the first topology, this one was to test the coverage of the entire network from base to relay to mobile node.
@@ -47,7 +47,7 @@ The \emph{Range Test} module was configured on the mobile node. This module comm
 These packets are numbered and contain a series of metrics: timestamp, GPS coordinates (when a phone is connected), \gls{rssi} and \gls{snr} values. These packets
 are sent to the base node where a CSV file can be extracted. That way you can immediately tell the sequences missing, and as a result the timestamps/locations of no connection.
 
-On top of the Range Test module the \emph{traceroute} function was also used, this wasn't to determine the dead zones while driving like the range test, this is used on the stop locations to test the full path to the base node.
+On top of the Range Test module the \emph{traceroute} function was also used. This wasn't to determine the dead zones while driving like the range test; this is used on the stop locations to test the full path to the base node.
 The metrics this gave were: the full path traveled (hops between mobile and base) and the quality of each single hop (\gls{rssi} and \gls{snr} values).
 
 Both these tests combined gave a clear view of coverage (working zones, dead zones) and the quality of the connections.
