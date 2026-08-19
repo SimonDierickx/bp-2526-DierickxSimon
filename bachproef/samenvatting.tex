@@ -23,7 +23,7 @@ Uit deze metingen bleek dat een directe verbinding van 18,5\,km in deze situatie
 Met de huidige setup en beperkingen kon een relay node dit uitbreiden tot ongeveer 30\,km.
 Na de relay node in te schakelen werden sommige ``dead zones'' ook omgeschakeld naar werkende zones.
 Een van de belangrijke bevindingen is dat de zichtbaarheid meer impact heeft op het signaal dan de effectieve afstand of de hoogte van de nodes.
-De ingebouwde \gls{aes}-256 encryptie beschermt de inhoud van de berichten, maar het standaardkanaal is publiek en moet dus verwijderd worden.
+De ingebouwde \gls{aes}-256 encryptie beschermt de inhoud van de berichten, maar het standaardkanaal gebruikt een publiek gekende sleutel en deze moet vóór een echte uitrol vervangen worden door een privésleutel.
 
 Binnen een beperkte range, of een grotere ongehinderd oppervlak kan Meshtastic dus een geloofwaardig, goedkoop en onafhankelijk alternatief bieden voor noodcommunicatie.
 
@@ -50,6 +50,6 @@ From these measurements a direct connection of 18.5\,km with the base node was f
 With the current setup and its limitations, the relay node could extend this range to about 30\,km.
 After putting the relay node into the network, some ``dead zones'' were also found working now.
 One of the main findings of the PoC is that line-of-sight matters more than distance or height of the nodes.
-The built-in \gls{aes}-256 encryption protects the content of the messages, even though the default channel stays public, and should be removed on first use during real deployment.
+The built-in \gls{aes}-256 encryption protects the content of the messages, but the default channel uses a publicly known key, so this key must be replaced with a private key before any real deployment.
 
 In a limited range, or in larger unobstructed areas, Meshtastic can be a credible, low-cost, independent alternative for emergency communication.

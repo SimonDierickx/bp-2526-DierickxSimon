@@ -11,15 +11,16 @@
 This thesis started by investigating to what extent Meshtastic, as a decentralized \gls{lora}-based mesh network, offers a reliable and readily deployable emergency communication solution when primary network infrastructure fails.
 Based on the initial literature study and the \gls{poc}, the answer to this question would be yes, on certain conditions.
 
-The \gls{poc} showed that a low-cost Meshtastic setup can provide a real, working link over real distances without relying on any existing infrastructure. A direct connection between two nodes reached a maximum of 18.5\,km, and adding a single relay in this setup improved the end-to-end distance (from Base-Node to mobile node) to an impressive 30\,km, this is larger than the literature study suggested.
+The \gls{poc} showed that a low-cost Meshtastic setup can provide a real, working link over real distances without relying on any existing infrastructure. A direct connection between two nodes reached a maximum of 18.5\,km, and adding a single relay in this setup improved the end-to-end distance (from Base-Node to mobile node) to 30\,km, this is larger than the literature study suggested.
 The \gls{poc} also proved a relay could convert a dead zone connection into a working connection (session 1 compared to session 3). When comparing against the five initial requirements the literature study gave us in chapter~\ref{ch:stand-van-zaken}, Meshtastic can be seen as a realistic alternative.
-It performs well on infrastructure independence, deployability and affordability, and for security, the last one is not perfect, but it offers a good level if correctly configured.
+It performws well on infrastructure independence, deployability and affordability, and for security, while it has limitations, it offers a reasonable level of protection if correctly configured.
+These figures come from three sessions in a single region with one hardware type, so they should be read as an indication rather than a guaranteed performance benchmark.
 
 For the problem domain, the identified gaps were solutions that don't depend on main infrastructure, which are quick to deploy and are affordable at scale. Both \gls{aprs} and \gls{dmr} fail because of the licensing requirements. Satellite messengers like Garmin inReach and Zoleo mainly fail because of the recurring costs.
 Meshtastic is the only alternative that ticks every box. Regarding the environmental factors, the \gls{poc} showed us that the trees, buildings and other obstructions impede the signal way more than just the distance or the altitude.
 This was clearly illustrated in section~\ref{sec:poc-session2} where the highest test locations (Hotond, Kwaremont) had 0\,\% \gls{pdr} because of the trees, while lower altitude locations but with a clear \gls{los} achieved 100\,\%.
 The security question is a bit tricky on Meshtastic. The messages are effectively encrypted using \gls{aes}-256 once a private key is configured, but the default channel is public, so on a wrong config every message isn't really encrypted. Also once set up, the channels don't use authentication to make sure the message is from the right device.
-If someone gets the key, they can impersonate a node and send messages on the channel. The header of the message is also in cleartext, so the metadata is not protected. The private communication in between devices (end-to-end, no channel usage) is not only protected with the encryption but this also has authentication compared to the channels.
+If someone gets the key, they can impersonate a node and send messages on the channel. The header of the message is also in cleartext, so the metadata is not protected. The private communication between devices (end-to-end, no channel usage) is protected by encryption and, unlike the shared channels, also by authentication.
 
 The range and reliability question from the solution domain has also been answered in the \gls{poc}.
 The maximum direct connection distance achieved between two nodes was 18.5\,km, and with a single relay, the end-to-end distance was 30\,km. The effective range of the relay was estimated at 10 to 13\,km depending on terrain.
@@ -45,6 +46,9 @@ Some limitations were also discovered. The only tested hardware was the Heltec W
 The comparison combines measured data on one side with documented data on the other. All measurements were also done in a single region (around Ronse and Tournai) and during a dry summer period. The results may look different in a more flat region, or during winter time, etc.
 
 Latency wasn't really analysed in depth in the results, the traceroute and messages arrived in a few seconds, but the range and packet delivery turned out to be the more decisive factors for answering the research question.
+
+Latency, which was listed as a metric in the original proposal, was intentionally left out of the measured scope (see section~\ref{sec:methodologie-poc}); It was just informally noted, seeing traceroutes and messages arrived within a few seconds, which is good enough for this kind of scenarios.
+Range and packet delivery turned out to be the decisive factors for answering the research question.
 As planned, the security analysis stayed documentation-based combined with some setup observations. No real traffic has been intercepted or decrypted, both because that would be illegal and because it fell outside the scope of this thesis.
 
 \section{Future research}%
@@ -57,8 +61,8 @@ Another next step could be testing in different environmental conditions. This w
 The same measurements could be repeated but at different times of the day, and most importantly, in different weather conditions (rain, wind, temperature swings) to see whether the change in conditions has a real-world effect on the stability of the connection.
 
 Going more into the security side of Meshtastic could be another direction to dig into, especially authentication and metadata protection (section~\ref{sec:sota-security}).
-Lastly, as mentioned in section~\ref{sec:poc-session3}, using higher-gain or directional antennas (such as Yagi, parabolic, etc.) instead of a small omnidirectional one could largely improve the quality and the range of the network. The broadcast aspect will most definitely be lost, but in return the range and quality could be extended.
-This wasn't tested during this thesis due to cost and time constraints, but it is most definitely a realistic next step for anyone trying to push the research even further.
+Lastly, as mentioned in section~\ref{sec:poc-session3}, using higher-gain or directional antennas (such as Yagi, parabolic, etc.) instead of a small omnidirectional one could largely improve the quality and the range of the network. The broadcast aspect would likely be lost, but in return the range and quality could be extended.
+This wasn't tested during this thesis due to cost and time constraints, but it is a realistic next step for anyone trying to push the research even further.
 
 \section{Comparison matrix}%
 \label{sec:conclusion-comparison}
@@ -68,15 +72,24 @@ This wasn't tested during this thesis due to cost and time constraints, but it i
     \toprule
     \textbf{Requirement} & \textbf{APRS} & \textbf{DMR} & \textbf{Satellite} & \textbf{Meshtastic} \\
     \midrule
-    Infrastructure-independent & Yes    & Partial & Yes    & Yes     \\
-    Low-barrier deployment     & No     & No      & Yes    & Yes     \\
-    Affordable at scale        & Partial& Partial & No     & Yes     \\
-    No licence required        & No     & No      & Yes    & Yes     \\
-    Range and reliability      & Good   & Good    & Global & Good \\
+    Infrastructure-independent   & Yes     & Partial & Yes    & Yes             \\
+    Low-barrier deployment       & No      & No      & Yes    & Yes             \\
+    Affordable at scale          & Partial & Partial & No     & Yes             \\
+    No licence required          & No      & No      & Yes    & Yes             \\
+    Range and reliability        & Good    & Good    & Global & Good            \\
+    \midrule
+    Data throughput              & Low     & High    & Low    & Very low        \\
+    Message type                 & Text    & Voice + data & Text & Text + telemetry \\
+    Guaranteed delivery          & No      & Yes     & Yes    & No (best-effort) \\
+    Independent of node density  & Yes     & Yes     & Yes    & No              \\
     \bottomrule
   \end{tabular}
-  \caption[Comparison of off-grid communication alternatives.]{\label{tab:conclusion-comparison}Comparison of the reviewed off-grid communication alternatives.}
+  \caption[Comparison of off-grid communication alternatives.]{\label{tab:conclusion-comparison}Comparison of the reviewed off the grid communication alternatives.}
 \end{table}
+
+The completed matrix and conclusion confirms that Meshtastic is not a universal winner.
+It trades throughput, voice capability and guaranteed delivery for cost, licence-free use and easy deployment requirements.
+For the specific scenario of this thesis, a low-cost text-based network that survives infrastructure failure, that trade-off is favourable, but it would be a poor choice where high bandwidth, voice, or guaranteed delivery are required.
 
 \section{Recommendations for practitioners}%
 \label{sec:conclusion-recommendations}

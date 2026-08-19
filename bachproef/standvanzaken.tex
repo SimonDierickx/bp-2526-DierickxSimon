@@ -162,12 +162,22 @@ The range and reliability of Meshtastic is left open on purpose, as this is what
     \toprule
     \textbf{Requirement} & \textbf{APRS} & \textbf{DMR} & \textbf{Satellite} & \textbf{Meshtastic} \\
     \midrule
-    Infrastructure-independent & Yes    & Partial & Yes    & Yes     \\
-    Low-barrier deployment     & No     & No      & Yes    & Yes     \\
-    Affordable at scale        & Partial& Partial & No     & Yes     \\
-    No licence required        & No     & No      & Yes    & Yes     \\
-    Range and reliability      & Good   & Good    & Global & To be measured \\
+    Infrastructure-independent   & Yes     & Partial & Yes    & Yes             \\
+    Low-barrier deployment       & No      & No      & Yes    & Yes             \\
+    Affordable at scale          & Partial & Partial & No     & Yes             \\
+    No licence required          & No      & No      & Yes    & Yes             \\
+    Range and reliability        & Good    & Good    & Global & To be measured  \\
+    \midrule
+    Data throughput              & Low     & High    & Low    & Very low        \\
+    Message type                 & Text    & Voice + data & Text & Text + telemetry \\
+    Guaranteed delivery          & No      & Yes     & Yes    & No (best-effort) \\
+    Independent of node density  & Yes     & Yes     & Yes    & No              \\
     \bottomrule
   \end{tabular}
   \caption[Comparison of off-grid communication alternatives.]{\label{tab:sota-comparison}Comparison of the reviewed off-grid communication alternatives.}
 \end{table}
+
+Table~\ref{tab:sota-comparison} makes the trade-offs from Meshtastic explicit.
+On paper, Meshtastic wins on the cost, licence-free operation and ease of deployment requirements. However, it pays for this with very low throughput, text and telemetry only (no voice), and no guaranteed delivery, since \gls{lora} traffic is best-effort with no acknowledgement mechanism by design.
+Its mesh nature also means reliable coverage depends on sufficient node density (if no nodes, no communication), whereas \gls{dmr} and satellite systems do not.
+Based on documentation alone, Meshtastic looks like a strong fit, especially for a low-cost, infrastructure-independent, text-based scenario. Whether it actually delivers reliable range and coverage is exactly what the \gls{poc} in chapter~\ref{ch:poc} is made for.
