@@ -97,7 +97,7 @@
 % Select a language: add option english or dutch, default=dutch
 \newif\if@dutch
 \newif\if@english
-\DeclareOption{dutch}{\@dutchtrue\@englishfalse}
+
 \DeclareOption{english}{\@dutchfalse\@englishtrue}
 
 \DeclareOption*{\PackageWarning{hogent-poster}{Unknown Option \CurrentOption}}
