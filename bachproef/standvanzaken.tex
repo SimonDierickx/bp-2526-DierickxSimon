@@ -19,14 +19,14 @@ This is exactly what motivates us to find an autonomous solution \autocite{Manoj
 Therefore, a solution that still relies on that same infrastructure is not a solution, it just has the same exact weakness. Real independence means the solution has to be able to generate its own connectivity when being deployed.
 
 Another requirement is \textbf{quick and easy deployability}. If there is a crisis, there is no time for licences, specialists or training.
-The emergency solution should be set up and ready by ``general public`` in minutes using the right documentation and instructions.
+The emergency solution should be set up and ready by ``general public'' in minutes using the right documentation and instructions.
 
-The third requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most ``normal`` people, then the solution in itself is not useful at all.
+The third requirement is \textbf{affordability at scale}. Only if there are enough participants the emergency solution is useful, which means if buying in to this network is impossible for most ``normal'' people, then the solution in itself is not useful at all.
 This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing \euro{}200.00 is expensive, but it is somewhat ok, if you need to buy 10 of those devices, that changes it completely.
 If the entry price or recurring costs (subscriptions, extra fees, etc.) are too high, the network stays too small to be really useful. \textcite{ElKhaledMcheick2019} point this out as well when talking about cost and energy efficiency as an evaluation criteria for communication in difficult conditions.
 
 Range and reliability are off course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
-Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possiblity to extend its range if necessary.
+Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possibility to extend its range if necessary.
 Especially in situations where the duration and scope of the emergency is unknown or undetermined.
 
 The last main requirement found is the \textbf{security and privacy} of said solutions. In some specific cases (wars, censorship, etc.) the communication could contain sensitive information which shouldn't be intercepted and might be targeted by attacks/snooping.
@@ -78,7 +78,7 @@ The satellite messengers satisfy the independence and range requirements, but ho
 \label{sec:sota-lora}
 
 Before diving into the whole Meshtastic architecture, it's important to understand the technology it is built on, \gls{lora}.
-\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{``sub-GHz``} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
+\gls{lora} is a physical-layer protocol, grouped under the \gls{lpwan} umbrella, that modulates radio signals in the \emph{``sub-GHz''} \gls{ism} band, these are free to use and unlicensed frequencies. To modulate they use \gls{css}, which is developed and sold by Semtech \autocite{Raza2017LPWAN}.
 How it works is, instead of sending on a fixed narrowband, \gls{lora} spreads the input signal over a wider channel using chirps. A chirp is a signal of which the frequency sweeps up (or down) across the whole bandwidth.
 This results in noise-like properties on the signal, which makes it more resistant to interferences, and make distant nodes able to decode the signal even if the signal is heavily polluted by noise.
 This is exactly why \gls{lora} is good at long distances at low transmit power \autocite{Raza2017LPWAN}.
