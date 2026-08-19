@@ -11,7 +11,7 @@
 This thesis started by investigating to what extent Meshtastic, as a decentralized \gls{lora}-based mesh network, offers a reliable and readily deployable emergency communication solution when primary network infrastructure fails.
 Based on the initial literature study and the \gls{poc}, the answer to this question would be yes, on certain conditions.
 
-The \gls{poc} showed that a low-cost Meshtastic setup can provide a real, working link over real distances without relying on any existing infrastructure. A direct connection between two nodes reached a maximum of 18.5\,km, and adding a single relay in this setup improved the end-to-end distance (from Base-Node to mobile node) to 30\,km, this is larger than the literature study suggested.
+The \gls{poc} showed that a low-cost Meshtastic setup can provide a real, working link over real distances without relying on any existing infrastructure. A direct connection between two nodes reached a maximum of 18.5\,km, and adding a single relay in this setup improved the end-to-end distance (from Base-Node to mobile node) to 30\,km, which is larger than the literature study suggested.
 The \gls{poc} also proved a relay could convert a dead zone connection into a working connection (session 1 compared to session 3). When comparing against the five initial requirements the literature study gave us in chapter~\ref{ch:stand-van-zaken}, Meshtastic can be seen as a realistic alternative.
 It performs well on infrastructure independence, deployability and affordability, and for security, while it has limitations, it offers a reasonable level of protection if correctly configured.
 These figures come from three sessions in a single region with one hardware type, so they should be read as an indication rather than a guaranteed performance benchmark.
@@ -52,7 +52,7 @@ As planned, the security analysis stayed documentation-based combined with some 
 \label{sec:conclusion-future}
 
 The most obvious next step for continuing this research is to expand the \gls{poc} with more nodes, and more relays. This would allow to test even more hops and see how far the range could be extended using more nodes.
-Each node probably adds some packet loss, it would be useful to know exactly how much and how far (in terms of hops and distance) this type of network can be pushed before it stops being useful.
+Each node probably adds some packet loss. It would be useful to know exactly how much and how far (in terms of hops and distance) this type of network can be pushed before it stops being useful.
 
 A rough estimation can be made on creating a longer multi-hop path. The first hop of the current setup (base to relay) reached 18.5\,km with a clear \gls{los}. The second hop (relay to mobile) reached an effective 10--13\,km, which gave us a 30\,km end-to-end distance.
 If a second relay would be added at another elevated, clear-\gls{los} site, a comparable third hop of roughly 10--15\,km could be estimated. This would extend the theoretical reach of the chain to approximately 45--50\,km over three hops.

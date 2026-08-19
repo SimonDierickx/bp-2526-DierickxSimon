@@ -105,19 +105,20 @@ This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
 
 Now \gls{lora} has been explained, the base of Meshtastic is clear. Meshtastic itself is an open-source firmware that turns simple microcontrollers (mostly ESP32) into nodes of a decentralized mesh network \autocite{MeshtasticDocs}.
 It has attracted academic attention over the last few years as an off-grid emergency alternative: \textcite{SepulvedaMeshtastic2026} analyses the resilience of Meshtastic networks and its modem presets in long-range propagation scenarios, confirming that each node can act as a router and a client. Unlike LoRaWAN, it doesn't depend on gateways, each node can both create, forward and receive traffic.
-The network is also self-healing, this means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emergency cases, where a node can suddenly be unavailable or be added.
+The network is also self-healing. This means that the route automatically adjusts whenever a node appears or disappears. This is really useful in emergency cases, where a node can suddenly be unavailable or be added.
 
 How do messages actually travel through the mesh: Meshtastic uses \gls{csma}/CA to avoid any collisions on the shared frequency. Each node forwards messages that are not meant only for itself using managed flooding (rebroadcasting). This way it reaches nodes further away.
 This is done until the message reaches the destination or the hop limit is reached \autocite{Durand2025MeshLoRa}.
 \textcite{Durand2025MeshLoRa} evaluate a \gls{lora}-based mesh network and shows that multi-hop forwarding improves the \gls{pdr} for nodes far away from the destination. This is exactly the supposed effect of a relay node.
 
-Each node is independent, it requires no SIM card, no internet connection and no licence.
+Each node is independent: it requires no SIM card, no internet connection and no licence.
 
-Different roles can be attributed to the nodes, a \texttt{CLIENT} node is an endpoint operated by a user; a \texttt{ROUTER} node is optimized to only relay traffic and a \texttt{CLIENT\_BASE} node combines both, it allows the node to forward traffic while also being able to connect to a user as an end-device.
+Different roles can be attributed to the nodes, a \texttt{CLIENT} node is an endpoint operated by a user; a \texttt{ROUTER} node is optimized to only relay traffic and a \texttt{CLIENT\_BASE} node combines both, allowing the node to forward traffic while also being able to connect to a user as an end-device.
 Messages go from one node to another, with a maximum hop limit you can set up in the app.
 
 Meshtastic puts nodes into different channels, each channel is named, encrypted and defined by a \gls{psk} \autocite{MeshtasticChannels}.
 A device wanting to participate in said channel, must have the same channel name and \gls{psk} configured. Eight different channels can be configured on a single node simultaneously, one primary and seven secondary channels, each with its own key \autocite{MeshtasticChannels}.
+Figure~\ref{fig:meshtastic-channel} shows the channel configuration in the Meshtastic client.
 
 \begin{figure}[H]
   \centering
@@ -132,12 +133,12 @@ The above mentioned properties are the ones that make Meshtastic a potential can
 
 One of the sub-questions was the security of Meshtastic in case of traffic interception. That's why Meshtastic's encryption model deserves a dedicated analysis.
 
-Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, they have a distinct key per channel \autocite{MeshtasticEncryption}. 
+Meshtastic encrypts the payload of each of its channels using \gls{aes} in \gls{ctr} mode, with a distinct key per channel \autocite{MeshtasticEncryption}. 
 The \gls{aes} encryption itself is considered secure, In \textcite{NIST2023AES} it is the approved standard for protecting sensitive information. It has been analysed for more than twenty years and is still considered secure to use \autocite{Bogdanov2011AES}.
 The known limitations come from the implementation, not the encryption itself, as specified down below.
 
 One of the crucial decisions of Meshtastic is to only encrypt the payload, which means the packet header (containing send node number, packet identifier and hop limit) is not encrypted and always transmitted in cleartext \autocite{MeshtasticEncryption}.
-This design is by intention, this makes routing possible, the route is chosen on the basis of the cleartext header, so that any node can forward it. That makes each node a relay, even when it can't decrypt the payload and read the message.
+This design is intentional, this makes routing possible, the route is chosen on the basis of the cleartext header, so that any node can forward it. That makes each node a relay, even when it can't decrypt the payload and read the message.
 This means confidentiality of the message content and participation in routing are independent: a third-party node can carry traffic without reading it.
 
 The most important limitation concerns the default channel, which contains a default publicly known key, encoded as \texttt{AQ==} in Base64 \autocite{MeshtasticChannels}.

@@ -15,13 +15,13 @@ At the end of this chapter we can also observe other nodes, not known to us part
 \label{sec:poc-hardware}
 
 The main constraint while choosing hardware was cost (this is one of the requirements for emergencies).
-The hardware should be able to support EU\,868\,MHz band as this is legally obliged, it should also allow an external antenna for improved range and permit power via battery and solar for autonomous usage.
+The hardware should be able to support EU\,868\,MHz band as this is legally obliged. It should also allow an external antenna for improved range and permit power via battery and solar for autonomous usage.
 
 The final hardware choice was to use the \textbf{Heltec WiFi LoRa 32 V4}. This is a board using an Espressif ESP32-S3 microcontroller and the Semtech SX1262 \gls{lora} transceiver.
 Four units were acquired, one base node, one mobile node, one relay and the last one was a spare/second relay node if necessary.
 The V4 was chosen over the V3 (cheaper model) because it provides solar-charging input, higher maximum transmit power and the possibility to add a battery.
 These features are important in this use case. 
-The SX1262 transceiver provides a better sensitivity compared to the SX1276 (used on older models), this is important for long-range usage.
+The SX1262 transceiver provides a better sensitivity compared to the SX1276 (used on older models); this is important for long-range usage.
 
 Another important piece of hardware are the antennas. The provided antenna with the board is a small PCB antenna which is unusable in long-range scenarios and if the board is placed in an enclosure.
 Having to place the nodes outside this would also mean the antenna is unusable. That's why for the two fixed nodes (base and relay) a 5\,dBi external antenna was chosen. This antenna is omnidirectional which allows us to have a good coverage, despite the orientation.
@@ -43,7 +43,7 @@ This was on the chosen sites and at the moment of building the setup in Belgium,
 
 The bought components were not necessarily the cheapest available at the moment on the market, but due to the time constraints this project fell in, some products had to be chosen from more expensive EU-based resellers instead of non-EU resellers, which may be a lot cheaper, in order to achieve it in time.
 But even given this, the total cost of the setup compared to the cost of a commercial solution (e.g. a single Garmin inreach device) costs more than the full setup before even paying any subscription or fee.
-The figures below represent a realistic upper bound on the cost, this should not be taken as a cost-optimized setup. According to estimations, a total of \euro{}100/150 could be done, according to the amount of nodes needed, etc.
+The figures below represent a realistic upper bound on the cost. This should not be taken as a cost-optimized setup. According to estimations, a total of \euro{}100/150 could be done, according to the amount of nodes needed, etc.
 
 \begin{table}[H]
   \centering
@@ -80,7 +80,7 @@ The base node was then installed on a house on one of the outskirts of Ronse (50
 The complete setup can be seen in figure~\ref{fig:poc-build-ronse} down below.
 The relay node was installed inside the viewing tower of Floreal Le Panoramique on the Mont-Saint-Aubert (50.65457,
 3.39975) with an altitude of 140\,m. Permission was obtained from the owners. The installation as seen in figure~\ref{fig:poc-build-relay} shows the solar panel is set up to be facing southwards.
-The junction box and antenna are oriented towards the base node.
+The junction box and antenna are oriented towards the base node. From the relay's position the base node is directly visible, as shown in figure~\ref{fig:poc-panoramique} (the red marker indicates the base node).
 
 \begin{figure}[H]
   \centering
@@ -434,7 +434,7 @@ This confirms our initial finding of session 1, \gls{los} is more important than
 As shown in figure~\ref{fig:poc-los}, some sites had good \gls{pdr} and \gls{rssi}, some had good altitude, but none of them combined both succesfully.
 The best possibilities from this session were the Malanderpark and Zandstraat tests. But these sites only had a straight line distance of 5.1--5.7\,km to the base node.
 On top of this, they didn't have a straightforward mounting point (houses, trees, poles, etc.) so an extra requirement would have been to ask permission to the relevant persons, which was complicated in this situation.
-Most of the locations that didn't get any signal were obstructed by surroundings (trees, vegetation, buildings, etc.), this is confirmed by our initial findings during the literature study in section~\ref{sec:sota-lora}.
+Most of the locations that didn't get any signal were obstructed by surroundings (trees, vegetation, buildings, etc.). This is confirmed by our initial findings during the literature study in section~\ref{sec:sota-lora}.
 
 The Mont-Saint-Aubert possibility stands out as the best option, combining elevation, clear \gls{los} and a person working there who could help with an accessible mounting point.
 As seen in Session~1, this location could guarantee a straight-line connection with the base at 18.5\,km.
