@@ -39,10 +39,10 @@ The junction box protects the hardware against dust and heavy rain and the cable
 
 Table~\ref{tab:poc-cost} summarizes the cost of the whole operation, as cost is one of the main criteria in these emergency scenarios.
 This is a relevant result in itself for the scope of this thesis. The complete setup (four nodes, including a spare node, cables, antennas, batteries, solar panels and enclosures) was acquired for \euro{}180.95 in total.
-This was on the chosen sites and at the moment of building the setup in Belgium, prices may vary according to time and location. 
+This was on the chosen websites and at the moment of building the setup in Belgium, prices may vary according to time and location. 
 
 The bought components were not necessarily the cheapest available at the moment on the market, but due to the time constraints this project fell in, some products had to be chosen from more expensive EU-based resellers instead of non-EU resellers, which may be a lot cheaper, in order to achieve it in time.
-But even given this, the total cost of the setup compared to the cost of a commercial solution (e.g. a single Garmin inreach device) costs more than the full setup before even paying any subscription or fee.
+But even given this, the total cost of the setup compared to the cost of a commercial solution (e.g. a single Garmin inReach device) costs more than the full setup before even paying any subscription or fee.
 The figures below represent a realistic upper bound on the cost. This should not be taken as a cost-optimized setup. According to estimations, a total of \euro{}100/150 could be done, according to the amount of nodes needed, etc.
 
 \begin{table}[H]
@@ -108,7 +108,7 @@ A phone was connected through Bluetooth to the mobile node, allowing it to broad
 \label{sec:poc-config}
 
 Using the \href{https://flasher.meshtastic.org/}{Meshtastic firmware flasher} the last stable version of Meshtastic (2.7.\allowbreak26.\allowbreak54e0d8d) was flashed on all four nodes.
-The board needed the installation of the CH343 driver to be able to flash and configure the board. The Heltec device should also be put into bootloader mode by holding the PRG button while plugging it in.
+The computer needed the installation of the CH343 driver to be able to flash and configure the board. The Heltec device should also be put into bootloader mode by holding the PRG button while plugging it in.
 
 The nodes can then be configured on three different ways: the web-based configuration interface, the Python command-line interface or the mobile application.
 
@@ -377,13 +377,13 @@ This means that there was a $25$\,dBm margin. The \gls{snr} distribution and sta
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{plot-snr-histogram.jpg}
-  \caption[SNR distribution at 18.5\,km.]{\label{fig:poc-snr-hist}Distribution of the\gls{snr} values of the 1\,015 packets received during the stationary test (18.5\,km at Mont-Saint-Aubert). 91.7\,\% of packets had a positive \gls{snr}, with a median of $+6$\,dB, confirming the maximum-range link was of consistently high quality.}
+  \caption[SNR distribution at 18.5\,km.]{\label{fig:poc-snr-hist}Distribution of the \gls{snr} values of the 1\,015 packets received during the stationary test (18.5\,km at Mont-Saint-Aubert). 91.7\,\% of packets had a positive \gls{snr}, with a median of $+6$\,dB, confirming the maximum-range link was of consistently high quality.}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{plot-snr-stability.jpg}
-  \caption[Link stability at 18.5\,km.]{\label{fig:poc-snr-stab}The same 1\,015 packets from the staionary test, plotted against their sequence number (from 1 to 342, 341 received: 99.7\,\% \gls{pdr}). After some initial variation, the link stabilised around $+6$\,dB and delivered 341 of 342 packets (99.7\,\% \gls{pdr}), showing the maximum-range link was sustainable.}
+  \caption[Link stability at 18.5\,km.]{\label{fig:poc-snr-stab}The same 1\,015 packets from the stationary test, plotted against their sequence number (from 1 to 342, 341 received: 99.7\,\% \gls{pdr}). After some initial variation, the link stabilised around $+6$\,dB, showing the maximum-range link was sustainable.}
 \end{figure}
 
 \section{Session 2: Relay-candidate survey}%
@@ -501,7 +501,7 @@ The security analysis is mostly done using documentation. Observations can be fo
 During the test sessions third-party nodes appeared (as discussed in section \ref{sec:poc-mesh}). At that point our nodes were still running the
 default \gls{psk} being \texttt{AQ==}. This means that each node intercepting and forwarding the traffic could decrypt the messages. This is of course not safe, so the \gls{psk} was changed to a random 256-bit key.
 This last key was then shared between all three nodes.
-The difference is that now the nodes can forward the messages but they can't read them.
+The difference is that now the third-party nodes can forward the messages but they can't read them.
 Some parts of the packets are not encrypted, and these parts guide the routing of that package (node identifiers, timing, hop count).
 
 This showed one of the main security issues of Meshtastic, when using the default \gls{psk} traffic seems secure but in reality, nothing really is as this default is known by everyone.

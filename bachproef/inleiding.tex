@@ -13,7 +13,7 @@ This means that this dependency can become critical at the exact moment it is mo
 
 When a big storm destroys a cellular tower, or when floods cut power of a specific region (where bases might be running) or other large-scale incidents happen that infrastructure just disappears, and suddenly what we took for granted is no longer available.
 This is not just hypothetical; natural disasters, power outages, conflict situations (disrupting traffic, censoring, etc.), these are moments when using the network is necessary, but impossible.
-An example of this is during the July 2021 floods in Wallonia, roughly 41\,500 people lost power for up to three weeks, and it took around eleven months to fully restore telecommunications to the last affected communities \autocite{Koks2022Infrastructure}.
+An example of this is during the July 2021 floods in Wallonia, roughly 41,500 people lost power for up to three weeks, and it took around eleven months to fully restore telecommunications to the last affected communities \autocite{Koks2022Infrastructure}.
 Even six months after the event, more than 1\,100 fixed internet connections in the region were still down, as the damaged network had to be physically rebuilt \autocite{DeMorgen2022Internet}.
 This exact scenario illustrates that even in our modern society we are still vulnerable to the loss of communication networks.
 
@@ -25,7 +25,7 @@ These limitations can be cost, licences, needed hardware, extra fees, etc.
 This bachelor thesis will investigate \textbf{Meshtastic}. \textbf{Meshtastic} is an open-source project that lets you build a decentralized, encrypted mesh network. This can be done on low-cost \gls{lora} radio hardware.
 Meshtastic doesn't require any SIM card, internet connection or licence. It provides self-healing multi-hop routing which allows us to extend the initial coverage without needing any fixed existing infrastructure.
 For these exact reasons, Meshtastic might be a promising candidate for the emergency contexts described above.
-However, while Meshtastic has seen some real-world community use, its reliability in an actual emergency context has not yet been evaluated yet. This thesis will address that gap in research by creating a \gls{poc} in the region around Ronse, Belgium.
+However, while Meshtastic has seen some real-world community use, its reliability in an actual emergency context has not been evaluated yet. This thesis will address that gap in research by creating a \gls{poc} in the region around Ronse, Belgium.
 \section{\IfLanguageName{dutch}{Probleemstelling}{Problem Statement}}%
 
 \label{sec:probleemstelling}
@@ -62,7 +62,7 @@ The \textbf{solution domain} on the other hand is evaluating the measurements fr
 This provides us with these sub-questions:
 \begin{itemize}
   \item What range and reliability does a Meshtastic network have across different topologies (direct long-distance
-  vs.\ multi-hop) in a real deployment (East Flanders/Hainaut province, Flemish Ardennes/Pays des Collines regions, Ronse/\allowbreak{}Oudenaarde/\allowbreak{}Kluisbergen/\allowbreak{}Tournai)?
+  vs.\ multi-hop) in a real deployment (East Flanders/Hainaut province, Flemish Ardennes/Pays des Collines regions, Ronse/\allowbreak{}Oudenaarde/\allowbreak{}Kluisbergen/\allowbreak{}Tournai/\allowbreak{}Frasnes-les-Anvaing)?
   \item How does the Meshtastic security model hold up against potential attacks?
   \item How does it compare with other alternatives in terms of requirements in emergency situations?
 \end{itemize}

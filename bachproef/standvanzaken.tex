@@ -14,7 +14,7 @@ The needs identified are usually the same, \textcite{ManojBaker2007} state that 
 In a review of communication technologies for difficult terrain they test robustness, rapid deployability, cost and energy efficiency as well as quality criteria \autocite{ElKhaledMcheick2019}.
 The five criteria listed below are the ones used throughout this thesis.
 
-The first and maybe most important, requirement is \textbf{the independence from fixed infrastructure}. If a solution is found but it only works relying on the central tower or on a data centre the same failure as the outage applies. Which means the solution is unusable.
+The first and maybe most important, requirement is \textbf{the independence from fixed infrastructure}. If a solution is found but it only works relying on the central tower or on a data centre the same failure as the outage applies, the solution is simply unusable.
 This is exactly what motivates us to find an autonomous solution \autocite{ManojBaker2007}. This is not just a theoretical thing, when a disaster hits, the fixed infrastructure usually goes down first. So what does this mean, the network everything is dependent on goes down when it's needed \autocite{ManojBaker2007}.
 Therefore, a solution that still relies on that same infrastructure is not a solution, it just has the exact same weakness. Real independence means the solution has to be able to generate its own connectivity when being deployed.
 
@@ -37,8 +37,8 @@ These five requirements form the main evaluation criteria for this thesis. They 
 \section{APRS (Automatic Packet Reporting System)}%
 \label{sec:sota-aprs}
 
-\gls{aprs} is a known protocol, it's used with amateur radio frequencies, enabling real-time communication of position and telemetric info on said shared frequencies \autocite{ManojBaker2007}.
-It is however relevant to emergency contexts as it operates independently from the internet. \textcite{ManojBaker2007} demonstrate this in a real-world disaster (this happened in Cambodia). Both the response and mobile station operators relied on licensed amateur radios.
+\gls{aprs} is a known protocol, it's used with amateur radio frequencies, enabling real-time communication of position and telemetric info on said shared frequencies \autocite{UN2023APRS}.
+It is however relevant to emergency contexts as it operates independently from the internet. \textcite{UN2023APRS} demonstrate this in an experimental disaster-scenario system in Cambodia. Both the response and mobile station operators relied on licensed amateur radios.
 
 The licence is in fact the biggest barrier to rapid deployment, in a conflict scenario those licences could be revoked or the frequencies seized by the authorities. And in case of a natural disaster, there is most likely no time will be spent on giving out radio licences.
 It also depends on specialized hardware, which makes it difficult to configure and place, especially in crisis conditions. If we compare this to the previously mentioned requirements, \gls{aprs} is infrastructure independent, but it fails for the easy and quick deploy.
@@ -46,7 +46,7 @@ It also depends on specialized hardware, which makes it difficult to configure a
 \section{DMR (Digital Mobile Radio)}%
 \label{sec:sota-dmr}
 
-\gls{dmr}, just like \gls{aprs}, is a protocol based on radio, namely digital mobile radio standard as defined in \textcite{ETSI2023DMR} by the \gls{etsi}.
+\gls{dmr}, just like \gls{aprs}, is a protocol based on radio, namely digital mobile radio standard as defined by the \gls{etsi} \autocite{ETSI2023DMR}.
 It is defined in three tiers:
 \begin{itemize}
     \item Tier-I: licence-free, low-power, short-range
