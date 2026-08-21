@@ -62,7 +62,7 @@ The fixed nodes were solar and battery powered for autonomous operation.
  
 \begin{itemize}
   \item A \textbf{direct link of 18.5\,km} was achieved, with 99.7\,\% PDR and an average SNR of $+6$\,dB.
-  \item A single relay extended the \textbf{range to 30\,km}, larger than the literature suggested.
+  \item A \textbf{single relay} extended the end-to-end range to \textbf{30\,km}, with an effective relay range of 10--13\,km depending on terrain.
   \item \textbf{Line-of-sight dominates over altitude and distance}: the three highest test sites (up to 140\,m) failed completely due to tree cover, while lower sites with a clear line-of-sight kept a working link (see figure).
   \item The complete setup (4 nodes, antennas, cables, etc.) cost \textbf{€180.95}, far below a single subscription-based satellite messenger.
 \end{itemize}
@@ -72,6 +72,13 @@ The fixed nodes were solar and battery powered for autonomous operation.
   \includegraphics[width=1.0\linewidth]{plot-los-altitude.jpg}
   \captionof{figure}{Altitude and line-of-sight vs. connection (Session~2). The highest sites failed, while lower clear-line-of-sight sites kept a working link.}
 \end{center}
+
+\begin{figure}[H]
+  \centering
+  % green = working, orange = marginal, red = failed
+  \includegraphics[width=\textwidth]{poc-measurements-map.jpg}
+  \caption[Map of all test locations.]{\label{fig:poc-measurements-map}Map of all measurement locations during the tests. Green markers indicate working links, orange markers marginal links, and red markers failed links. The base and relay node are marked separately.}
+\end{figure}
 
 \section{Conclusion}
  
@@ -83,6 +90,8 @@ Reliable coverage depends on line-of-sight and sufficient node placement rather 
  
 A second relay could extend the chain to an estimated 45--50\,km over three hops, though each hop adds latency and packet loss.
 Further work includes more hops, testing across different weather conditions, higher-gain or directional antennas, and a deeper analysis of Meshtastic's security features.
+
+Across three field sessions the range, RSSI, SNR and packet delivery rate were measured for both direct and relayed links. The results show a reliable direct link up to 18.5\,km and, with a single relay, an end-to-end range of 30\,km, with line-of-sight proving more decisive than altitude or distance.
 
 \end{multicols}
 \end{document}

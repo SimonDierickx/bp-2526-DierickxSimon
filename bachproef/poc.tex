@@ -29,7 +29,7 @@ The main V4 boards were then mounted inside the enclosure and the external anten
 The mobile node was equipped with a 868\,MHz antenna with a magnetic base so that it could be mounted on the car roof.
 
 For realistic emergency situations both the fixed nodes were not plugged in a regular electrical socket. That's why for both the fixed nodes a small 2,000\,mAh/3.7\,V LiPo battery was used as a buffer.
-The main power source was a 6\,W 5\,V/1\,A solar panel, the size of this panel ($27.1 \times 17.5 \times 0.26$\,cm) allows it to be easily mounted and directed to the sun.
+The main power source was a 6\,W 5\,V/1.2\,A solar panel, the size of this panel ($27.1 \times 17.5 \times 0.26$\,cm) allows it to be easily mounted and directed to the sun.
 This way the nodes use the solar panel to be powered on and charge the battery during the day, at night or at cloudy weather the battery takes over.
 On the base node the solar panel was soldered to a JST\,1.25\,mm connector so the USB-C plug could be used for data transfer.
 The mobile node was powered using USB-C from the car.
@@ -53,7 +53,7 @@ The figures below represent a realistic upper bound on the cost. This should not
     \textbf{Component} & \textbf{Unit price} & \textbf{Qty} & \textbf{Subtotal} \\
     \midrule
     Heltec WiFi LoRa 32 V4 (868\,MHz)          & \euro{}22.00 & 4 & \euro{}88.00 \\
-    6\,W USB solar panel (5\,V/1\,A)            & \euro{}19.99 & 2 & \euro{}39.98 \\
+    6\,W USB solar panel (5\,V/1.2\,A)            & \euro{}19.99 & 2 & \euro{}39.98 \\
     LiPo battery 2,000\,mAh (JST 1.25\,mm)       & \euro{}9.64  & 2 & \euro{}19.28 \\
     Vecys 3\,dBi magnetic-base car antenna      & \euro{}7.87  & 1 & \euro{}7.87  \\
     5\,dBi omnidirectional antenna (2-pack)     & \euro{}6.76  & 1 & \euro{}6.76  \\
@@ -343,7 +343,7 @@ As shown below, each of the nodes had such a config file, which was a regular .b
 \captionof{listing}[Config file]{\label{lst:poc-config-file}Example of a config file from one of the nodes.}
 
 In the configuration file the \texttt{lora.tx\_power} is set to \texttt{0}. This doesn't mean that the power is 0\,dBm, but the maximum the regional settings allow.
-For the EU\_868 band this means 27\,dBm, that's why table~\ref{tab:poc-config} and appendix~\ref{ch:bijlage-configuratie} report 27\,dBm.
+For the EU\_868 band this means 27\,dBm, that's why table~\ref{tab:poc-config} and appendix~\ref{ch:bijlage-config} report 27\,dBm.
 
 The Python CLI saved lots of time configuring, but also verifying existing config using the following command:
 
@@ -365,6 +365,8 @@ The \gls{pdr} was 78.6\,\% and the \gls{rssi} degraded from $-51$\,dBm to $-119$
 After these initial three kilometres a first complete dead zone was found, lower altitude, no line-of-sight with the home node, these factors made communication impossible, 0\,\% \gls{pdr}.
 Eventually the mobile node reached the Mont-Saint-Aubert. This is an elevated part of Tournai with some spots having a clear uninterrupted line-of-sight to the base node.
 While ascending the Mont-Saint-Aubert the total \gls{pdr} of the climb was 68.8\,\% and the \gls{rssi} stabilized around $-107$\,dBm with an \gls{snr} of approximately $+1$\,dB.
+Taken together, these three segments illustrate that Session~1's \gls{pdr} was highly location-dependent rather than a single figure: 78.6\,\% over the first three kilometres, 0\,\% in the intermediate dead zone, and 68.8\,\% during the final clear-line-of-sight climb.
+The 99.7\,\% reported later (Figure~\ref{fig:poc-snr-stab}) refers specifically to the stationary maximum-range link once a clear line-of-sight was established, not to the moving drive.
 The maximum distance at which communication was established that day was 18.5\,km.
 
 The key takeaway from this first testing session was that what the distance isn't the real challenge in our scenario. The terrain obstruction and absence of line-of-sight is the main limiting factor for long-range communication with these types of devices.
@@ -375,13 +377,13 @@ This means that there was a $25$\,dBm margin. The \gls{snr} distribution and sta
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{plot-snr-histogram.jpg}
-  \caption[SNR distribution at 18.5\,km.]{\label{fig:poc-snr-hist}\gls{snr} distribution of the 1\,015 packets received during 18.5\,km test at Mont-Saint-Aubert. 91.7\,\% of packets had a positive \gls{snr}, with a median of $+6$\,dB, confirming the maximum-range link was of consistently high quality.}
+  \caption[SNR distribution at 18.5\,km.]{\label{fig:poc-snr-hist}Distribution of the\gls{snr} values of the 1\,015 packets received during the stationary test (18.5\,km at Mont-Saint-Aubert). 91.7\,\% of packets had a positive \gls{snr}, with a median of $+6$\,dB, confirming the maximum-range link was of consistently high quality.}
 \end{figure}
 
 \begin{figure}[H]
   \centering
   \includegraphics[width=0.85\textwidth]{plot-snr-stability.jpg}
-  \caption[Link stability at 18.5\,km.]{\label{fig:poc-snr-stab}\gls{snr} across the range-test packets during the 18.5\,km test. After some initial variation, the link stabilised around $+6$\,dB and delivered 341 of 342 packets (99.7\,\% \gls{pdr}), showing the maximum-range link was sustainable.}
+  \caption[Link stability at 18.5\,km.]{\label{fig:poc-snr-stab}The same 1\,015 packets from the staionary test, plotted against their sequence number (from 1 to 342, 341 received: 99.7\,\% \gls{pdr}). After some initial variation, the link stabilised around $+6$\,dB and delivered 341 of 342 packets (99.7\,\% \gls{pdr}), showing the maximum-range link was sustainable.}
 \end{figure}
 
 \section{Session 2: Relay-candidate survey}%
@@ -431,7 +433,7 @@ This confirms our initial finding of session 1, \gls{los} is more important than
   \caption[Altitude and line-of-sight versus link success (Session~2).]{\label{fig:poc-los}Altitude and \gls{los} quality versus link success in Session~2. The three highest sites (all above 100\,m) failed completely, while lower sites with a clear \gls{los} kept a working link. This confirms that \gls{los} dominates over altitude.}
 \end{figure}
 
-As shown in figure~\ref{fig:poc-los}, some sites had good \gls{pdr} and \gls{rssi}, some had good altitude, but none of them combined both succesfully.
+As shown in figure~\ref{fig:poc-los}, some sites had good \gls{pdr} and \gls{rssi}, some had good altitude, but none of them combined both successfully.
 The best possibilities from this session were the Malanderpark and Zandstraat tests. But these sites only had a straight line distance of 5.1--5.7\,km to the base node.
 On top of this, they didn't have a straightforward mounting point (houses, trees, poles, etc.) so an extra requirement would have been to ask permission to the relevant persons, which was complicated in this situation.
 Most of the locations that didn't get any signal were obstructed by surroundings (trees, vegetation, buildings, etc.). This is confirmed by our initial findings during the literature study in section~\ref{sec:sota-lora}.
@@ -439,7 +441,7 @@ Most of the locations that didn't get any signal were obstructed by surroundings
 The Mont-Saint-Aubert possibility stands out as the best option, combining elevation, clear \gls{los} and a person working there who could help with an accessible mounting point.
 As seen in Session~1, this location could guarantee a straight-line connection with the base at 18.5\,km.
 Permission to mount the relay node was confirmed inside the viewing tower of Floreal Le Panoramique. It offers a clear 180-degree view of the surrounding area, direct access to sunlight, all at a high elevation.
-The confirmed location of the relay node were then 50.65457, 3.39975 at an altitude of 140\,m.
+The confirmed location of the relay node was then 50.65457, 3.39975 at an altitude of 140\,m.
 
 Once mounted, the configured relay node was quickly tested to confirm connection with the base node, and communication from mobile to base node through the relay was confirmed.
 A next test session was planned to test the effective coverage and limitations of the deployed chain.
@@ -530,4 +532,4 @@ Throughout the whole testing period the weather in Belgium (Flemish Ardennes and
 However at the end of the period, on 17 August 2026 at 06:02, a single traceroute could be performed during heavy rain. This traceroute was done between the Ronse base node and the relay node at Mont-Saint-Aubert.
 The traceroute returned a successful result. The Ronse\,$\rightarrow$\,relay link had an \gls{rssi} of $-114$\,dBm and an \gls{snr} of $-10.75$\,dB. The relay\,$\rightarrow$\,Ronse link had an \gls{rssi} of $-114$\,dBm and an \gls{snr} of $-4.75$\,dB.
 This single observation cannot claim the connection is weather variation proof, but it does show that in this occasion the link was still operational.
-What can be seen is that, altough the link was successful, the quality of the connection was degraded, so this should be further investigated.
+What can be seen is that, although the link was successful, the quality of the connection was degraded, so this should be further investigated.

@@ -16,7 +16,7 @@ The five criteria listed below are the ones used throughout this thesis.
 
 The first and maybe most important, requirement is \textbf{the independence from fixed infrastructure}. If a solution is found but it only works relying on the central tower or on a data centre the same failure as the outage applies. Which means the solution is unusable.
 This is exactly what motivates us to find an autonomous solution \autocite{ManojBaker2007}. This is not just a theoretical thing, when a disaster hits, the fixed infrastructure usually goes down first. So what does this mean, the network everything is dependent on goes down when it's needed \autocite{ManojBaker2007}.
-Therefore, a solution that still relies on that same infrastructure is not a solution, it just has the same exact weakness. Real independence means the solution has to be able to generate its own connectivity when being deployed.
+Therefore, a solution that still relies on that same infrastructure is not a solution, it just has the exact same weakness. Real independence means the solution has to be able to generate its own connectivity when being deployed.
 
 Another requirement is \textbf{quick and easy deployability}. If there is a crisis, there is no time for licences, specialists or training.
 The emergency solution should be set up and ready by ``general public'' in minutes using the right documentation and instructions.
@@ -25,7 +25,7 @@ The third requirement is \textbf{affordability at scale}. Only if there are enou
 This applies to subscription and per-message fees based solutions as well, especially for larger scale operations. The idea of being able to scale it is what makes the cost so important. One device costing \euro{}200.00 is expensive, but it is somewhat ok, if you need to buy 10 of those devices, that changes it completely.
 If the entry price or recurring costs (subscriptions, extra fees, etc.) are too high, the network stays too small to be really useful. \textcite{ElKhaledMcheick2019} point this out as well when talking about cost and energy efficiency as an evaluation criteria for communication in difficult conditions.
 
-Range and reliability are off course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
+Range and reliability are of course one of the main requirements. The solution must be able to cover a meaningful distance in order for it to be realistically deployable. 
 Meaning that in a real-life scenario and terrain, messages should be delivered with an acceptable success rate, with ideally a possibility to extend its range if necessary.
 Especially in situations where the duration and scope of the emergency is unknown or undetermined.
 
@@ -95,7 +95,7 @@ The range is also determined by the antenna. A higher antenna position (less obs
 These limitations directed us in the right direction for the used config in the \gls{poc}; this can be found in chapter~\ref{ch:methodologie}.
 
 \gls{lora} in itself isn't how the nodes form a network; it is just a modulation protocol. The most known layer built on top of \gls{lora} is LoRaWAN.
-It organises end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the same exact main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
+It organises end-devices in a star-topology network around fixed gateways. This dependency on gateways introduces the exact same main infrastructure dependence problem as the other solutions. Here is where Meshtastic shows a different approach.
 
 The usage of \gls{lora} for off-grid emergency communication has been explored, for example in \textcite{Hochst2020LoRa}, they evaluate \gls{lora}-based communication for crisis situations. This showed a range of 4.6 to 6.5\,km, with a base node placed on a high building (depending on the used antenna and frequency).
 This provides a useful comparison to the measurements in chapter~\ref{ch:poc}.
