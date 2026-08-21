@@ -87,7 +87,7 @@ To achieve this, the \gls{sf} parameter is configured. It ranges from 6 to 12 an
 A higher \gls{sf} means longer chirps which means higher range, but lower data rate. The \gls{sf} combined with the bandwidth and coding rate determines the sensitivity and the throughput \autocite{Raza2017LPWAN}.
 This is important to understand, because depending on the use case it might be better to sacrifice the range for the speed at which the message is sent, and vice versa. In our use case, range matters more. This is the reason why we set \texttt{LONG\_FAST} as a setting preset (see chapter~\ref{ch:poc}).
 The hardware used in this thesis (Heltec V4 with Semtech SX1262 transceiver) has a maximum sensitivity of $-148$ dBm, which is achieved with a \gls{sf} of 12.
-According to \textcite{Janssen2020LoRaRange}, sub-GHz \gls{lora} can do between 10 and 15\,km in rural/open areas, in urban areas this drops to a few km according to the obstruction. This means anything over 10/15\,km could be seen as a strong result.
+According to \textcite{Raza2017LPWAN}, sub-GHz \gls{lora} can reach up to 15\,km in rural/open areas, in urban areas this dropping to around 5\,km according to the obstruction. This means anything over 10\,km could be seen as a strong result.
 \textcite{Ma2024ForestAttenuation} also shows us that vegetation and trees significantly reduce the radio signals. This can cause severe signal loss.
 The range is also determined by the antenna. A higher antenna position (less obstructions = less path loss) and a more sensitive receiver (better antenna) means a higher range. This also explains why a similar location with a few trees in between can have a connection or not as clearly seen in chapter~\ref{ch:poc}.
 
